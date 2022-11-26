@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class MyTile : MonoBehaviour
 {
@@ -34,10 +35,14 @@ public class MyTile : MonoBehaviour
     public enum ButtonType{
         Delete,
         Edit,
-        Lock
+        Free,
+        Protected,
+        ReadOnly
     }
     [SerializeField]
     GameObject buttonPrefab;
+    [SerializeField]
+    Color ReadOnlyColor;
     [SerializeField]
     List<Sprite> buttonTextures = new List<Sprite>();
     [SerializeField]
@@ -65,7 +70,7 @@ public class MyTile : MonoBehaviour
     public bool logicState = true;
     public enum Permission{
         ReadOnly, // read
-        Editable, // read | edit
+        Protected, // read | edit
         Free      // read | edit | delete
     }
     public Permission permission;
@@ -140,6 +145,15 @@ public class MyTile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (permission == Permission.Free) sprite.color = new Color(1,1,1,1);
+        else sprite.color = ReadOnlyColor;
+
+        if (permission != Permission.ReadOnly) text.color = myGrid.tileTextColors[(int)type];
+        else {
+            Color newColor = myGrid.tileTextColors[(int)type];
+            newColor.a = 0.4f;
+            text.color = newColor;
+        }
         if (Input.GetMouseButtonDown(1)) OnEdit();
         CheckExitEditArea();
         EditValue();
@@ -152,10 +166,15 @@ public class MyTile : MonoBehaviour
         Vector2 mousePos = myCamera.ScreenToWorldPoint(Input.mousePosition);
         float dist = (mousePos - (Vector2)transform.position).magnitude;
         if (dist < myGrid.tileSize * 0.7f && !Input.GetKeyDown(KeyCode.Return)) return;
+        DropEditButtons();
+        QuitEditValue();
+    }
+
+    public void DropEditButtons()
+    {
         editing = false;
         foreach(var button in buttons)
             if (button != null) button.Disappear(transform.position);
-        QuitEditValue();
         buttons.Clear();
     }
 
@@ -166,24 +185,26 @@ public class MyTile : MonoBehaviour
         editing = true;
         animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.LinearBack, 0.07f));
         buttons.Clear();
-        bool deletable = false, editable = true;
-        if (permission == Permission.Free) deletable = true;
-        if (permission == Permission.ReadOnly) editable = false;
-        if (deletable) {
-            EditTileButton newButton = Instantiate(buttonPrefab).GetComponent<EditTileButton>();
-            newButton.onClick.AddListener(Delete);
-            SpriteRenderer sprite = newButton.GetComponent<SpriteRenderer>();
-            sprite.sprite = buttonTextures[(int)ButtonType.Delete];
-            newButton.onClick.AddListener(Delete);
-            buttons.Add(newButton);
+
+        bool deletable, editable;
+        bool isWorkshop = Global.currentGameMode == Global.GameMode.Workshop;
+        if (isWorkshop)
+        {
+            deletable = true;
+            editable = true;
         }
-        if (editable && hasValue) {
-            EditTileButton newButton = Instantiate(buttonPrefab).GetComponent<EditTileButton>();
-            SpriteRenderer sprite = newButton.GetComponent<SpriteRenderer>();
-            sprite.sprite = buttonTextures[(int)ButtonType.Edit];
-            newButton.onClick.AddListener(StartEditValue);
-            buttons.Add(newButton);
+        else
+        {
+            deletable = permission == Permission.Free;
+            editable = !(permission == Permission.ReadOnly);
         }
+
+        if (deletable) AddButton(Delete, (int)ButtonType.Delete);
+        if (editable && hasValue) AddButton(StartEditValue, (int)ButtonType.Edit);
+        if (permission != Permission.Free && isWorkshop) AddButton(SetFree, (int)ButtonType.Free);
+        if (permission != Permission.Protected && isWorkshop) AddButton(SetProtected, (int)ButtonType.Protected);
+        if (permission != Permission.ReadOnly && isWorkshop && hasValue) AddButton(SetReadOnly, (int)ButtonType.ReadOnly);
+        
 
         int n = buttons.Count;
         if (n == 0) return;
@@ -201,7 +222,17 @@ public class MyTile : MonoBehaviour
             */
         }
     }
-
+    void AddButton(UnityAction buttonEvent, int id)
+    {
+        EditTileButton newButton = Instantiate(buttonPrefab).GetComponent<EditTileButton>();
+        SpriteRenderer sprite = newButton.GetComponent<SpriteRenderer>();
+        sprite.sprite = buttonTextures[id];
+        newButton.onClick.AddListener(buttonEvent);
+        buttons.Add(newButton);        
+    }
+    void SetFree() { permission = Permission.Free; }
+    void SetProtected() { permission = Permission.Protected; }
+    void SetReadOnly() { permission = Permission.ReadOnly; }
     public void Delete()
     {
         if (deleted) return;
@@ -294,7 +325,9 @@ public class MyTile : MonoBehaviour
     {
         mouseEnter = true;
         if (editing) return;
-        animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.LinearOut, 0.07f));
+        
+        if (permission == Permission.Free) animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.LinearOut, 0.07f));
+        else if (permission == Permission.Protected && hasValue) animationBuffer.Add(new PopAnimatorInfo(valueScaler.gameObject, PopAnimator.Type.LinearOut, 0.07f));
         //transform.localScale = originScale * 1.2f;
     }
     
@@ -302,7 +335,9 @@ public class MyTile : MonoBehaviour
     {
         mouseEnter = false;
         if (editing) return;
-        animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.LinearBack, 0.07f));
+        if (permission == Permission.Free) animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.LinearBack, 0.07f));
+        else if (permission == Permission.Protected && hasValue) animationBuffer.Add(new PopAnimatorInfo(valueScaler.gameObject, PopAnimator.Type.LinearBack, 0.07f));
+       
         //transform.localScale = originScale;
     }
     public void PlaceArrow(int id, Vector2 pos)
