@@ -14,4 +14,10 @@ public class Global
         Workshop
     }
     static public GameMode currentGameMode;
+    static public Vector3 MoveToMouse(Vector3 pos)
+    {
+        Vector3 res = mainCam.ScreenToWorldPoint(Input.mousePosition);
+        res.z = pos.z;
+        return res;
+    }
 }

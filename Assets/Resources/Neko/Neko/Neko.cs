@@ -6,6 +6,8 @@ using TMPro;
 public class Neko : MonoBehaviour
 {
     [SerializeField]
+    public float z_pos;
+    [SerializeField]
     public MyGrid grid;
     int direction; // 0-right 1-down 2-left 3-up
     public int i, j;
@@ -37,6 +39,7 @@ public class Neko : MonoBehaviour
         Global.nekoPlaySpeed = 1;
         animationBuffer = gameObject.AddComponent<AnimationBuffer>();
         gameObject.AddComponent<UpdatePosAnimator>();
+        mouseEnter = false;
     }
     void Start()
     {
@@ -52,6 +55,7 @@ public class Neko : MonoBehaviour
             if (!running)
                 StartCoroutine(RunOneStep());
         }
+        CheckPickUp();
     }
     IEnumerator RunOneStep()
     {
@@ -70,6 +74,7 @@ public class Neko : MonoBehaviour
         }
         Debug.Log("Pass2");       
         Vector3 targetPos = grid.GetWorldPos(_i, _j);
+        targetPos.z = z_pos;
         AnimationInfo moveAnimation = new UpdatePosAnimatorInfo(gameObject, targetPos, true, 0.2f/Global.nekoPlaySpeed, true);
         animationBuffer.Add(moveAnimation);
         while (!moveAnimation.completed) yield return null;
@@ -201,5 +206,43 @@ public class Neko : MonoBehaviour
     {
         mode = newMode;
         bubble.SetInteger("state", (int)newMode);
+    }
+    bool mouseEnter, followMouse;
+    void OnMouseEnter()
+    {
+        if (MyGrid.currentTileType != MyTile.Type.NULL) return;
+        if (Global.mouseOverUI) return;
+        mouseEnter = true;
+        sprite.color = new Color(1, 1, 1, 0.5f);
+    }
+    void OnMouseExit()
+    {
+        if (followMouse) return;
+        mouseEnter = false;
+        sprite.color = new Color(1, 1, 1, 1);
+    }
+    void CheckPickUp()
+    {
+        if (!mouseEnter && !followMouse) return;
+        if (followMouse) transform.position = Global.MoveToMouse(transform.position);
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (mouseEnter && !followMouse)
+            {
+                followMouse = true;
+                return;
+            }
+            else
+            {
+                Vector2 pos = grid.GridPosOfMouse();
+                int _i = (int)pos.x, _j = (int)pos.y;
+                if (_i < 0 || _j < 0 || _i >= grid.n || _j >= grid.m) return;
+                if (grid.grid[_i, _j] == null) return;
+                i = _i; j = _j;
+                transform.position = grid.GetWorldPos(i, j);
+                followMouse = false;
+                sprite.color = new Color(1, 1, 1, 1);
+            }
+        }
     }
 }

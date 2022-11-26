@@ -51,7 +51,9 @@ public class MyGrid : MonoBehaviour
         grid[n/2, m/2] = NewTile(MyTile.Type.Blank);
         grid[n/2, m/2].transform.position = GetWorldPos(n/2, m/2);
         neko = Instantiate(nekoPrefab).GetComponent<Neko>();
-        neko.transform.position = GetWorldPos(n/2, m/2);
+        Vector3 nekoPos = GetWorldPos(n/2, m/2);
+        nekoPos.z = neko.z_pos;
+        neko.transform.position = nekoPos;
         neko.i = n/2; neko.j = m/2;
         neko.grid = this;
     }
@@ -74,7 +76,7 @@ public class MyGrid : MonoBehaviour
         if (Arrow.IsArrow(currentTileType)) return;
         if (Input.GetMouseButtonDown(1)) currentTileType = MyTile.Type.NULL;
     }
-    Vector2 GridPosOfMouse()
+    public Vector2 GridPosOfMouse()
     {
         Vector2 mousePos = myCamera.ScreenToWorldPoint(Input.mousePosition);
         return new Vector2(Mathf.Floor(mousePos.y / tileSize), Mathf.Floor(mousePos.x / tileSize));
