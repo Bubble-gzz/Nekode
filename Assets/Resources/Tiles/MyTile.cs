@@ -43,7 +43,7 @@ public class MyTile : MonoBehaviour
     [SerializeField]
     public Type type;
     public bool isGhost;
-    int value;
+    public int value;
     bool hasValue;
     TMP_Text text;
     Vector2 textOffset = new Vector2(0, 0);
@@ -62,6 +62,7 @@ public class MyTile : MonoBehaviour
     };
     Camera myCamera;
     bool deleted;
+    public bool logicState = true;
     public enum Permission{
         ReadOnly, // read
         Editable, // read | edit
@@ -118,8 +119,10 @@ public class MyTile : MonoBehaviour
         else text.enabled = false;
 
         if (arithmeticTiles.Contains(type)) textOffset = new Vector2(0, -0.15f);
-        if (logicTiles.Contains(type)) textOffset = new Vector2(0.14f, -0.17f);
-
+        if (logicTiles.Contains(type)) {
+            textOffset = new Vector2(0.14f, -0.17f);
+            logicState = false;
+        }
         valueScaler.transform.position = transform.position + (Vector3)textOffset;
         Debug.Log("type:" + (int)type);
         text.color = myGrid.tileTextColors[(int)type];
@@ -316,5 +319,13 @@ public class MyTile : MonoBehaviour
     {
         Destroy(arrows[id].gameObject);
         arrowDetectAreas[id].enabled = true;
+    }
+    public void UpdateValue(int newValue, bool animated = true)
+    {
+        value = newValue;
+    }
+    public void SetLogitState(bool newState)
+    {
+        logicState = newState;
     }
 }

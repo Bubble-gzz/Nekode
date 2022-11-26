@@ -10,6 +10,8 @@ public class Workshop : MonoBehaviour
         Global.currentGameMode = Global.GameMode.Workshop;
         Global.mouseOverUI = false;
         Global.mouseOverArrow = false;
+        MyGrid grid = GameObject.FindObjectOfType<MyGrid>();
+        grid.Init();
     }
 
     // Update is called once per frame

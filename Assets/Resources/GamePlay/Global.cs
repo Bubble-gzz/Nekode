@@ -7,6 +7,8 @@ public class Global
     static public Camera mainCam;
     static public bool mouseOverUI;
     static public bool mouseOverArrow;
+    static public float nekoPlaySpeed;
+    static public Neko currentNeko;
     public enum GameMode{
         Play,
         Workshop

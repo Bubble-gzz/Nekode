@@ -20,7 +20,7 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         gameObject.AddComponent<ChangeColorAnimator>();
         mouseEnter = false;
     }
-    void Start()
+    virtual protected void Start()
     {
         originSize = transform.localScale;
     }

@@ -170,7 +170,9 @@ MonoBehaviour:
   - {fileID: 0}
   type: 1
   isGhost: 0
+  value: 0
   myGrid: {fileID: 0}
+  logicState: 1
   permission: 0
   i: 0
   j: 0
@@ -268,8 +270,8 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 1890335835
-  m_SortingOrder: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &931098800934791028
 MonoBehaviour:

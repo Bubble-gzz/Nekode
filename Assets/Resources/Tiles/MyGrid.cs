@@ -6,7 +6,9 @@ public class MyGrid : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField]
-    int n, m;
+    GameObject nekoPrefab;
+    [SerializeField]
+    public int n, m;
     [SerializeField]
     public float tileSize;
     [SerializeField]
@@ -24,6 +26,7 @@ public class MyGrid : MonoBehaviour
     static public MyTile.Type currentTileType;
     int lasti, lastj, i, j;
     GameObject lastGhost;
+    Neko neko;
 
     void Awake()
     {
@@ -41,6 +44,16 @@ public class MyGrid : MonoBehaviour
             newPos.z = -10;
             myCamera.transform.position = newPos;
         }
+    }
+
+    public void Init()
+    {
+        grid[n/2, m/2] = NewTile(MyTile.Type.Blank);
+        grid[n/2, m/2].transform.position = GetWorldPos(n/2, m/2);
+        neko = Instantiate(nekoPrefab).GetComponent<Neko>();
+        neko.transform.position = GetWorldPos(n/2, m/2);
+        neko.i = n/2; neko.j = m/2;
+        neko.grid = this;
     }
 
     // Update is called once per frame
