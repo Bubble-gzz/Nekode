@@ -27,6 +27,14 @@ public class MyGrid : MonoBehaviour
     int lasti, lastj, i, j;
     GameObject lastGhost;
     Neko neko;
+    public List<int> tileCount = new List<int>();
+    [SerializeField]
+    Dictionary<MyTile.Type, int> tileCountPreset = new Dictionary<MyTile.Type, int>(){
+        {MyTile.Type.Arrow, -1},
+        {MyTile.Type.FlipArrow, -1},
+        {MyTile.Type.ADD, 3},
+        {MyTile.Type.Blank, -1}
+    };
 
     void Awake()
     {
@@ -37,6 +45,9 @@ public class MyGrid : MonoBehaviour
     }
     void Start()
     {
+        for (int i = 0; i < 24; i++) tileCount.Add(0);
+        foreach(var tileType in tileCountPreset.Keys)
+            tileCount[(int)tileType] = tileCountPreset[tileType];
         myCamera = Global.mainCam;
         if (myCamera.GetComponent<MyCamera>().mode == MyCamera.Mode.WSAD)
         {
@@ -154,7 +165,12 @@ public class MyGrid : MonoBehaviour
             if (grid[i, j].GetComponent<MyTile>().type != MyTile.Type.Blank) return;
         }
         if (grid[i, j] != null) grid[i, j].GetComponent<MyTile>().Delete();
+        if (tileCount[(int)currentTileType] == 0) return;
+        if (tileCount[(int)currentTileType] > 0) tileCount[(int)currentTileType]--;
+
         grid[i, j] = NewTile(currentTileType);
         grid[i, j].transform.position = GetWorldPos(i, j);
+        
+        if (tileCount[(int)currentTileType] == 0) currentTileType = MyTile.Type.NULL;
     }
 }

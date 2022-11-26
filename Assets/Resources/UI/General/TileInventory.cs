@@ -7,15 +7,25 @@ using UnityEngine.EventSystems;
 public class TileInventory : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
+    public GameObject mainInventory, arithInventory, logicInventory;
+    [SerializeField]
+    Vector2 slotSize;
+    [SerializeField]
     GameObject tileSlotPrefab;
     [SerializeField]
     List<MyTile.Type> tileTypes = new List<MyTile.Type>();
     [SerializeField]
-    public List<int> counts = new List<int>();
-    [SerializeField]
-    MyGrid myGrid;
-
+    public MyGrid myGrid;
+    RectTransform rect;
+    void Awake()
+    {
+        rect = GetComponent<RectTransform>();
+    }
     void Start()
+    {
+
+    }
+    void OnEnable()
     {
         int curID = 0;
         foreach (var tileType in tileTypes)
@@ -27,7 +37,10 @@ public class TileInventory : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             tileSlot.inventory = this;
         }
     }
-
+    void Update()
+    {
+        rect.sizeDelta = new Vector2(slotSize.x * tileTypes.Count, slotSize.y);
+    }
     public void OnPointerEnter(PointerEventData eventData)
     {
         Global.mouseOverUI = true;
@@ -36,5 +49,16 @@ public class TileInventory : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void OnPointerExit(PointerEventData eventData)
     {
         Global.mouseOverUI = false;
+    }
+    public void Hide()
+    {
+        foreach(Transform child in transform)
+            Destroy(child.gameObject);
+        gameObject.SetActive(false);
+    }
+    public void SwitchTo(GameObject otherInventory)
+    {
+        otherInventory.SetActive(true);
+        Hide();
     }
 }

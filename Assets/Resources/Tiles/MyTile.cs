@@ -246,6 +246,7 @@ public class MyTile : MonoBehaviour
             myGrid.grid[i, j] = blankTile;
             blankTile.transform.position = myGrid.GetWorldPos(i, j);
         }
+        if (myGrid.tileCount[(int)type] >= 0) myGrid.tileCount[(int)type]++;
         Destroy(gameObject);
     }
     void StartEditValue()
@@ -362,5 +363,13 @@ public class MyTile : MonoBehaviour
     public void SetLogitState(bool newState)
     {
         logicState = newState;
+    }
+    static public bool NotTile(Type type)
+    {
+        if (type == Type.ArithmeticBack) return true;
+        if (type == Type.ArithmeticMenu) return true;
+        if (type == Type.LogicMenu) return true;
+        if (type == Type.LogicBack) return true;
+        return false;
     }
 }
