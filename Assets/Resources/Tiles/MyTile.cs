@@ -372,4 +372,12 @@ public class MyTile : MonoBehaviour
         if (type == Type.LogicBack) return true;
         return false;
     }
+    public TileData ConvertToData()
+    {
+        TileData res = new TileData(i, j, (int)type, (int)permission, value);
+        for (int i = 0; i < 4; i++)
+            if (arrows[i] != null)
+                res.arrows.Add(arrows[i].ConvertToData());
+        return res;
+    }
 }

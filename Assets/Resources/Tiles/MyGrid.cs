@@ -173,4 +173,13 @@ public class MyGrid : MonoBehaviour
         
         if (tileCount[(int)currentTileType] == 0) currentTileType = MyTile.Type.NULL;
     }
+    public GridData ConvertToData()
+    {
+        GridData res = new GridData(n, m);
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < m; j++)
+                if (grid[i, j] != null)
+                    res.tiles.Add(grid[i, j].GetComponent<MyTile>().ConvertToData());
+        return res;
+    }
 }

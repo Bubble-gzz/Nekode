@@ -86,4 +86,8 @@ public class Arrow : MonoBehaviour
     {
         Destroy(gameObject);
     }
+    public ArrowData ConvertToData()
+    {
+        return new ArrowData((int)type, id, direction);
+    }
 }

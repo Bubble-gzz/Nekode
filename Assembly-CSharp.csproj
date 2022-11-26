@@ -67,6 +67,8 @@
      <Compile Include="Assets\Resources\Tiles\TileGhost.cs" />
      <Compile Include="Assets\Resources\Animation\UpdatePosAnimatorInfo.cs" />
      <Compile Include="Assets\Resources\Animation\PopAnimatorInfo.cs" />
+     <Compile Include="Assets\Resources\Tiles\MapData.cs" />
+     <Compile Include="Assets\Resources\UI\Workshop\SaveButton.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
