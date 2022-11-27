@@ -30,7 +30,8 @@ public class MyTile : MonoBehaviour
         LogicBack, // 20
         Blank, // 21
         Arrow, //22
-        FlipArrow // 23
+        FlipArrow, // 23
+        Destination // 24
     }
     public enum ButtonType{
         Delete,
@@ -136,7 +137,7 @@ public class MyTile : MonoBehaviour
             logicState = false;
         }
         valueScaler.transform.position = transform.position + (Vector3)textOffset;
-        Debug.Log("type:" + (int)type);
+        //Debug.Log("type:" + (int)type);
         text.color = myGrid.tileTextColors[(int)type];
     }
     bool CheckHasValue()
@@ -351,7 +352,7 @@ public class MyTile : MonoBehaviour
     public void PlaceArrow(int id, Arrow.Type type, int direction = 0)
     {
         GameObject newArrow = Instantiate(arrowPrefab, transform);
-        Debug.Log("arrowPos: " + arrowPos[id]);
+        //Debug.Log("arrowPos: " + arrowPos[id]);
         newArrow.transform.localPosition = arrowPos[id];
         arrows[id] = newArrow.GetComponent<Arrow>();
         arrows[id].type = type;

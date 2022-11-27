@@ -33,6 +33,15 @@ public class Arrow : MonoBehaviour
             default: return Type.Normal;
         }
     }
+    static public MyTile.Type ArrowToTileType(Type type)
+    {
+        switch(type)
+        {
+            case (Type.Normal): return MyTile.Type.Arrow;
+            case (Type.Flip): return MyTile.Type.FlipArrow;
+            default: return MyTile.Type.Arrow;
+        }
+    }
     void Awake()
     {
         animationBuffer = gameObject.AddComponent<AnimationBuffer>();
@@ -40,7 +49,7 @@ public class Arrow : MonoBehaviour
         mouseEnter = false;
         myCollider = transform.Find("Collider");
         texture = transform.Find("Texture");
-        Debug.Log("texture:" + texture);
+        //Debug.Log("texture:" + texture);
     }
     void Start()
     {
@@ -56,7 +65,7 @@ public class Arrow : MonoBehaviour
     void Update()
     {
         if (isGhost) return;
-        if (Input.GetMouseButtonDown(0) && mouseEnter) tile.DeleteArrow(id);
+        if (Input.GetMouseButtonDown(0) && mouseEnter) Delete();
         if (Input.GetMouseButtonDown(1) && mouseEnter) Turn(1);
     }
     void Turn(int delta)
@@ -84,7 +93,9 @@ public class Arrow : MonoBehaviour
     }
     void Delete()
     {
-        Destroy(gameObject);
+        //Debug.Log("arrow to tile: " + (int)ArrowToTileType(type));
+        if (tile.myGrid.tileCount[(int)ArrowToTileType(type)] >= 0) tile.myGrid.tileCount[(int)ArrowToTileType(type)]++;
+        tile.DeleteArrow(id);
     }
     public ArrowData ConvertToData()
     {

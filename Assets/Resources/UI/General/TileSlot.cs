@@ -39,7 +39,7 @@ public class TileSlot : MonoBehaviour
         if (inventory.myGrid.tileCount[(int)type] == 0) return;
         if (MyGrid.currentTileType == type) MyGrid.currentTileType = MyTile.Type.NULL;
         else MyGrid.currentTileType = type;
-        Debug.Log(MyGrid.currentTileType);
+        //Debug.Log(MyGrid.currentTileType);
     }
 
     void Awake()

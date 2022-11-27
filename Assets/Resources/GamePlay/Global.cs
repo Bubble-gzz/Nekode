@@ -8,7 +8,10 @@ public class Global
     static public bool mouseOverUI;
     static public bool mouseOverArrow;
     static public float nekoPlaySpeed;
+    static public MyGrid grid;
     static public Neko currentNeko;
+    static public string currentPuzzleName;
+    static public bool puzzleComplete;
     public enum GameMode{
         Play,
         Workshop

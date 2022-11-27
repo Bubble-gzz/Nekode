@@ -1469,6 +1469,14 @@ PrefabInstance:
       propertyPath: logicInventory
       value: 
       objectReference: {fileID: 602004834}
+    - target: {fileID: 8112857577752923123, guid: 5c90ce3403b00c540ad150b359749fe3, type: 3}
+      propertyPath: tileTypes.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112857577752923123, guid: 5c90ce3403b00c540ad150b359749fe3, type: 3}
+      propertyPath: tileTypes.Array.data[9]
+      value: 24
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c90ce3403b00c540ad150b359749fe3, type: 3}
 --- !u!1001 &8115712869128338655

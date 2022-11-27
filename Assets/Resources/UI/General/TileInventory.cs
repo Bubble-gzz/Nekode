@@ -13,7 +13,7 @@ public class TileInventory : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField]
     GameObject tileSlotPrefab;
     [SerializeField]
-    List<MyTile.Type> tileTypes = new List<MyTile.Type>();
+    public List<MyTile.Type> tileTypes = new List<MyTile.Type>();
     [SerializeField]
     public MyGrid myGrid;
     RectTransform rect;

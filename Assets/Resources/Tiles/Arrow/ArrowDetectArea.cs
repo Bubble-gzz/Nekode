@@ -49,6 +49,9 @@ public class ArrowDetectArea : MonoBehaviour
         if (!Arrow.IsArrow(MyGrid.currentTileType)) return;
         mouseEnter = false;
         if (arrowGhost != null) Destroy(arrowGhost);
-        tile.PlaceArrow(id,  Arrow.TileToArrowType(MyGrid.currentTileType));
+        MyTile.Type type = MyGrid.currentTileType;
+        tile.PlaceArrow(id,  Arrow.TileToArrowType(type));
+        if (tile.myGrid.tileCount[(int)type] > 0) tile.myGrid.tileCount[(int)type]--;
+        if (tile.myGrid.tileCount[(int)type] == 0) MyGrid.currentTileType = MyTile.Type.NULL;
     }
 }

@@ -30,25 +30,23 @@ public class MyGrid : MonoBehaviour
     Neko neko;
     public List<int> tileCount = new List<int>();
     [SerializeField]
-    Dictionary<MyTile.Type, int> tileCountPreset = new Dictionary<MyTile.Type, int>(){
-        {MyTile.Type.Arrow, -1},
-        {MyTile.Type.FlipArrow, -1},
-        {MyTile.Type.ADD, 3},
-        {MyTile.Type.Blank, -1}
-    };
-
+    
+    public List<TilePresetPair> tileCountPreset;
     void Awake()
     {
         grid = new GameObject[n, m];
         currentTileType = MyTile.Type.NULL;
         lasti = lastj = -100;
         lastGhost = null;
+        Global.grid = this;
     }
     void Start()
     {
-        for (int i = 0; i < 24; i++) tileCount.Add(0);
-        foreach(var tileType in tileCountPreset.Keys)
-            tileCount[(int)tileType] = tileCountPreset[tileType];
+        for (int i = 0; i < 25; i++) {
+            if (Global.currentGameMode == Global.GameMode.Workshop) tileCount.Add(-1);
+            else tileCount.Add(0);
+        }
+        
         myCamera = Global.mainCam;
         if (myCamera.GetComponent<MyCamera>().mode == MyCamera.Mode.WSAD)
         {
@@ -56,6 +54,11 @@ public class MyGrid : MonoBehaviour
             newPos.z = -10;
             myCamera.transform.position = newPos;
         }
+    }
+    public void SetTileCount(List<TilePresetPair> tileCountPreset)
+    {
+        foreach(var preset in tileCountPreset)
+            tileCount[(int)preset.type] = preset.count;
     }
 
     public void Init()
@@ -197,7 +200,7 @@ public class MyGrid : MonoBehaviour
             {
                 if (grid[i, j] != null) Destroy(grid[i, j]);
             }
-        Destroy(neko.gameObject);
+        if (neko != null) Destroy(neko.gameObject);
     }
     public void LoadFromFile(string path)
     {
