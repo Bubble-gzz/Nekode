@@ -43,6 +43,7 @@
      <Compile Include="Assets\Resources\Animation\ChangeColorAnimator.cs" />
      <Compile Include="Assets\Resources\UI\General\PlayButton\PlayButton.cs" />
      <Compile Include="Assets\Resources\UI\General\EditTile\EditTileButton.cs" />
+     <Compile Include="Assets\Resources\UI\Workshop\FileExplorer.cs" />
      <Compile Include="Assets\Resources\Animation\MyAnimation.cs" />
      <Compile Include="Assets\Resources\Animation\PopAnimator.cs" />
      <Compile Include="Assets\Resources\UI\General\TileSlot.cs" />
@@ -66,11 +67,13 @@
      <Compile Include="Assets\Resources\Animation\UpdatePosAnimator.cs" />
      <Compile Include="Assets\Resources\Neko\Neko\Neko.cs" />
      <Compile Include="Assets\Resources\Tiles\MapData.cs" />
+     <Compile Include="Assets\Resources\UI\Workshop\FileEntry.cs" />
      <Compile Include="Assets\Resources\Tiles\TileGhost.cs" />
      <Compile Include="Assets\Resources\Animation\UpdatePosAnimatorInfo.cs" />
      <Compile Include="Assets\Resources\Animation\PopAnimatorInfo.cs" />
-     <Compile Include="Assets\Resources\UI\Workshop\FileEntry.cs" />
-     <Compile Include="Assets\Resources\UI\Workshop\FileExplorer.cs" />
+     <Compile Include="Assets\Resources\UI\General\Menu\ScrollMenu.cs" />
+     <Compile Include="Assets\Scenes\GamePlay.cs" />
+     <Compile Include="Assets\Resources\GamePlay\Puzzles\PuzzleHelloWorld.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
