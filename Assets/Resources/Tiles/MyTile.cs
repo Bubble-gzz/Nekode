@@ -113,7 +113,10 @@ public class MyTile : MonoBehaviour
         if (type == Type.Blank)
         {
             transform.Find("Texture").rotation = Quaternion.Euler(0, 0, 90 * Random.Range(0, 3));
+            permission = Permission.Protected;
         }
+        if (type == Type.Destination)
+            permission = Permission.Protected;
         if (isGhost)
         {
             Color newColor = sprite.color;
@@ -147,13 +150,14 @@ public class MyTile : MonoBehaviour
             case Type.ISwitch: return false;
             case Type.OSwitch: return false;
             case Type.Blank: return false;
+            case Type.Destination: return false;
             default: return true;
         }
     }
     // Update is called once per frame
     void Update()
     {
-        if (permission == Permission.Free) sprite.color = new Color(1,1,1,1);
+        if (permission == Permission.Free || (type == Type.Blank || type == Type.Destination)) sprite.color = new Color(1,1,1,1);
         else sprite.color = ReadOnlyColor;
 
         if (permission != Permission.ReadOnly) text.color = myGrid.tileTextColors[(int)type];
@@ -194,24 +198,29 @@ public class MyTile : MonoBehaviour
         animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.LinearBack, 0.07f));
         buttons.Clear();
 
-        bool deletable, editable;
         bool isWorkshop = Global.currentGameMode == Global.GameMode.Workshop;
+        bool deletable, editable = hasValue, canBeFree, canBeProtected, canBeReadOnly;
+        
+        canBeFree = permission != Permission.Free && isWorkshop;
+        canBeProtected = permission != Permission.Protected && isWorkshop;
+        canBeReadOnly = permission != Permission.ReadOnly && isWorkshop && hasValue;
+
         if (isWorkshop)
         {
             deletable = true;
-            editable = true;
+            if (type == Type.Destination || type == Type.Blank) canBeFree = false;
         }
         else
         {
-            deletable = permission == Permission.Free;
-            editable = !(permission == Permission.ReadOnly);
+            deletable = (permission == Permission.Free);
+            editable &= !(permission == Permission.ReadOnly);
         }
 
         if (deletable) AddButton(Delete, (int)ButtonType.Delete);
         if (editable && hasValue) AddButton(StartEditValue, (int)ButtonType.Edit);
-        if (permission != Permission.Free && isWorkshop) AddButton(SetFree, (int)ButtonType.Free);
-        if (permission != Permission.Protected && isWorkshop) AddButton(SetProtected, (int)ButtonType.Protected);
-        if (permission != Permission.ReadOnly && isWorkshop && hasValue) AddButton(SetReadOnly, (int)ButtonType.ReadOnly);
+        if (canBeFree) AddButton(SetFree, (int)ButtonType.Free);
+        if (canBeProtected) AddButton(SetProtected, (int)ButtonType.Protected);
+        if (canBeReadOnly) AddButton(SetReadOnly, (int)ButtonType.ReadOnly);
         
 
         int n = buttons.Count;
@@ -335,7 +344,7 @@ public class MyTile : MonoBehaviour
         mouseEnter = true;
         if (editing) return;
         
-        if (permission == Permission.Free) animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.LinearOut, 0.07f));
+        if (permission == Permission.Free || (type == Type.Blank || type == Type.Destination)) animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.LinearOut, 0.07f));
         else if (permission == Permission.Protected && hasValue) animationBuffer.Add(new PopAnimatorInfo(valueScaler.gameObject, PopAnimator.Type.LinearOut, 0.07f));
         //transform.localScale = originScale * 1.2f;
     }
@@ -344,7 +353,7 @@ public class MyTile : MonoBehaviour
     {
         mouseEnter = false;
         if (editing) return;
-        if (permission == Permission.Free) animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.LinearBack, 0.07f));
+        if (permission == Permission.Free || (type == Type.Blank || type == Type.Destination)) animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.LinearBack, 0.07f));
         else if (permission == Permission.Protected && hasValue) animationBuffer.Add(new PopAnimatorInfo(valueScaler.gameObject, PopAnimator.Type.LinearBack, 0.07f));
        
         //transform.localScale = originScale;
@@ -384,7 +393,18 @@ public class MyTile : MonoBehaviour
     }
     public TileData ConvertToData()
     {
-        TileData res = new TileData(i, j, (int)type, (int)permission, value);
+        Permission _permission = permission;
+        Type _type = type;
+        if (Global.currentGameMode == Global.GameMode.Workshop)
+        {
+            if (permission == Permission.Free)
+            {
+                _type = Type.Blank;
+                _permission = Permission.Protected;
+            }
+        }
+
+        TileData res = new TileData(i, j, (int)_type, (int)_permission, value);
         for (int i = 0; i < 4; i++)
             if (arrows[i] != null)
                 res.arrows.Add(arrows[i].ConvertToData());

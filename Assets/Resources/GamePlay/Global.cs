@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Global
 {
@@ -12,6 +13,7 @@ public class Global
     static public Neko currentNeko;
     static public string currentPuzzleName;
     static public bool puzzleComplete;
+    static public GameMessage gameMessage;
     public enum GameMode{
         Play,
         Workshop

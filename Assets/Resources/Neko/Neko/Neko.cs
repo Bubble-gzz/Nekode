@@ -23,6 +23,7 @@ public class Neko : MonoBehaviour
     }
     [SerializeField]
     public Mode mode;
+    public bool atDestination;
     [SerializeField]
     List<Color> bubbleTextColors = new List<Color>();
     SpriteRenderer sprite;
@@ -40,10 +41,15 @@ public class Neko : MonoBehaviour
         animationBuffer = gameObject.AddComponent<AnimationBuffer>();
         gameObject.AddComponent<UpdatePosAnimator>();
         mouseEnter = false;
+        atDestination = false;
     }
     void Start()
     {
         bubble.transform.GetComponentInChildren<TMP_Text>().color = bubbleTextColors[(int)mode];
+        if (Global.currentGameMode == Global.GameMode.Play)
+        {
+            if (GamePlay.puzzleSetting.bubble) bubble.gameObject.SetActive(true);
+        }
         UpdateValue(value);
     }
 
@@ -97,6 +103,7 @@ public class Neko : MonoBehaviour
     {
         MyTile tile = grid.grid[i, j].GetComponent<MyTile>();
         MyTile.Type tileType = tile.type;
+        atDestination = false;
         switch (tileType)
         {
             case (MyTile.Type.InputTile):
@@ -196,6 +203,9 @@ public class Neko : MonoBehaviour
                     tile.SetLogitState(value != tile.value);
                 }
                 break;
+            case (MyTile.Type.Destination):
+                atDestination = true;
+                break;
             default: break;
         }
     }
@@ -215,6 +225,7 @@ public class Neko : MonoBehaviour
     {
         if (MyGrid.currentTileType != MyTile.Type.NULL) return;
         if (Global.mouseOverUI) return;
+        if (Global.currentGameMode == Global.GameMode.Play) return;
         mouseEnter = true;
         sprite.color = new Color(1, 1, 1, 0.5f);
     }
@@ -222,6 +233,7 @@ public class Neko : MonoBehaviour
     {
         if (followMouse) return;
         mouseEnter = false;
+        if (Global.currentGameMode == Global.GameMode.Play) return;
         sprite.color = new Color(1, 1, 1, 1);
     }
     void CheckPickUp()

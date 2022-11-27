@@ -77,6 +77,8 @@
      <Compile Include="Assets\Resources\Animation\PopAnimatorInfo.cs" />
      <Compile Include="Assets\Resources\GamePlay\Puzzles\PuzzleLogic.cs" />
      <Compile Include="Assets\Resources\GamePlay\Puzzles\TilePreset.cs" />
+     <Compile Include="Assets\Resources\UI\General\PlayButton\ResetButton.cs" />
+     <Compile Include="Assets\Resources\GamePlay\GameMessage.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

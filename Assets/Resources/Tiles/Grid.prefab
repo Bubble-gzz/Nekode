@@ -198,7 +198,11 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
   blankTileTextures:
   - {fileID: 21300000, guid: a0108a7e93e62d745b2adfbf9f2ab2c7, type: 3}
   - {fileID: 21300000, guid: 565312b405f3be04ebcaa43573d21506, type: 3}
   tileCount: 
+  tileCountPreset: []

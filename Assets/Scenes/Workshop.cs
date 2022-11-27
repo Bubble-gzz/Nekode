@@ -10,11 +10,14 @@ public class Workshop : MonoBehaviour
     public string puzzleName;
     [SerializeField]
     TMP_Text title;
-    void Start()
+    void Awake()
     {
         Global.currentGameMode = Global.GameMode.Workshop;
         Global.mouseOverUI = false;
         Global.mouseOverArrow = false;
+    }
+    void Start()
+    {
         MyGrid grid = GameObject.FindObjectOfType<MyGrid>();
         grid.Init();
     }

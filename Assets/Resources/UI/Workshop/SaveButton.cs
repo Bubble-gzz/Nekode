@@ -24,7 +24,7 @@ public class SaveButton : MyButton
     public void Save()
     {
         string data = JsonUtility.ToJson(grid.ConvertToData());
-        DirectoryInfo root = new DirectoryInfo(Application.dataPath + "/MapData/");
+        DirectoryInfo root = new DirectoryInfo(Application.dataPath + "/Resources/MapData/");
         if (!root.Exists) root.Create();
         string path = root + workshop.puzzleName + ".json";
         File.WriteAllText(path, data);
