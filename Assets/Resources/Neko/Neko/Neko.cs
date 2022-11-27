@@ -44,7 +44,7 @@ public class Neko : MonoBehaviour
     void Start()
     {
         bubble.transform.GetComponentInChildren<TMP_Text>().color = bubbleTextColors[(int)mode];
-        UpdateValue(5);
+        UpdateValue(value);
     }
 
     void Update()
@@ -247,5 +247,9 @@ public class Neko : MonoBehaviour
                 sprite.color = new Color(1, 1, 1, 1);
             }
         }
+    }
+    public NekoData ConvertToData()
+    {
+        return new NekoData(i, j, (int)mode, value);
     }
 }

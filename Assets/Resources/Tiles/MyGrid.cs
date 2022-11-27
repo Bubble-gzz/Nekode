@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class MyGrid : MonoBehaviour
 {
@@ -59,13 +60,18 @@ public class MyGrid : MonoBehaviour
 
     public void Init()
     {
-        grid[n/2, m/2] = NewTile(MyTile.Type.Blank);
+        grid[n/2, m/2] = NewTile(MyTile.Type.Blank, n/2, m/2);
         grid[n/2, m/2].transform.position = GetWorldPos(n/2, m/2);
+        InviteNeko(n/2, m/2);
+    }
+
+    void InviteNeko(int i, int j)
+    {
         neko = Instantiate(nekoPrefab).GetComponent<Neko>();
-        Vector3 nekoPos = GetWorldPos(n/2, m/2);
+        Vector3 nekoPos = GetWorldPos(i, j);
         nekoPos.z = neko.z_pos;
         neko.transform.position = nekoPos;
-        neko.i = n/2; neko.j = m/2;
+        neko.i = i; neko.j = j;
         neko.grid = this;
     }
 
@@ -111,14 +117,15 @@ public class MyGrid : MonoBehaviour
             if (lastGhost != null) Destroy(lastGhost);
         }    
     }
-    public GameObject NewTile(MyTile.Type type)
+    public GameObject NewTile(MyTile.Type type, int i, int j, int value = 0, MyTile.Permission permission = MyTile.Permission.Free)
     {
         MyTile newTile = Instantiate(tilePrefab).GetComponent<MyTile>();
         newTile.myGrid = this;
         newTile.type = type;
         //SpriteRenderer sprite = newTile.transform.Find("Texture").GetComponent<SpriteRenderer>();
         //sprite.sprite = GetTileTexture(type);
-        newTile.permission = MyTile.Permission.Free;
+        newTile.permission = permission;
+        newTile.value = value;
         newTile.i = i;
         newTile.j = j;
         return newTile.gameObject;
@@ -140,7 +147,7 @@ public class MyGrid : MonoBehaviour
         if (grid[i, j] != null) return;
 
 
-        GameObject newGhost = NewTile(MyTile.Type.Blank);
+        GameObject newGhost = NewTile(MyTile.Type.Blank, i, j);
         newGhost.transform.position = GetWorldPos(i, j);
         newGhost.GetComponent<MyTile>().isGhost = true;
 
@@ -168,7 +175,7 @@ public class MyGrid : MonoBehaviour
         if (tileCount[(int)currentTileType] == 0) return;
         if (tileCount[(int)currentTileType] > 0) tileCount[(int)currentTileType]--;
 
-        grid[i, j] = NewTile(currentTileType);
+        grid[i, j] = NewTile(currentTileType, i, j);
         grid[i, j].transform.position = GetWorldPos(i, j);
         
         if (tileCount[(int)currentTileType] == 0) currentTileType = MyTile.Type.NULL;
@@ -180,6 +187,43 @@ public class MyGrid : MonoBehaviour
             for (int j = 0; j < m; j++)
                 if (grid[i, j] != null)
                     res.tiles.Add(grid[i, j].GetComponent<MyTile>().ConvertToData());
+        res.neko = neko.ConvertToData();
         return res;
+    }
+    public void ClearGrid()
+    {
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < m; j++)
+            {
+                if (grid[i, j] != null) Destroy(grid[i, j]);
+            }
+        Destroy(neko.gameObject);
+    }
+    public void LoadFromFile(string path)
+    {
+        string jsonData = File.ReadAllText(path);
+        LoadFromJson(jsonData);
+        Global.mouseOverUI = false;
+    }
+    void LoadFromJson(string jsonData)
+    {
+        ClearGrid();
+        GridData gridData = JsonUtility.FromJson<GridData>(jsonData);
+        n = gridData.n; m = gridData.m;
+        grid = new GameObject[n, m];
+        foreach (var tileData in gridData.tiles)
+            BuildTileFromData(tileData);
+        NekoData nekoData = gridData.neko;
+        InviteNeko(nekoData.i, nekoData.j);
+        neko.mode = (Neko.Mode)nekoData.mode;
+        neko.value = nekoData.value;
+    }
+    void BuildTileFromData(TileData tileData)
+    {
+        int i = tileData.i, j = tileData.j;
+        grid[i, j] = NewTile((MyTile.Type)tileData.type, i, j, tileData.value, (MyTile.Permission)tileData.permission);
+        grid[i, j].transform.position = GetWorldPos(i, j);
+        foreach (var arrowData in tileData.arrows)
+            grid[i, j].GetComponent<MyTile>().BuildArrowFromData(arrowData);
     }
 }

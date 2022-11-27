@@ -53,6 +53,7 @@
      <Compile Include="Assets\Resources\Tiles\MyGrid.cs" />
      <Compile Include="Assets\Scenes\Workshop.cs" />
      <Compile Include="Assets\Resources\UI\General\MyButton.cs" />
+     <Compile Include="Assets\Resources\UI\Workshop\SaveButton.cs" />
      <Compile Include="Assets\Resources\Animation\SelfDestroyAnimatorInfo.cs" />
      <Compile Include="Assets\Resources\Animation\ChangeColorAnimatorInfo.cs" />
      <Compile Include="Assets\Resources\GamePlay\MyCamera.cs" />
@@ -64,11 +65,12 @@
      <Compile Include="Assets\Resources\Animation\AnimationOrder.cs" />
      <Compile Include="Assets\Resources\Animation\UpdatePosAnimator.cs" />
      <Compile Include="Assets\Resources\Neko\Neko\Neko.cs" />
+     <Compile Include="Assets\Resources\Tiles\MapData.cs" />
      <Compile Include="Assets\Resources\Tiles\TileGhost.cs" />
      <Compile Include="Assets\Resources\Animation\UpdatePosAnimatorInfo.cs" />
      <Compile Include="Assets\Resources\Animation\PopAnimatorInfo.cs" />
-     <Compile Include="Assets\Resources\Tiles\MapData.cs" />
-     <Compile Include="Assets\Resources\UI\Workshop\SaveButton.cs" />
+     <Compile Include="Assets\Resources\UI\Workshop\FileEntry.cs" />
+     <Compile Include="Assets\Resources\UI\Workshop\FileExplorer.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

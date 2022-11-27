@@ -17,7 +17,6 @@ public class ArrowDetectArea : MonoBehaviour
     }
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -50,6 +49,6 @@ public class ArrowDetectArea : MonoBehaviour
         if (!Arrow.IsArrow(MyGrid.currentTileType)) return;
         mouseEnter = false;
         if (arrowGhost != null) Destroy(arrowGhost);
-        tile.PlaceArrow(id, transform.position);
+        tile.PlaceArrow(id,  Arrow.TileToArrowType(MyGrid.currentTileType));
     }
 }

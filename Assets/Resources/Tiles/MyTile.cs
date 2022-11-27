@@ -81,6 +81,7 @@ public class MyTile : MonoBehaviour
     bool editingValue;
 
     public Arrow[] arrows = new Arrow[4];
+    public Vector3[] arrowPos;
     [SerializeField]
     public ArrowDetectArea[] arrowDetectAreas = new ArrowDetectArea[4];
     [SerializeField]
@@ -99,6 +100,12 @@ public class MyTile : MonoBehaviour
         valueScaler = transform.Find("ValueScaler").gameObject;
         valueScaler.AddComponent<PopAnimator>();
         tileCollider = GetComponent<Collider2D>();
+        arrowPos =  new Vector3[4]{
+            new Vector3(0.45f, 0, 0),
+            new Vector3(0, -0.45f, 0),
+            new Vector3(-0.45f, 0, 0),
+            new Vector3(0, 0.45f, 0)
+        };
     }
     void Start()
     {
@@ -242,7 +249,7 @@ public class MyTile : MonoBehaviour
             if (button != null) Destroy(button.gameObject);
         if (type != Type.Blank)
         {
-            GameObject blankTile = myGrid.NewTile(Type.Blank);
+            GameObject blankTile = myGrid.NewTile(Type.Blank, i, j);
             myGrid.grid[i, j] = blankTile;
             blankTile.transform.position = myGrid.GetWorldPos(i, j);
         }
@@ -341,14 +348,16 @@ public class MyTile : MonoBehaviour
        
         //transform.localScale = originScale;
     }
-    public void PlaceArrow(int id, Vector2 pos)
+    public void PlaceArrow(int id, Arrow.Type type, int direction = 0)
     {
         GameObject newArrow = Instantiate(arrowPrefab, transform);
-        newArrow.transform.position = pos;
+        Debug.Log("arrowPos: " + arrowPos[id]);
+        newArrow.transform.localPosition = arrowPos[id];
         arrows[id] = newArrow.GetComponent<Arrow>();
-        arrows[id].type = Arrow.TileToArrowType(MyGrid.currentTileType);
+        arrows[id].type = type;
         arrows[id].id = id;
         arrows[id].tile = this;
+        arrows[id].direction = direction;
         arrowDetectAreas[id].enabled = false;
     }
     public void DeleteArrow(int id)
@@ -379,5 +388,9 @@ public class MyTile : MonoBehaviour
             if (arrows[i] != null)
                 res.arrows.Add(arrows[i].ConvertToData());
         return res;
+    }
+    public void BuildArrowFromData(ArrowData arrowData)
+    {
+        PlaceArrow(arrowData.side, (Arrow.Type)arrowData.type, arrowData.direction);
     }
 }
