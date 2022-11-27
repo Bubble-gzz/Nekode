@@ -12,6 +12,8 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public AnimationBuffer animationBuffer;
     Vector3 originSize;
     bool mouseEnter;
+    [SerializeField]
+    bool notUIelement;
     void Awake()
     {
         animationBuffer = gameObject.AddComponent<AnimationBuffer>();
@@ -30,18 +32,21 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (notUIelement) return;
         transform.localScale = originSize * 0.7f;
         animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.PopOut, 0.07f));
         onClick.Invoke();
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (notUIelement) return;
         animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.PopOut, 0.07f));
         //transform.localScale = originSize * 1.1f;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (notUIelement) return;
         animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.PopBack, 0.07f));
         //transform.localScale = originSize * 1.0f;
     }

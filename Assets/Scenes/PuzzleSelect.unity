@@ -506,6 +506,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   animationBuffer: {fileID: 0}
+  notUIelement: 0
 --- !u!114 &1073558741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -969,6 +970,10 @@ PrefabInstance:
     - target: {fileID: 4143400277766522393, guid: 9e2964b509864a64ebe7928d438d90ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143400277766522399, guid: 9e2964b509864a64ebe7928d438d90ae, type: 3}
+      propertyPath: notUIelement
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4143400277766522399, guid: 9e2964b509864a64ebe7928d438d90ae, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.size

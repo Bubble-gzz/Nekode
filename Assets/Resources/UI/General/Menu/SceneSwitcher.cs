@@ -36,8 +36,11 @@ public class SceneSwitcher : MonoBehaviour
     }
     public void SwitchTo(string sceneName)
     {
-        if (sceneName == "ExitGame") Application.Quit();
-        StartCoroutine(_SwitchTo(sceneName));
+        if (sceneName == "ExitGame") {
+            Application.Quit();
+            Debug.Log("quit game");
+        }
+        else StartCoroutine(_SwitchTo(sceneName));
     }
     IEnumerator _SwitchTo(string sceneName)
     {

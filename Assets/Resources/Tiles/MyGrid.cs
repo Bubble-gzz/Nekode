@@ -32,21 +32,20 @@ public class MyGrid : MonoBehaviour
     [SerializeField]
     
     public List<TilePresetPair> tileCountPreset;
+    int tileKindN;
     void Awake()
     {
         grid = new GameObject[n, m];
         currentTileType = MyTile.Type.NULL;
         lasti = lastj = -100;
         lastGhost = null;
+        tileKindN = 25;
         Global.grid = this;
+        for (int i = 0; i < tileKindN; i++)
+            tileCount.Add(-1);
     }
     void Start()
     {
-        for (int i = 0; i < 25; i++) {
-            if (Global.currentGameMode == Global.GameMode.Workshop) tileCount.Add(-1);
-            else tileCount.Add(0);
-        }
-        
         myCamera = Global.mainCam;
         if (myCamera.GetComponent<MyCamera>().mode == MyCamera.Mode.WSAD)
         {
@@ -57,6 +56,8 @@ public class MyGrid : MonoBehaviour
     }
     public void SetTileCount(List<TilePresetPair> tileCountPreset)
     {
+        for (int i = 0; i < tileKindN; i++)
+            tileCount[i] = 0;
         foreach(var preset in tileCountPreset)
             tileCount[(int)preset.type] = preset.count;
     }
