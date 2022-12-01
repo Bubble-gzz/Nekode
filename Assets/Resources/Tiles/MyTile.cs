@@ -38,7 +38,8 @@ public class MyTile : MonoBehaviour
         Edit,
         Free,
         Protected,
-        ReadOnly
+        ReadOnly,
+        Label,
     }
     [SerializeField]
     GameObject buttonPrefab;
@@ -51,8 +52,12 @@ public class MyTile : MonoBehaviour
     public bool isGhost;
     public int value;
     bool hasValue;
-    TMP_Text text;
-    Vector2 textOffset = new Vector2(0, 0);
+    public string label = "";
+    public string lastLabel;
+    TMP_Text valueText;
+    Vector2 valueTextOffset = new Vector2(0, 0);
+    TMP_Text labelText;
+    Vector2 labelTextOffset = new Vector2(-0.3f, 0.3f);
     SpriteRenderer sprite;
     public MyGrid myGrid;
     bool mouseEnter;
@@ -79,7 +84,10 @@ public class MyTile : MonoBehaviour
     Collider2D tileCollider;
 
     GameObject valueScaler;
+    GameObject labelScaler;
+
     bool editingValue;
+    bool editingLabel;
 
     public Arrow[] arrows = new Arrow[4];
     public Vector3[] arrowPos;
@@ -94,12 +102,19 @@ public class MyTile : MonoBehaviour
         mouseEnter = false;
         editing = false;
         editingValue = false;
+        editingLabel = false;
         deleted = false;
         gameObject.AddComponent<PopAnimator>();
         animationBuffer = gameObject.AddComponent<AnimationBuffer>();
-        text = gameObject.GetComponentInChildren<TMP_Text>();
+        valueText = transform.Find("ValueScaler").gameObject.GetComponentInChildren<TMP_Text>();
         valueScaler = transform.Find("ValueScaler").gameObject;
         valueScaler.AddComponent<PopAnimator>();
+
+        labelText = transform.Find("LabelScaler").gameObject.GetComponentInChildren<TMP_Text>();
+        labelScaler = transform.Find("LabelScaler").gameObject;
+        labelScaler.AddComponent<PopAnimator>();
+        label = "";
+
         tileCollider = GetComponent<Collider2D>();
         arrowPos =  new Vector3[4]{
             new Vector3(0.45f, 0, 0),
@@ -131,17 +146,23 @@ public class MyTile : MonoBehaviour
         sprite.sprite = myGrid.GetTileTexture(type);
     
         hasValue = CheckHasValue();
-        if (hasValue) text.enabled = true;
-        else text.enabled = false;
+        if (hasValue) valueText.enabled = true;
+        else valueText.enabled = false;
 
-        if (arithmeticTiles.Contains(type)) textOffset = new Vector2(0, -0.15f);
+        if (arithmeticTiles.Contains(type)) valueTextOffset = new Vector2(0, -0.15f);
         if (logicTiles.Contains(type)) {
-            textOffset = new Vector2(0.14f, -0.17f);
+            valueTextOffset = new Vector2(0.14f, -0.17f);
             logicState = false;
         }
-        valueScaler.transform.position = transform.position + (Vector3)textOffset;
+        valueScaler.transform.position = transform.position + (Vector3)valueTextOffset;
         //Debug.Log("type:" + (int)type);
-        text.color = myGrid.tileTextColors[(int)type];
+        valueText.color = myGrid.tileTextColors[(int)type];
+
+        labelScaler.transform.position = transform.position + (Vector3)labelTextOffset;
+        labelText.color = myGrid.tileTextColors[(int)type];
+
+        if (label != "" && label != null) myGrid.tileTable[label] = this;
+        lastLabel = label;
     }
     bool CheckHasValue()
     {
@@ -160,15 +181,16 @@ public class MyTile : MonoBehaviour
         if (permission == Permission.Free || (type == Type.Blank || type == Type.Destination)) sprite.color = new Color(1,1,1,1);
         else sprite.color = ReadOnlyColor;
 
-        if (permission != Permission.ReadOnly) text.color = myGrid.tileTextColors[(int)type];
+        if (permission != Permission.ReadOnly) valueText.color = myGrid.tileTextColors[(int)type];
         else {
             Color newColor = myGrid.tileTextColors[(int)type];
             newColor.a = 0.4f;
-            text.color = newColor;
+            valueText.color = newColor;
         }
         if (Input.GetMouseButtonDown(1)) OnEdit();
         CheckExitEditArea();
         EditValue();
+        EditLabel();
         if (Arrow.IsArrow(MyGrid.currentTileType)) tileCollider.enabled = false;
         else tileCollider.enabled = true;
     }
@@ -180,6 +202,7 @@ public class MyTile : MonoBehaviour
         if (dist < myGrid.tileSize * 0.7f && !Input.GetKeyDown(KeyCode.Return)) return;
         DropEditButtons();
         QuitEditValue();
+        QuitEditLabel();
     }
 
     public void DropEditButtons()
@@ -199,11 +222,12 @@ public class MyTile : MonoBehaviour
         buttons.Clear();
 
         bool isWorkshop = Global.currentGameMode == Global.GameMode.Workshop;
-        bool deletable, editable = hasValue, canBeFree, canBeProtected, canBeReadOnly;
+        bool deletable, editable = hasValue, canBeFree, canBeProtected, canBeReadOnly, hasLabel;
         
         canBeFree = permission != Permission.Free && isWorkshop;
         canBeProtected = permission != Permission.Protected && isWorkshop;
         canBeReadOnly = permission != Permission.ReadOnly && isWorkshop && hasValue;
+        hasLabel = Global.currentGameMode == Global.GameMode.Workshop;
 
         if (isWorkshop)
         {
@@ -221,7 +245,7 @@ public class MyTile : MonoBehaviour
         if (canBeFree) AddButton(SetFree, (int)ButtonType.Free);
         if (canBeProtected) AddButton(SetProtected, (int)ButtonType.Protected);
         if (canBeReadOnly) AddButton(SetReadOnly, (int)ButtonType.ReadOnly);
-        
+        if (hasLabel) AddButton(StartEditLable, (int)ButtonType.Label);
 
         int n = buttons.Count;
         if (n == 0) return;
@@ -269,14 +293,40 @@ public class MyTile : MonoBehaviour
     void StartEditValue()
     {
         if (editingValue) return;
+        QuitEditLabel();
         editingValue = true;
+        Global.isTyping = true;
         animationBuffer.Add(new PopAnimatorInfo(valueScaler, PopAnimator.Type.PopOut_TileText, 0.07f));
     }
     void QuitEditValue()
     {
         if (!editingValue) return;
         editingValue = false;
+        Global.isTyping = false;
         animationBuffer.Add(new PopAnimatorInfo(valueScaler, PopAnimator.Type.PopBack, 0.07f));
+    }
+    void StartEditLable()
+    {
+        if (editingLabel) return;
+        lastLabel = label;
+        QuitEditValue();
+        editingLabel = true;
+        Global.isTyping = true;
+        if (label == null) label = "";
+        if (label == "") label = "*";
+        animationBuffer.Add(new PopAnimatorInfo(labelScaler, PopAnimator.Type.PopOut_TileText, 0.07f));
+    }
+    void QuitEditLabel()
+    {
+        if (!editingLabel) return;
+        if (label != lastLabel)
+        {
+            if (lastLabel != null) myGrid.tileTable.Remove(lastLabel);
+            if (label != "") myGrid.tileTable[label] = this;
+        }
+        editingLabel = false;
+        Global.isTyping = false;
+        animationBuffer.Add(new PopAnimatorInfo(labelScaler, PopAnimator.Type.PopBack, 0.07f));
     }
     Dictionary<KeyCode, int> alphaKeys = new Dictionary<KeyCode, int>(){
         {KeyCode.Alpha0, 0},
@@ -302,12 +352,41 @@ public class MyTile : MonoBehaviour
         {KeyCode.Keypad8, 8},
         {KeyCode.Keypad9, 9}
     };
+    Dictionary<KeyCode, char> charKeys = new Dictionary<KeyCode, char>{
+        {KeyCode.A, 'A'},
+        {KeyCode.B, 'B'},
+        {KeyCode.C, 'C'},
+        {KeyCode.D, 'D'},
+        {KeyCode.E, 'E'},
+        {KeyCode.F, 'F'},
+        {KeyCode.G, 'G'},
+        {KeyCode.H, 'H'},
+        {KeyCode.I, 'I'},
+        {KeyCode.J, 'J'},
+        {KeyCode.K, 'K'},
+        {KeyCode.L, 'L'},
+        {KeyCode.M, 'M'},
+        {KeyCode.N, 'N'},
+        {KeyCode.O, 'O'},
+        {KeyCode.P, 'P'},
+        {KeyCode.Q, 'Q'},
+        {KeyCode.R, 'R'},
+        {KeyCode.S, 'S'},
+        {KeyCode.T, 'T'},
+        {KeyCode.U, 'U'},
+        {KeyCode.V, 'V'},
+        {KeyCode.W, 'W'},
+        {KeyCode.X, 'X'},
+        {KeyCode.Y, 'Y'},
+        {KeyCode.Z, 'Z'}
+    };
     void EditValue()
     {
-        text.text = value.ToString();
-        if (Mathf.Abs(value) < 100) text.fontSize = 0.35f;
-        else if (Mathf.Abs(value) < 1000) text.fontSize = 0.3f;
-        else text.fontSize = 0.25f;
+        if (value < -32767 || value >= 32767) valueText.text = "?";
+        else valueText.text = value.ToString();
+        if (Mathf.Abs(value) < 100) valueText.fontSize = 0.35f;
+        else if (Mathf.Abs(value) < 1000) valueText.fontSize = 0.3f;
+        else valueText.fontSize = 0.25f;
         if (!editingValue) return;
         int x = -1;
         foreach(var keyCode in alphaKeys.Keys)
@@ -337,6 +416,40 @@ public class MyTile : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
             value = value / 10;
+        }
+    }
+    void EditLabel()
+    {
+        labelText.text = label;
+        if (!editingLabel) return;
+        if (label.Length == 1) labelText.fontSize = 0.22f;
+        else if (label.Length == 2) labelText.fontSize = 0.2f;
+        else if (label.Length == 3) labelText.fontSize = 0.18f;
+        else if (label.Length == 4) labelText.fontSize = 0.15f;
+        int x = -1;
+        foreach(var keyCode in alphaKeys.Keys)
+            if (Input.GetKeyDown(keyCode))
+            {
+                x = alphaKeys[keyCode];
+                break;
+            }
+        foreach(var keyCode in keypadKeys.Keys)
+            if (Input.GetKeyDown(keyCode))
+            {
+                x = keypadKeys[keyCode];
+                break;
+            }
+        if (x != -1)
+            label += x.ToString();
+        foreach(var keyCode in charKeys.Keys)
+            if (Input.GetKeyDown(keyCode))
+            {
+                label += charKeys[keyCode];
+                break;
+            }
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            if (label.Length > 0) label = label.Substring(0, label.Length - 1);
         }
     }
     void OnMouseEnter()
@@ -404,7 +517,7 @@ public class MyTile : MonoBehaviour
             }
         }
 
-        TileData res = new TileData(i, j, (int)_type, (int)_permission, value);
+        TileData res = new TileData(i, j, (int)_type, (int)_permission, label, value);
         for (int i = 0; i < 4; i++)
             if (arrows[i] != null)
                 res.arrows.Add(arrows[i].ConvertToData());

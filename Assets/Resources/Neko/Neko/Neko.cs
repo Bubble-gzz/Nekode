@@ -9,7 +9,7 @@ public class Neko : MonoBehaviour
     public float z_pos;
     [SerializeField]
     public MyGrid grid;
-    int direction; // 0-right 1-down 2-left 3-up
+    public int direction; // 0-right 1-down 2-left 3-up
     public int i, j;
     int[] dx = new int[4]{0,-1,0,1};
     int[] dy = new int[4]{1,0,-1,0};
@@ -28,6 +28,7 @@ public class Neko : MonoBehaviour
     List<Color> bubbleTextColors = new List<Color>();
     SpriteRenderer sprite;
     Animator bubble;
+    TMP_Text bubbleText;
     public bool playMode;
     bool running;
     AnimationBuffer animationBuffer;
@@ -35,6 +36,7 @@ public class Neko : MonoBehaviour
     {
         sprite = transform.Find("Sprite").GetComponent<SpriteRenderer>();
         bubble = transform.Find("Bubble").GetComponent<Animator>();
+        bubbleText = transform.Find("Bubble").GetComponentInChildren<TMP_Text>();
         playMode = false; running = false;
         Global.currentNeko = this;
         Global.nekoPlaySpeed = 1;
@@ -50,18 +52,47 @@ public class Neko : MonoBehaviour
         {
             if (GamePlay.puzzleSetting.bubble) bubble.gameObject.SetActive(true);
         }
+        else bubble.gameObject.SetActive(true);
         UpdateValue(value);
+        UpdateDirection(direction);
     }
 
     void Update()
     {
         bubble.SetInteger("state", (int)mode);
+        bubbleText.color = bubbleTextColors[(int)mode];
         if (playMode)
         {
             if (!running)
                 StartCoroutine(RunOneStep());
         }
         CheckPickUp();
+        Cheat();
+    }
+    void Cheat()
+    {
+        if (Global.currentGameMode == Global.GameMode.Play) return;
+        if (!mouseEnter) return;
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            UpdateDirection((direction + 1) % 4);
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            SwitchMode(Mode.Read);
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            SwitchMode(Mode.Write);
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            UpdateValue(value + 1);
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            UpdateValue(value - 1);
+        }
     }
     IEnumerator RunOneStep()
     {
@@ -73,12 +104,12 @@ public class Neko : MonoBehaviour
             running = false;
             yield break;
         }
-        Debug.Log("Pass1");
+        //Debug.Log("Pass1");
         if (grid.grid[_i, _j] == null) {
             running = false;
             yield break;
         }
-        Debug.Log("Pass2");       
+        //Debug.Log("Pass2");       
         Vector3 targetPos = grid.GetWorldPos(_i, _j);
         targetPos.z = z_pos;
         AnimationInfo moveAnimation = new UpdatePosAnimatorInfo(gameObject, targetPos, true, 0.2f/Global.nekoPlaySpeed, true);
@@ -95,9 +126,13 @@ public class Neko : MonoBehaviour
         Arrow arrow = tile.arrows[direction];
         if (arrow == null) return;
         if (!tile.logicState) return;
-        direction = arrow.direction;
-        sprite.sprite = sprites[direction];
+        UpdateDirection(arrow.direction);
         arrow.ChangeState();
+    }
+    void UpdateDirection(int newDir)
+    {
+        direction = newDir;
+        sprite.sprite = sprites[direction];
     }
     void Interact(int i, int j)
     {
@@ -262,6 +297,6 @@ public class Neko : MonoBehaviour
     }
     public NekoData ConvertToData()
     {
-        return new NekoData(i, j, (int)mode, value);
+        return new NekoData(i, j, (int)mode, value, direction);
     }
 }

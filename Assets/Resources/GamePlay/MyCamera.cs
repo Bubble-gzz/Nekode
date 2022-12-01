@@ -33,7 +33,7 @@ public class MyCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (mode == Mode.WSAD)
+        if (mode == Mode.WSAD && !Global.isTyping)
         {
             Vector2 accel = new Vector2(0, 0);
             if (Input.GetKey(KeyCode.A)) accel.x -= 1;

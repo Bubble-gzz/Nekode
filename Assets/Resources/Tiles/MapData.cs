@@ -19,13 +19,15 @@ public class GridData
 [Serializable]
 public class TileData{
     public int i, j, type, permission, value;
+    public string label;
     public List<ArrowData> arrows;
-    public TileData(int _i, int _j, int _type, int _permission, int _value = 0)
+    public TileData(int _i, int _j, int _type, int _permission, string _label, int _value = 0)
     {
         this.i = _i;
         this.j = _j;
         this.type = _type;
         this.permission = _permission;
+        this.label = _label;
         this.value = _value;
         arrows = new List<ArrowData>();
     }
@@ -41,8 +43,11 @@ public class ArrowData{
 
 [Serializable]
 public class NekoData{
-    public int i, j, mode, value;
-    public NekoData(int _i, int _j, int _mode, int _value) {
-        this.i = _i; this.j = _j; this.mode = _mode; this.value = _value;
+    public int i, j, mode, value, direction;
+    public NekoData(int _i, int _j, int _mode, int _value, int _direction) {
+        this.i = _i; this.j = _j;
+        this.mode = _mode;
+        this.value = _value;
+        this.direction = _direction;
     }
 }

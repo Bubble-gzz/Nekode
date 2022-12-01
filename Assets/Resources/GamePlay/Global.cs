@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class Global
 {
@@ -14,6 +15,7 @@ public class Global
     static public string currentPuzzleName;
     static public bool puzzleComplete;
     static public GameMessage gameMessage;
+    static public bool isTyping;
     public enum GameMode{
         Play,
         Workshop

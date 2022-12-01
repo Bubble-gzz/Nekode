@@ -13,6 +13,8 @@ public class TileSlot : MonoBehaviour
     [SerializeField]
     public MyTile.Type type;
     AnimationBuffer animationBuffer;
+    [SerializeField]
+    GameObject messageBubblePrefab;
     Image sprite;
     int lastCount;
     public void OnPickUp()
@@ -81,5 +83,12 @@ public class TileSlot : MonoBehaviour
         if (MyTile.NotTile(type) || inventory.myGrid.tileCount[(int)type] < 0) count.text = "";
         else count.text = inventory.myGrid.tileCount[(int)type].ToString();
         lastCount = inventory.myGrid.tileCount[(int)type];
+    }
+    public MessageBubble PopMessage(string message, Vector3 pos)
+    {
+        MessageBubble newBubble = Instantiate(messageBubblePrefab).GetComponent<MessageBubble>();
+        newBubble.transform.position = pos;
+        newBubble.SetMessage(message);
+        return newBubble;
     }
 }

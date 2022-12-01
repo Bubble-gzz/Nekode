@@ -92,7 +92,7 @@ MonoBehaviour:
   mainInventory: {fileID: 8112857577752923120}
   arithInventory: {fileID: 0}
   logicInventory: {fileID: 0}
-  slotSize: {x: 175, y: 175}
+  slotSize: {x: 125, y: 125}
   tileSlotPrefab: {fileID: 4923451525975643844, guid: c3067132f6dff2846a353deb7b42478b, type: 3}
   tileTypes: 16000000170000001500000001000000060000000d0000000a0000000b00000013000000
   myGrid: {fileID: 0}

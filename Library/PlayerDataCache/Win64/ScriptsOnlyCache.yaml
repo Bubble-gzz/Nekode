@@ -16,6 +16,7 @@ ScriptsOnlyBuild:
     - Neko
     - PlayButton
     - PopAnimator
+    - Puzzel1_2
     - PuzzleEntrance
     - PuzzleHelloWorld
     - SaveButton
@@ -154,6 +155,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 5722}
     - Class: 114
       Script: {instanceID: 5966}
+    - Class: 114
+      Script: {instanceID: 28056}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -267,6 +270,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 5394}
     - Class: 114
       Script: {instanceID: 5966}
+    - Class: 114
+      Script: {instanceID: 28056}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -604,7 +609,7 @@ ScriptsOnlyBuild:
     className: ChangeColorAnimator
   - hash:
       serializedVersion: 2
-      Hash: 181929b7db727f1c1cfd5a8b83ac1191
+      Hash: 45a1bd983ddf7e6e33c129b0f94cb738
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayButton
@@ -622,7 +627,7 @@ ScriptsOnlyBuild:
     className: CinemachinePixelPerfect
   - hash:
       serializedVersion: 2
-      Hash: af962e9f14283d1f70738977c8922461
+      Hash: b2b8236c4c3e8f8e140ac44ae883b993
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EditTileButton
@@ -652,7 +657,7 @@ ScriptsOnlyBuild:
     className: MyAnimation
   - hash:
       serializedVersion: 2
-      Hash: 983e7af5651adf0e3cb54b3928d09987
+      Hash: 4e56f5ff313af2a376b26ea2f442aaa4
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GamePlay
@@ -760,7 +765,7 @@ ScriptsOnlyBuild:
     className: LimbSolver2D
   - hash:
       serializedVersion: 2
-      Hash: af962e9f14283d1f70738977c8922461
+      Hash: b2b8236c4c3e8f8e140ac44ae883b993
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MyButton
@@ -784,7 +789,7 @@ ScriptsOnlyBuild:
     className: Scrollbar
   - hash:
       serializedVersion: 2
-      Hash: a7486e5a82df8b9b2a08c89f6897eb78
+      Hash: 196ff9a3af9250c7d31960b4bb2e20e2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SaveButton
@@ -892,7 +897,7 @@ ScriptsOnlyBuild:
     className: BaseInput
   - hash:
       serializedVersion: 2
-      Hash: af962e9f14283d1f70738977c8922461
+      Hash: b2b8236c4c3e8f8e140ac44ae883b993
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ResetButton
@@ -1166,6 +1171,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TilePreset
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Puzzel1_2
   platform: 19
   scenePathNames:
   - Assets/Scenes/Menu.unity

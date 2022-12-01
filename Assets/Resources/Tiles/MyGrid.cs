@@ -17,6 +17,7 @@ public class MyGrid : MonoBehaviour
     [SerializeField]
     GameObject tilePrefab;
     public GameObject[,] grid;
+    public Dictionary<string, MyTile> tileTable = new Dictionary<string, MyTile>();
     Camera myCamera;
     [SerializeField]
     public List<Sprite> tileTextures = new List<Sprite>();
@@ -221,11 +222,13 @@ public class MyGrid : MonoBehaviour
         InviteNeko(nekoData.i, nekoData.j);
         neko.mode = (Neko.Mode)nekoData.mode;
         neko.value = nekoData.value;
+        neko.direction = nekoData.direction;
     }
     void BuildTileFromData(TileData tileData)
     {
         int i = tileData.i, j = tileData.j;
         grid[i, j] = NewTile((MyTile.Type)tileData.type, i, j, tileData.value, (MyTile.Permission)tileData.permission);
+        grid[i, j].GetComponent<MyTile>().label = tileData.label;
         grid[i, j].transform.position = GetWorldPos(i, j);
         foreach (var arrowData in tileData.arrows)
             grid[i, j].GetComponent<MyTile>().BuildArrowFromData(arrowData);

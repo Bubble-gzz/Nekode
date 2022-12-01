@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Events;
 
 public class GamePlay : MonoBehaviour
 {
@@ -14,9 +15,15 @@ public class GamePlay : MonoBehaviour
     TileInventory mainInventory, arithInventory, logicInventory;
     MyGrid grid;
     static public PuzzlePreset puzzleSetting;
+    static public UnityEvent onNekoRun = new UnityEvent();
+    static public UnityEvent onNekoReset = new UnityEvent();
+    static public bool hasNekoStart;
     void Awake()
     {
         Global.currentGameMode = Global.GameMode.Play;
+        onNekoRun = new UnityEvent();
+        onNekoReset = new UnityEvent();
+        hasNekoStart = false;
     }
     void Start()
     {
@@ -41,6 +48,7 @@ public class GamePlay : MonoBehaviour
         arithInventory.tileTypes = tilePreset.arithInventory;
         logicInventory.tileTypes = tilePreset.logicInventory;
         if (preset.inventory) mainInventory.gameObject.SetActive(true);
+        Global.mainCam.orthographicSize = preset.cameraSize;
         Instantiate(preset.puzzleLogic); 
     }
     void Update()
@@ -55,4 +63,5 @@ public class PuzzlePreset{
     public string puzzleName;
     public TilePreset tilePreset;
     public GameObject puzzleLogic;
+    public float cameraSize;
 }

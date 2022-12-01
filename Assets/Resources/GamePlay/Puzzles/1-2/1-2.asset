@@ -14,9 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileCounts:
   - type: 22
-    count: 3
-  - type: 4
-    count: 1
-  mainInventory: 1600000004000000
+    count: 2
+  mainInventory: 16000000
   arithInventory: 
   logicInventory: 

@@ -25,6 +25,12 @@ public class PlayButton : MyButton
         if (state == State.Pause)
         {
             state = State.Playing;
+            if (Global.currentGameMode == Global.GameMode.Play)
+            {
+                if (!GamePlay.hasNekoStart)
+                    GamePlay.onNekoRun.Invoke();
+                GamePlay.hasNekoStart = true;
+            }
             if (Global.currentNeko != null) Global.currentNeko.playMode = true;
         }
         else
