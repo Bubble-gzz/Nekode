@@ -24,9 +24,7 @@ public class GamePlay : MonoBehaviour
         onNekoRun = new UnityEvent();
         onNekoReset = new UnityEvent();
         hasNekoStart = false;
-    }
-    void Start()
-    {
+        
         Global.mouseOverUI = false;
         Global.mouseOverArrow = false;
         for (int i = 0; i < puzzlePresets.Count; i++)
@@ -34,6 +32,10 @@ public class GamePlay : MonoBehaviour
                 InitWithPreset(puzzlePresets[i]);
                 break;
             }
+    }
+    void Start()
+    {
+
     }
 
     // Update is called once per frame

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class Workshop : MonoBehaviour
 {
@@ -15,6 +16,10 @@ public class Workshop : MonoBehaviour
         Global.currentGameMode = Global.GameMode.Workshop;
         Global.mouseOverUI = false;
         Global.mouseOverArrow = false;
+        
+        GamePlay.onNekoReset = new UnityEvent();
+        GamePlay.onNekoRun = new UnityEvent();
+        GamePlay.hasNekoStart = false;
     }
     void Start()
     {

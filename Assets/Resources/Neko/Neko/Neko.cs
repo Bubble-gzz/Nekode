@@ -299,4 +299,21 @@ public class Neko : MonoBehaviour
     {
         return new NekoData(i, j, (int)mode, value, direction);
     }
+    int backup_i, backup_j, backup_value, backup_direction;
+    Mode backup_mode;
+    public void Backup()
+    {
+        backup_i = i; backup_j = j;
+        backup_value = value;
+        backup_direction = direction;
+        backup_mode = mode;
+    }
+    public void Recover()
+    {
+        i = backup_i; j = backup_j;
+        transform.position = grid.GetWorldPos(i, j);
+        UpdateDirection(backup_direction);
+        UpdateValue(backup_value);
+        SwitchMode(backup_mode);
+    }
 }

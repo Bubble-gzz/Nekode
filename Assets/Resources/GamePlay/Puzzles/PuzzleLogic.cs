@@ -11,6 +11,9 @@ public class PuzzleLogic : MonoBehaviour
     {
         Global.puzzleComplete = false;
         grid = Global.grid;
+        GamePlay.onNekoReset.AddListener(PuzzleReset);
+        GamePlay.onNekoRun.AddListener(PuzzleRun);
+        StartCoroutine(PuzzleInit());
     }
 
     // Update is called once per frame
@@ -24,5 +27,18 @@ public class PuzzleLogic : MonoBehaviour
     virtual public void PuzzleComplete()
     {
         Debug.Log("puzzle complete");
+    }
+    virtual public void PuzzleRun()
+    {
+
+    }
+    virtual public void PuzzleReset()
+    {
+
+    }
+    virtual public IEnumerator PuzzleInit()
+    {
+        yield return new WaitForEndOfFrame();
+        
     }
 }

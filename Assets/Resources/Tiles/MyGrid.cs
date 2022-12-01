@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.Events;
 
 public class MyGrid : MonoBehaviour
 {
@@ -232,5 +233,25 @@ public class MyGrid : MonoBehaviour
         grid[i, j].transform.position = GetWorldPos(i, j);
         foreach (var arrowData in tileData.arrows)
             grid[i, j].GetComponent<MyTile>().BuildArrowFromData(arrowData);
+    }
+    public void MapBackUp()
+    {
+        neko.Backup();
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < m; j++)
+                if (grid[i, j] != null)
+                {
+                    grid[i, j].GetComponent<MyTile>().Backup();
+                }
+    }
+    public void MapRecover()
+    {
+        neko.Recover();
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < m; j++)
+                if (grid[i, j] != null)
+                {
+                    grid[i, j].GetComponent<MyTile>().Recover();
+                }       
     }
 }

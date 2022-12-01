@@ -51,6 +51,7 @@ public class MyTile : MonoBehaviour
     public Type type;
     public bool isGhost;
     public int value;
+    public int backupValue;
     bool hasValue;
     public string label = "";
     public string lastLabel;
@@ -526,5 +527,17 @@ public class MyTile : MonoBehaviour
     public void BuildArrowFromData(ArrowData arrowData)
     {
         PlaceArrow(arrowData.side, (Arrow.Type)arrowData.type, arrowData.direction);
+    }
+    public void Backup()
+    {
+        backupValue = value;
+        for (int i = 0; i < 4; i++)
+            if (arrows[i] != null) arrows[i].Backup();
+    }
+    public void Recover()
+    {
+        UpdateValue(backupValue);
+        for (int i = 0; i < 4; i++)
+            if (arrows[i] != null) arrows[i].Recover();   
     }
 }

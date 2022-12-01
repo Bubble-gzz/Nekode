@@ -31,4 +31,20 @@ public class Puzzle_BinaryCat : PuzzleLogic
         }
         
     }
+    
+    override public void PuzzleReset()
+    {
+        base.PuzzleReset();
+        Global.grid.tileTable["X"].value = -32769;
+    }
+    public override void PuzzleRun()
+    {
+        base.PuzzleRun();
+        Global.grid.tileTable["X"].value = Random.Range(0,8);
+    }
+    override public IEnumerator PuzzleInit()
+    {
+        yield return base.PuzzleInit();
+        PuzzleReset();
+    }
 }

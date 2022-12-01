@@ -14,6 +14,7 @@ public class Arrow : MonoBehaviour
     public Type type;
     public bool isGhost;
     public int direction; // 0-right 1-down 2-left 3-up
+    public int backupDirection;
     public int id;
     public MyTile tile;
     AnimationBuffer animationBuffer;
@@ -70,8 +71,12 @@ public class Arrow : MonoBehaviour
     }
     void Turn(int delta)
     {
-        direction = (direction + delta) % 4;
-        transform.rotation = Quaternion.Euler(0, 0, -90 * direction);
+        TurnTo((direction + delta) % 4);
+    }
+    void TurnTo(int dir)
+    {
+        direction = dir;
+        transform.rotation = Quaternion.Euler(0, 0, -90 * direction);        
     }
     public void ChangeState() {
         if (type == Type.Flip) Turn(2);
@@ -100,5 +105,13 @@ public class Arrow : MonoBehaviour
     public ArrowData ConvertToData()
     {
         return new ArrowData((int)type, id, direction);
+    }
+    public void Backup()
+    {
+        backupDirection = direction;
+    }
+    public void Recover()
+    {
+        TurnTo(backupDirection);
     }
 }

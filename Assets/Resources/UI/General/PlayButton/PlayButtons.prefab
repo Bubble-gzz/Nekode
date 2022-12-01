@@ -92,6 +92,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   animationBuffer: {fileID: 0}
+  notUIelement: 0
   textures:
   - {fileID: 21300000, guid: 3a5e9f77fe38d394ea721aaf0b84dab3, type: 3}
   - {fileID: 21300000, guid: c577cc948c572244cb65fca68aa05434, type: 3}
@@ -142,6 +143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8115712871058934269}
   - component: {fileID: 8115712871058934267}
+  - component: {fileID: 798954266743025072}
   - component: {fileID: 8115712871058934268}
   m_Layer: 5
   m_Name: Reset
@@ -177,6 +179,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8115712871058934270}
   m_CullTransparentMesh: 1
+--- !u!114 &798954266743025072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8115712871058934270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec078d46b314d149a2304eb4a9eb052, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 798954266743025072}
+        m_TargetAssemblyTypeName: ResetButton, Assembly-CSharp
+        m_MethodName: Reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  animationBuffer: {fileID: 0}
+  notUIelement: 0
 --- !u!114 &8115712871058934268
 MonoBehaviour:
   m_ObjectHideFlags: 0

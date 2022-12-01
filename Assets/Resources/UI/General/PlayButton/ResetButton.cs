@@ -9,6 +9,7 @@ public class ResetButton : MyButton
     {
         if (Global.currentGameMode == Global.GameMode.Play)
         {
+            if (GamePlay.puzzleSetting != null)
             if (!GamePlay.puzzleSetting.resetButton)
                 gameObject.SetActive(false);
         }
@@ -18,5 +19,11 @@ public class ResetButton : MyButton
     override protected void Update()
     {
         
+    }
+    public void Reset()
+    {
+        Global.grid.MapRecover();
+        GamePlay.hasNekoStart = false;
+        GamePlay.onNekoReset.Invoke();
     }
 }

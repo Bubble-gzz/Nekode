@@ -18,6 +18,7 @@ public class PlayButton : MyButton
         state = State.Pause;
         GetComponent<Image>().sprite = textures[(int)state];
         onClick.AddListener(SwitchState);
+        GamePlay.onNekoReset.AddListener(Pause);
     }
 
     void SwitchState()
@@ -25,12 +26,14 @@ public class PlayButton : MyButton
         if (state == State.Pause)
         {
             state = State.Playing;
-            if (Global.currentGameMode == Global.GameMode.Play)
+
+            if (!GamePlay.hasNekoStart)
             {
-                if (!GamePlay.hasNekoStart)
-                    GamePlay.onNekoRun.Invoke();
-                GamePlay.hasNekoStart = true;
+                Global.grid.MapBackUp();
+                GamePlay.onNekoRun.Invoke();
             }
+            GamePlay.hasNekoStart = true;
+
             if (Global.currentNeko != null) Global.currentNeko.playMode = true;
         }
         else
@@ -41,5 +44,10 @@ public class PlayButton : MyButton
         GetComponent<Image>().sprite = textures[(int)state];
     }
     // Update is called once per frame
-    
+    void Pause()
+    {
+        state = State.Pause;
+        if (Global.currentNeko != null) Global.currentNeko.playMode = false;    
+        GetComponent<Image>().sprite = textures[(int)state];
+    }
 }
