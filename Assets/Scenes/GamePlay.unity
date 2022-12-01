@@ -1053,9 +1053,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 0
-  damping: 0
-  accelRate: 1
-  speedLimit: 0
+  damping: 8
+  accelRate: 5
+  speedLimit: 5
 --- !u!114 &1638878594
 MonoBehaviour:
   m_ObjectHideFlags: 0

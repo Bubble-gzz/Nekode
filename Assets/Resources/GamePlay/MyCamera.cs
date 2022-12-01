@@ -48,5 +48,12 @@ public class MyCamera : MonoBehaviour
             else velocity = new Vector2(0, 0);
             transform.position += (Vector3)velocity * Time.deltaTime;
         }
+        if (mode == Mode.Follow)
+        {
+            Neko neko = Global.currentNeko;
+            Vector2 offset = neko.transform.position - transform.position;
+            if (offset.magnitude > 0.01f)
+                transform.position += (Vector3)offset.normalized * offset.magnitude * 4f * Time.deltaTime;
+        }
     }
 }

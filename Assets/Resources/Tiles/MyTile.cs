@@ -105,6 +105,8 @@ public class MyTile : MonoBehaviour
         editingValue = false;
         editingLabel = false;
         deleted = false;
+        Global.isTyping = false;
+        
         gameObject.AddComponent<PopAnimator>();
         animationBuffer = gameObject.AddComponent<AnimationBuffer>();
         valueText = transform.Find("ValueScaler").gameObject.GetComponentInChildren<TMP_Text>();
