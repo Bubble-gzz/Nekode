@@ -1,20 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba57a5b1de0386d41b295b8959f7fd7c, type: 3}
-  m_Name: "\u4F60\u597D\u4E16\u754C"
-  m_EditorClassIdentifier: 
-  tileCounts:
-  - type: 22
-    count: -1
-  mainInventory: 160000000b000000
-  arithInventory: 0c000000
-  logicInventory: 14000000
+version https://git-lfs.github.com/spec/v1
+oid sha256:02fde6e8b41af80919927cd76da836295803cd6620b47086820a25a26d16bdb3
+size 544
