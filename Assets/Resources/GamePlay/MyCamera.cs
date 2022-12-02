@@ -41,7 +41,7 @@ public class MyCamera : MonoBehaviour
             if (Input.GetKey(KeyCode.S)) accel.y -= 1;
             if (Input.GetKey(KeyCode.W)) accel.y += 1;
             accel = accel.normalized * accelRate;
-            velocity += accel;
+            velocity += accel * Time.deltaTime;
             if (velocity.magnitude > speedLimit) velocity = velocity.normalized * speedLimit;
             if (velocity.magnitude > damping * Time.deltaTime)
                 velocity -= velocity.normalized * damping * Time.deltaTime;

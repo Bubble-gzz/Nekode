@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class PuzzleCondition : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -11,11 +11,13 @@ public class PuzzleCondition : MonoBehaviour
     Image state;
     public bool satisfied;
     AnimationBuffer animationBuffer;
+    TMP_Text text;
     void Awake()
     {
         animationBuffer = gameObject.AddComponent<AnimationBuffer>();
         state = transform.Find("State").GetComponentInChildren<Image>();
         transform.Find("State").gameObject.AddComponent<PopAnimator>();
+        text = GetComponentInChildren<TMP_Text>();
     }
     void Start()
     {

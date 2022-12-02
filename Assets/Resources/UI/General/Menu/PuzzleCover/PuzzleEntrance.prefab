@@ -308,8 +308,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "1-1 \u4F60\u597D\u4E16\u754C"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3e57c12986dd9704abfa0499f21af6f2, type: 2}
-  m_sharedMaterial: {fileID: 8899633011459863873, guid: 3e57c12986dd9704abfa0499f21af6f2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3cd9c7dce4c4c484bb785f4c715d12e8, type: 2}
+  m_sharedMaterial: {fileID: -3612955012071991001, guid: 3cd9c7dce4c4c484bb785f4c715d12e8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

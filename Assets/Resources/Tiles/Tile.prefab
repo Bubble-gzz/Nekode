@@ -341,9 +341,19 @@ MonoBehaviour:
   type: 1
   isGhost: 0
   value: 0
+  backupValue: 0
   label: 
+  lastLabel: 
   myGrid: {fileID: 0}
+  logicTileInactiveTexture:
+  - {fileID: 21300000, guid: 3da29e05de99a244080f0be3d09f76d2, type: 3}
+  - {fileID: 21300000, guid: ce6924269b1b2ea4fb6e989abe4d4cd6, type: 3}
+  - {fileID: 21300000, guid: f4bde430f98d6c040aa8f43d8a875b33, type: 3}
+  - {fileID: 21300000, guid: 67e54dfcc429f0a4a98071b897897dd3, type: 3}
+  - {fileID: 21300000, guid: b85e36b2478cad64a88e979d33477d2a, type: 3}
+  - {fileID: 21300000, guid: 97fc6612e1ae3a84bab5983bcfeed3b8, type: 3}
   logicState: 1
+  lastLogicState: 0
   permission: 0
   i: 0
   j: 0

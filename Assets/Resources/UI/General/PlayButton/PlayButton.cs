@@ -13,12 +13,18 @@ public class PlayButton : MyButton
         Pause
     }
     State state;
+    RectTransform rect;
     override protected void Start()
     {
         state = State.Pause;
         GetComponent<Image>().sprite = textures[(int)state];
         onClick.AddListener(SwitchState);
         GamePlay.onNekoReset.AddListener(Pause);
+        rect = GetComponent<RectTransform>();
+        if (Global.currentPuzzleName == "你好世界")
+        {
+            rect.anchoredPosition = new Vector2(Screen.width * 0.46f, Screen.height * 0.2f);
+        }
     }
 
     void SwitchState()
@@ -26,7 +32,7 @@ public class PlayButton : MyButton
         if (state == State.Pause)
         {
             state = State.Playing;
-
+            //Debug.Log("hasNekoStart: " + GamePlay.hasNekoStart);
             if (!GamePlay.hasNekoStart)
             {
                 Global.grid.MapBackUp();

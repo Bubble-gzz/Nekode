@@ -155,8 +155,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6469186411651597698, guid: c968f15a0e2f6af4f98f67098a635183, type: 3}
       propertyPath: m_text
-      value: "\u5C0F\u732B\u7684\u6570\u4E3A1"
+      value: "\u5C0F\u732B\u7684\u6570\u503C\u4E3A1"
       objectReference: {fileID: 0}
+    - target: {fileID: 6469186411651597698, guid: c968f15a0e2f6af4f98f67098a635183, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3cd9c7dce4c4c484bb785f4c715d12e8, type: 2}
+    - target: {fileID: 6469186411651597698, guid: c968f15a0e2f6af4f98f67098a635183, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3612955012071991001, guid: 3cd9c7dce4c4c484bb785f4c715d12e8, type: 2}
     - target: {fileID: 6469186412620593715, guid: c968f15a0e2f6af4f98f67098a635183, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

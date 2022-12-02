@@ -72,9 +72,11 @@ public class MyTile : MonoBehaviour
     List<Type> logicTiles = new List<Type>() {
         Type.EQU, Type.GEQ, Type.LEQ, Type.LSS, Type.GTR, Type.NEQ
     };
+    [SerializeField]
+    List<Sprite> logicTileInactiveTexture = new List<Sprite>();
     Camera myCamera;
     bool deleted;
-    public bool logicState = true;
+    public bool logicState = true, lastLogicState;
     public enum Permission{
         ReadOnly, // read
         Protected, // read | edit
@@ -166,6 +168,8 @@ public class MyTile : MonoBehaviour
 
         if (label != "" && label != null) myGrid.tileTable[label] = this;
         lastLabel = label;
+
+        lastLogicState = !logicState; //force initial update
     }
     bool CheckHasValue()
     {
@@ -196,6 +200,18 @@ public class MyTile : MonoBehaviour
         EditLabel();
         if (Arrow.IsArrow(MyGrid.currentTileType)) tileCollider.enabled = false;
         else tileCollider.enabled = true;
+
+        LogicStateCheck();
+    }
+    void LogicStateCheck()
+    {
+        if (lastLogicState == logicState) return;
+        if (logicState)
+        {
+            sprite.sprite = myGrid.GetTileTexture(type);
+        }
+        else sprite.sprite = logicTileInactiveTexture[logicTiles.IndexOf(type)];
+        lastLogicState = logicState;
     }
     void CheckExitEditArea()
     {
@@ -541,5 +557,11 @@ public class MyTile : MonoBehaviour
         UpdateValue(backupValue);
         for (int i = 0; i < 4; i++)
             if (arrows[i] != null) arrows[i].Recover();   
+    }
+    public bool IsLogicType() {
+        return logicTiles.Contains(type);
+    }
+    public bool IsArithmeticType() {
+        return arithmeticTiles.Contains(type);
     }
 }
