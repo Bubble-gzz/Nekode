@@ -763,8 +763,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u4F60\u597D\u4E16\u754C"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3e57c12986dd9704abfa0499f21af6f2, type: 2}
-  m_sharedMaterial: {fileID: 8899633011459863873, guid: 3e57c12986dd9704abfa0499f21af6f2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3cd9c7dce4c4c484bb785f4c715d12e8, type: 2}
+  m_sharedMaterial: {fileID: -3612955012071991001, guid: 3cd9c7dce4c4c484bb785f4c715d12e8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1053,8 +1053,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 0
-  damping: 8
-  accelRate: 5
+  damping: 3
+  accelRate: 15
   speedLimit: 5
 --- !u!114 &1638878594
 MonoBehaviour:
@@ -1139,19 +1139,19 @@ MonoBehaviour:
     bubble: 1
     puzzleName: "\u8F93\u51FA\u732B"
     tilePreset: {fileID: 11400000, guid: 2268d6b5f9a78d849bf288600f7e3c62, type: 2}
-    puzzleLogic: {fileID: 3136310867492904979, guid: 699b7a73316895746ae6202cee0faca5, type: 3}
-    cameraSize: 4
+    puzzleLogic: {fileID: 6904934123537776813, guid: c19ebee55b43fe745abd76ab969b4a05, type: 3}
+    cameraSize: 3.2
   - resetButton: 1
     inventory: 1
     CameraSwitcher: 0
     bubble: 1
     puzzleName: "\u7EC5\u58EB\u732B"
     tilePreset: {fileID: 11400000, guid: 3ba373d480c68a2409f2743772216056, type: 2}
-    puzzleLogic: {fileID: 3136310867492904979, guid: 699b7a73316895746ae6202cee0faca5, type: 3}
+    puzzleLogic: {fileID: 6838940335192115445, guid: b90c22c1e3df34c4981f9f406d322dca, type: 3}
     cameraSize: 4
   - resetButton: 1
     inventory: 1
-    CameraSwitcher: 0
+    CameraSwitcher: 1
     bubble: 1
     puzzleName: "\u4E8C\u8FDB\u5236\u732B"
     tilePreset: {fileID: 11400000, guid: 4ff7b1c39cefb634487b1ac2a05366ef, type: 2}

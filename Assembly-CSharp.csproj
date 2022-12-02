@@ -37,8 +37,10 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Resources\GamePlay\Puzzles\1-1\PuzzleHelloWorld.cs" />
+     <Compile Include="Assets\Resources\UI\General\PlayButton\CameraButton.cs" />
      <Compile Include="Assets\Resources\Tiles\MyTile.cs" />
      <Compile Include="Assets\Resources\UI\General\Menu\ScrollMenu.cs" />
+     <Compile Include="Assets\Resources\GamePlay\Puzzles\1-5\Puzzle1_5.cs" />
      <Compile Include="Assets\Resources\GamePlay\Global.cs" />
      <Compile Include="Assets\Resources\Tiles\Arrow\ArrowDetectArea.cs" />
      <Compile Include="Assets\Resources\Animation\AnimationBuffer.cs" />
@@ -85,7 +87,10 @@
      <Compile Include="Assets\Resources\GamePlay\Puzzles\PuzzleLogic.cs" />
      <Compile Include="Assets\Resources\GamePlay\Puzzles\1-4\Puzzle1_4.cs" />
      <Compile Include="Assets\Resources\GamePlay\Puzzles\TilePreset.cs" />
-     <Compile Include="Assets\Resources\UI\General\PlayButton\CameraButton.cs" />
+     <Compile Include="Assets\Resources\GamePlay\Puzzles\1-9\Puzzle1_9.cs" />
+     <Compile Include="Assets\Resources\GamePlay\Puzzles\1-10\Puzzle1_10.cs" />
+     <Compile Include="Assets\Resources\UI\General\PlayButton\FastForwardButton.cs" />
+     <Compile Include="Assets\Resources\UI\General\PlayButton\SlowDownButton.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
@@ -100,6 +105,7 @@
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+     <None Include="Assets\Fonts\characters.txt" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />

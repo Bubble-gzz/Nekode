@@ -236,6 +236,7 @@ public class MyGrid : MonoBehaviour
     }
     public void MapBackUp()
     {
+        //Debug.Log("Backup");
         neko.Backup();
         for (int i = 0; i < n; i++)
             for (int j = 0; j < m; j++)

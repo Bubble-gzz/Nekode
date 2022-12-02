@@ -109,15 +109,16 @@ public class Neko : MonoBehaviour
             running = false;
             yield break;
         }
+        Leave(i, j);
         //Debug.Log("Pass2");       
         Vector3 targetPos = grid.GetWorldPos(_i, _j);
         targetPos.z = z_pos;
         AnimationInfo moveAnimation = new UpdatePosAnimatorInfo(gameObject, targetPos, true, 0.2f/Global.nekoPlaySpeed, true);
         animationBuffer.Add(moveAnimation);
         while (!moveAnimation.completed) yield return null;
-        yield return new WaitForSeconds(0.5f / Global.nekoPlaySpeed);
         i = _i; j = _j;
         Interact(i, j);
+        yield return new WaitForSeconds(0.5f / Global.nekoPlaySpeed);
         running = false;
     }
     void CalcDirection()
@@ -133,6 +134,11 @@ public class Neko : MonoBehaviour
     {
         direction = newDir;
         sprite.sprite = sprites[direction];
+    }
+    void Leave(int i, int j)
+    {
+        MyTile tile = grid.grid[i,j].GetComponent<MyTile>();
+        if (tile.IsLogicType()) tile.logicState = false;
     }
     void Interact(int i, int j)
     {
@@ -182,6 +188,7 @@ public class Neko : MonoBehaviour
                 if (mode == Mode.Write)
                 {
                     tile.UpdateValue(value);
+                    tile.SetLogitState(true);
                 }
                 else
                 {

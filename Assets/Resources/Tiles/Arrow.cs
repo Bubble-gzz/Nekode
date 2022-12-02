@@ -21,6 +21,8 @@ public class Arrow : MonoBehaviour
     public bool mouseEnter;
     Transform texture;
     Transform myCollider;
+    SpriteRenderer sprite;
+    bool logicState, lastLogicState;
     static public bool IsArrow(MyTile.Type type)
     {
         return type == MyTile.Type.Arrow || type == MyTile.Type.FlipArrow;
@@ -56,10 +58,15 @@ public class Arrow : MonoBehaviour
     {
         if (isGhost) myCollider.GetComponent<Collider2D>().enabled = false;
 
-        texture.GetComponent<SpriteRenderer>().sprite = arrowTextures[(int)type];
+        sprite = texture.GetComponent<SpriteRenderer>();
+        sprite.sprite = arrowTextures[(int)type];
         transform.rotation = Quaternion.Euler(0, 0, 0);
         transform.position += new Vector3(0, 0, -0.1f);
         myCollider.rotation = Quaternion.Euler(0, 0, 90 * id);
+
+        if (tile != null) logicState = tile.logicState;
+        else logicState = false;
+        lastLogicState = !logicState; // force init update
     }
 
     // Update is called once per frame
@@ -68,6 +75,15 @@ public class Arrow : MonoBehaviour
         if (isGhost) return;
         if (Input.GetMouseButtonDown(0) && mouseEnter) Delete();
         if (Input.GetMouseButtonDown(1) && mouseEnter) Turn(1);
+        CheckState();
+    }
+    void CheckState()
+    {
+        if (tile != null) logicState = tile.logicState;
+        else logicState = false;
+        if (logicState == lastLogicState) return;
+        SetState(logicState);
+        lastLogicState = logicState;
     }
     void Turn(int delta)
     {
@@ -80,6 +96,7 @@ public class Arrow : MonoBehaviour
     }
     public void ChangeState() {
         if (type == Type.Flip) Turn(2);
+        if (type == Type.Normal) OnBumped();
     }
     void OnMouseEnter()
     {
@@ -95,6 +112,15 @@ public class Arrow : MonoBehaviour
         Global.mouseOverArrow = false;
         mouseEnter = false;
         animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.PopBack, 0.07f));
+    }
+    public void OnBumped()
+    {
+        animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.Emphasize, 0.1f));
+    }
+    public void SetState(bool active)
+    {
+        if (active == false) sprite.color = new Color(1,1,1,0.5f);
+        else sprite.color = new Color(1,1,1,1);
     }
     void Delete()
     {
