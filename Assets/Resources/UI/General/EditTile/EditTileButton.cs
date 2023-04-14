@@ -7,7 +7,7 @@ public class EditTileButton : MyButton
     protected override void Update()
     {
         base.Update();
-        Debug.Log("pos:" + transform.position);
+        //Debug.Log("pos:" + transform.position);
     }
     public void Appear(Vector3 startPos, Vector3 targetPos)
     {

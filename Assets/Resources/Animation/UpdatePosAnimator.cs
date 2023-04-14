@@ -23,7 +23,7 @@ public class UpdatePosAnimator : MyAnimation
         int myOrder = animationOrder.NewOrder();
         //Debug.Log("updatePos.block: " + block);
         if (!block) info.completed = true;
-        Debug.Log("block:" + block);
+        //Debug.Log("block:" + block);
         if (animated)
         {
             if (linear)

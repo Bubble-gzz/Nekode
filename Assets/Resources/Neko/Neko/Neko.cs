@@ -170,19 +170,40 @@ public class Neko : MonoBehaviour
                 }
                 break;
             case (MyTile.Type.ADD):
-                UpdateValue(value + tile.value);
+                if (mode == Mode.Write)
+                {
+                    tile.UpdateValue(value);
+                }
+                else UpdateValue(value + tile.value);
                 break;
             case (MyTile.Type.SUB):
-                UpdateValue(value - tile.value);
+                if (mode == Mode.Write)
+                {
+                    tile.UpdateValue(value);
+                }
+                else UpdateValue(value - tile.value);
                 break;
             case (MyTile.Type.MUL):
-                UpdateValue(value * tile.value);
+                if (mode == Mode.Write)
+                {
+                    tile.UpdateValue(value);
+                }
+                else UpdateValue(value * tile.value);
                 break;
             case (MyTile.Type.DIV):
+                if (mode == Mode.Write)
+                {
+                    tile.UpdateValue(value);
+                }
+                else
                 if (tile.value != 0) UpdateValue(value / tile.value);
                 break;
             case (MyTile.Type.MOD):
-                if (tile.value != 0) UpdateValue(value % tile.value);
+                if (mode == Mode.Write)
+                {
+                    tile.UpdateValue(value);
+                }
+                else if (tile.value != 0) UpdateValue(value % tile.value);
                 break;
             case (MyTile.Type.EQU):
                 if (mode == Mode.Write)
