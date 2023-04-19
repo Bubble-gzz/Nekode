@@ -63,6 +63,7 @@ public class Arrow : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, 0);
         transform.position += new Vector3(0, 0, -0.1f);
         myCollider.rotation = Quaternion.Euler(0, 0, 90 * id);
+        TurnTo(direction);
 
         if (tile != null) logicState = tile.logicState;
         else logicState = false;
@@ -122,7 +123,7 @@ public class Arrow : MonoBehaviour
         if (active == false) sprite.color = new Color(1,1,1,0.5f);
         else sprite.color = new Color(1,1,1,1);
     }
-    void Delete()
+    public void Delete()
     {
         //Debug.Log("arrow to tile: " + (int)ArrowToTileType(type));
         if (tile.myGrid.tileCount[(int)ArrowToTileType(type)] >= 0) tile.myGrid.tileCount[(int)ArrowToTileType(type)]++;

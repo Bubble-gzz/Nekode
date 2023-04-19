@@ -167,6 +167,7 @@ public class MyGrid : MonoBehaviour
         if (Arrow.IsArrow(currentTileType)) return;
         if (Global.mouseOverUI) return;
         if (i < 0 || i >= n || j < 0 || j >= m) return;
+        
         if (currentTileType == MyTile.Type.Blank)
         {
             Destroy(lastGhost);
@@ -177,11 +178,19 @@ public class MyGrid : MonoBehaviour
             if (grid[i, j] == null) return;
             if (grid[i, j].GetComponent<MyTile>().type != MyTile.Type.Blank) return;
         }
-        if (grid[i, j] != null) grid[i, j].GetComponent<MyTile>().Delete();
+        
+        MyTile lastTile = null;
+        if (grid[i, j] != null) lastTile = grid[i, j].GetComponent<MyTile>();
+
         if (tileCount[(int)currentTileType] == 0) return;
         if (tileCount[(int)currentTileType] > 0) tileCount[(int)currentTileType]--;
 
         grid[i, j] = NewTile(currentTileType, i, j);
+        if (lastTile != null)
+        {
+            lastTile.CopyTo(grid[i, j].GetComponent<MyTile>());
+            lastTile.Delete();
+        }
         grid[i, j].transform.position = GetWorldPos(i, j);
         
         if (tileCount[(int)currentTileType] == 0) currentTileType = MyTile.Type.NULL;

@@ -305,6 +305,7 @@ public class MyTile : MonoBehaviour
             GameObject blankTile = myGrid.NewTile(Type.Blank, i, j);
             myGrid.grid[i, j] = blankTile;
             blankTile.transform.position = myGrid.GetWorldPos(i, j);
+            CopyTo(blankTile.GetComponent<MyTile>());
         }
         if (myGrid.tileCount[(int)type] >= 0) myGrid.tileCount[(int)type]++;
         Destroy(gameObject);
@@ -522,6 +523,16 @@ public class MyTile : MonoBehaviour
         if (type == Type.LogicMenu) return true;
         if (type == Type.LogicBack) return true;
         return false;
+    }
+    public void CopyTo(MyTile other)
+    {
+        for (int i = 0; i < 4; i++) // copy arrows
+        {
+            if (other.arrows[i] != null)
+                other.arrows[i].Delete();
+            if (arrows[i] != null)
+                other.PlaceArrow(i, arrows[i].type, arrows[i].direction);
+        }
     }
     public TileData ConvertToData()
     {
