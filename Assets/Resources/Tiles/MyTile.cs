@@ -89,6 +89,8 @@ public class MyTile : MonoBehaviour
     GameObject valueScaler;
     GameObject labelScaler;
 
+    bool editingValueActively;
+
     bool editingValue;
     bool editingLabel;
 
@@ -105,6 +107,8 @@ public class MyTile : MonoBehaviour
         mouseEnter = false;
         editing = false;
         editingValue = false;
+        editingValueActively = false;
+
         editingLabel = false;
         deleted = false;
         Global.isTyping = false;
@@ -166,7 +170,10 @@ public class MyTile : MonoBehaviour
         labelScaler.transform.position = transform.position + (Vector3)labelTextOffset;
         labelText.color = myGrid.tileTextColors[(int)type];
 
-        if (label != "" && label != null) myGrid.tileTable[label] = this;
+        if (label != "" && label != null) {
+            if (!myGrid.tileTable.ContainsKey(label)) myGrid.tileTable.Add(label, new List<MyTile>());
+            myGrid.tileTable[label].Add(this);
+        }
         lastLabel = label;
 
         lastLogicState = !logicState; //force initial update
@@ -220,7 +227,7 @@ public class MyTile : MonoBehaviour
         float dist = (mousePos - (Vector2)transform.position).magnitude;
         if (dist < myGrid.tileSize * 0.7f && !Input.GetKeyDown(KeyCode.Return)) return;
         DropEditButtons();
-        QuitEditValue();
+        QuitEditValueActively();
         QuitEditLabel();
     }
 
@@ -260,11 +267,11 @@ public class MyTile : MonoBehaviour
         }
 
         if (deletable) AddButton(Delete, (int)ButtonType.Delete);
-        if (editable && hasValue) AddButton(StartEditValue, (int)ButtonType.Edit);
+        if (editable && hasValue) AddButton(StartEditValueActively, (int)ButtonType.Edit);
         if (canBeFree) AddButton(SetFree, (int)ButtonType.Free);
         if (canBeProtected) AddButton(SetProtected, (int)ButtonType.Protected);
         if (canBeReadOnly) AddButton(SetReadOnly, (int)ButtonType.ReadOnly);
-        if (hasLabel) AddButton(StartEditLable, (int)ButtonType.Label);
+        if (hasLabel) AddButton(StartEditLabel, (int)ButtonType.Label);
 
         int n = buttons.Count;
         if (n == 0) return;
@@ -310,26 +317,46 @@ public class MyTile : MonoBehaviour
         if (myGrid.tileCount[(int)type] >= 0) myGrid.tileCount[(int)type]++;
         Destroy(gameObject);
     }
-    void StartEditValue()
+    void StartEditValueActively()
     {
-        if (editingValue) return;
+        if (editingValueActively) return;
         QuitEditLabel();
-        editingValue = true;
+        editingValueActively = true;
         Global.isTyping = true;
+        if (label != "")
+        {
+            foreach(MyTile tile in myGrid.tileTable[label])
+                tile.StartEditValue();
+        }
+        else StartEditValue();
+    }
+    public void StartEditValue()
+    {
+        editingValue = true;
         animationBuffer.Add(new PopAnimatorInfo(valueScaler, PopAnimator.Type.PopOut_TileText, 0.07f));
     }
-    void QuitEditValue()
+    void QuitEditValueActively()
     {
-        if (!editingValue) return;
-        editingValue = false;
+        if (!editingValueActively) return;
+        editingValueActively = false;
         Global.isTyping = false;
+        if (label != "")
+        {
+            foreach(MyTile tile in myGrid.tileTable[label])
+                tile.QuitEditValue();
+        }
+        else QuitEditValue();
+    }
+    public void QuitEditValue()
+    {
+        editingValue = false;
         animationBuffer.Add(new PopAnimatorInfo(valueScaler, PopAnimator.Type.PopBack, 0.07f));
     }
-    void StartEditLable()
+    void StartEditLabel()
     {
         if (editingLabel) return;
         lastLabel = label;
-        QuitEditValue();
+        QuitEditValueActively();
         editingLabel = true;
         Global.isTyping = true;
         if (label == null) label = "";
@@ -341,8 +368,16 @@ public class MyTile : MonoBehaviour
         if (!editingLabel) return;
         if (label != lastLabel)
         {
-            if (lastLabel != null) myGrid.tileTable.Remove(lastLabel);
-            if (label != "") myGrid.tileTable[label] = this;
+            if (lastLabel != null) {
+                if (myGrid.tileTable.ContainsKey(lastLabel))
+                    myGrid.tileTable[lastLabel].Remove(this);
+            }
+            if (label == "*") label = "";
+            if (label != "") {
+                if (!myGrid.tileTable.ContainsKey(label)) myGrid.tileTable.Add(label, new List<MyTile>());
+                if (myGrid.tileTable[label].Count > 0) value = myGrid.tileTable[label][0].value; // forcing value consistency
+                myGrid.tileTable[label].Add(this);
+            }
         }
         editingLabel = false;
         Global.isTyping = false;
@@ -464,12 +499,14 @@ public class MyTile : MonoBehaviour
         foreach(var keyCode in charKeys.Keys)
             if (Input.GetKeyDown(keyCode))
             {
+                if (label.Length == 1 && label[0] == '*') label = "";
                 label += charKeys[keyCode];
                 break;
             }
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
             if (label.Length > 0) label = label.Substring(0, label.Length - 1);
+            if (label.Length == 0) label = "*";
         }
     }
     void OnMouseEnter()
@@ -510,7 +547,10 @@ public class MyTile : MonoBehaviour
     }
     public void UpdateValue(int newValue, bool animated = true)
     {
-        value = newValue;
+        if (label != "")
+            foreach(var tile in myGrid.tileTable[label])
+                tile.value = newValue;
+        else value = newValue;
     }
     public void SetLogitState(bool newState)
     {

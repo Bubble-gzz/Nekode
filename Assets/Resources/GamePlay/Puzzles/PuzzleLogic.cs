@@ -5,8 +5,11 @@ using UnityEngine;
 public class PuzzleLogic : MonoBehaviour
 {
     MyGrid grid;
-    [SerializeField]
-    public List<PuzzleCondition> conditions = new List<PuzzleCondition>();
+    Dictionary<string, int> answer;
+    virtual protected void Awake()
+    {
+        answer = new Dictionary<string, int>();
+    }
     virtual protected void Start()
     {
         Global.puzzleComplete = false;

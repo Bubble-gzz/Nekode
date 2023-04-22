@@ -18,7 +18,7 @@ public class MyGrid : MonoBehaviour
     [SerializeField]
     GameObject tilePrefab;
     public GameObject[,] grid;
-    public Dictionary<string, MyTile> tileTable = new Dictionary<string, MyTile>();
+    public Dictionary<string, List<MyTile> > tileTable = new Dictionary<string, List<MyTile> >();
     Camera myCamera;
     [SerializeField]
     public List<Sprite> tileTextures = new List<Sprite>();
@@ -43,6 +43,7 @@ public class MyGrid : MonoBehaviour
         lastGhost = null;
         tileKindN = 25;
         Global.grid = this;
+        tileTable = new Dictionary<string, List<MyTile>>();
         for (int i = 0; i < tileKindN; i++)
             tileCount.Add(-1);
     }
