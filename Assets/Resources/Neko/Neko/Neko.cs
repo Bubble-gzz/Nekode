@@ -220,6 +220,7 @@ public class Neko : MonoBehaviour
                 if (mode == Mode.Write)
                 {
                     tile.UpdateValue(value);
+                    tile.SetLogitState(true);
                 }
                 else
                 {
@@ -230,6 +231,7 @@ public class Neko : MonoBehaviour
                 if (mode == Mode.Write)
                 {
                     tile.UpdateValue(value);
+                    tile.SetLogitState(true);
                 }
                 else
                 {
@@ -240,6 +242,7 @@ public class Neko : MonoBehaviour
                 if (mode == Mode.Write)
                 {
                     tile.UpdateValue(value);
+                    tile.SetLogitState(true);
                 }
                 else
                 {
@@ -250,6 +253,7 @@ public class Neko : MonoBehaviour
                 if (mode == Mode.Write)
                 {
                     tile.UpdateValue(value);
+                    tile.SetLogitState(true);
                 }
                 else
                 {
@@ -260,6 +264,7 @@ public class Neko : MonoBehaviour
                 if (mode == Mode.Write)
                 {
                     tile.UpdateValue(value);
+                    tile.SetLogitState(true);
                 }
                 else
                 {
