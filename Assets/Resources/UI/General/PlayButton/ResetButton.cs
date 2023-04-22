@@ -18,12 +18,6 @@ public class ResetButton : MyButton
         icon.material.color = new Color(1,1,1,1);
         onClick.AddListener(OnClick);
         Global.onGameStateChanged.AddListener(OnGameStateChanged);
-        if (Global.currentGameMode == Global.GameMode.Play)
-        {
-            if (GamePlay.puzzleSetting != null)
-            if (!GamePlay.puzzleSetting.resetButton)
-                gameObject.SetActive(false);
-        }
     }
 
     void OnGameStateChanged()

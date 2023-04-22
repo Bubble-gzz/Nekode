@@ -47,11 +47,7 @@ public class Neko : MonoBehaviour
     void Start()
     {
         bubble.transform.GetComponentInChildren<TMP_Text>().color = bubbleTextColors[(int)mode];
-        if (Global.currentGameMode == Global.GameMode.Play)
-        {
-            if (GamePlay.puzzleSetting.bubble) bubble.gameObject.SetActive(true);
-        }
-        else bubble.gameObject.SetActive(true);
+        bubble.gameObject.SetActive(true);
         UpdateValue(value);
         UpdateDirection(direction);
     }
@@ -70,7 +66,7 @@ public class Neko : MonoBehaviour
     }
     void Cheat()
     {
-        if (Global.currentGameMode == Global.GameMode.Play) return;
+        if (Global.gameMode == Global.GameMode.Test) return;
         if (!mouseEnter) return;
         if (Input.GetKeyDown(KeyCode.T))
         {
@@ -96,6 +92,8 @@ public class Neko : MonoBehaviour
     IEnumerator RunOneStep()
     {
         running = true;
+        while (Global.gameMode == Global.GameMode.Test && Global.isGeneratingTestData)
+            yield return null;
         CalcDirection();
         int _i = i + dx[direction], _j = j + dy[direction];
         //Debug.Log("(" + i + ", " + j + ") (" + _i +", " + _j + ")");
@@ -280,6 +278,7 @@ public class Neko : MonoBehaviour
                 break;
             case (MyTile.Type.Destination):
                 atDestination = true;
+                GamePlay.onNekoSubmit.Invoke();
                 break;
             default: break;
         }
@@ -300,7 +299,7 @@ public class Neko : MonoBehaviour
     {
         if (MyGrid.currentTileType != MyTile.Type.NULL) return;
         if (Global.mouseOverUI) return;
-        if (Global.currentGameMode == Global.GameMode.Play) return;
+        if (Global.gameMode == Global.GameMode.Test) return;
         mouseEnter = true;
         sprite.color = new Color(1, 1, 1, 0.5f);
     }
@@ -308,7 +307,7 @@ public class Neko : MonoBehaviour
     {
         if (followMouse) return;
         mouseEnter = false;
-        if (Global.currentGameMode == Global.GameMode.Play) return;
+        if (Global.gameMode == Global.GameMode.Test) return;
         sprite.color = new Color(1, 1, 1, 1);
     }
     void CheckPickUp()

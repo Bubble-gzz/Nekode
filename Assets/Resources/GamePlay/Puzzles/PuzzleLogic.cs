@@ -20,6 +20,7 @@ public class PuzzleLogic : MonoBehaviour
     virtual protected void Start()
     {
         Global.puzzleComplete = false;
+        Global.onTestStart.AddListener(OnTestStart);
         grid = Global.grid;
         GamePlay.onNekoSubmit.AddListener(CheckAnswers);
         StartCoroutine(PuzzleInit());
@@ -32,6 +33,12 @@ public class PuzzleLogic : MonoBehaviour
         {
             PuzzleComplete();
         }
+    }
+    protected void OnTestStart()
+    {
+        curTestCase = 1;
+        GenerateTestCase();
+        Global.isGeneratingTestData = false;
     }
     virtual public void GenerateTestCase()
     {
@@ -57,7 +64,13 @@ public class PuzzleLogic : MonoBehaviour
         foreach(string label in answerTable.Keys)
         {
             if (grid.tileTable[label][0].value != answerTable[label])
+            {
                 accpeted = false;
+            }
+            else
+            {
+                Debug.Log("[" + label + "] Value Correct.");
+            }
         }
         if (accpeted)
         {
@@ -78,8 +91,10 @@ public class PuzzleLogic : MonoBehaviour
     }
     void NextTestCase()
     {
+        Global.isGeneratingTestData = true;
         curTestCase++;
         GenerateTestCase();
+        Global.isGeneratingTestData = false;
     }
 
 }

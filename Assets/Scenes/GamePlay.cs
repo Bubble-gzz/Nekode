@@ -20,11 +20,12 @@ public class GamePlay : MonoBehaviour
 
     void Awake()
     {
-        Global.currentGameMode = Global.GameMode.Play;
-        onNekoSubmit = new UnityEvent();
-        
+        Global.inWorkshop = false;
+        Global.gameMode = Global.GameMode.Test;
         Global.mouseOverUI = false;
         Global.mouseOverArrow = false;
+        
+        onNekoSubmit = new UnityEvent();
         for (int i = 0; i < puzzlePresets.Count; i++)
             if (Global.currentPuzzleName == puzzlePresets[i].puzzleName) {
                 InitWithPreset(puzzlePresets[i]);
@@ -47,7 +48,7 @@ public class GamePlay : MonoBehaviour
         mainInventory.tileTypes = tilePreset.mainInventory;
         arithInventory.tileTypes = tilePreset.arithInventory;
         logicInventory.tileTypes = tilePreset.logicInventory;
-        if (preset.inventory) mainInventory.gameObject.SetActive(true);
+        mainInventory.gameObject.SetActive(true);
         Global.mainCam.orthographicSize = preset.cameraSize;
         Instantiate(preset.puzzleLogic); 
     }
@@ -59,7 +60,6 @@ public class GamePlay : MonoBehaviour
 
 [Serializable]
 public class PuzzlePreset{
-    public bool resetButton, inventory, CameraSwitcher, bubble;
     public string puzzleName;
     public TilePreset tilePreset;
     public GameObject puzzleLogic;

@@ -17,9 +17,11 @@ public class Global
     static public PuzzleTarget puzzleTarget;
     static public bool isTyping;
     public enum GameMode{
-        Play,
-        Workshop
+        Test,
+        Debug
+
     }
+    static public bool inWorkshop;
     public enum GameState{
         Editing,
         Playing,
@@ -27,12 +29,22 @@ public class Global
     }
     static public GameState gameState;
     static public UnityEvent onGameStateChanged = new UnityEvent();
+    static public UnityEvent onTestStart = new UnityEvent();
+    static public bool isGeneratingTestData;
     static public void SetGameState(GameState newGameState)
     {
+        if (gameMode == GameMode.Test)
+        {
+            if (gameState == GameState.Editing && newGameState == GameState.Playing)
+            {
+                isGeneratingTestData = true;
+                onTestStart.Invoke();
+            }
+        }
         gameState = newGameState;
         onGameStateChanged.Invoke();
     }
-    static public GameMode currentGameMode;
+    static public GameMode gameMode;
     static public Vector3 MoveToMouse(Vector3 pos)
     {
         Vector3 res = mainCam.ScreenToWorldPoint(Input.mousePosition);

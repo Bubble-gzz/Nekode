@@ -14,12 +14,6 @@ public class CameraButton : MyButton
         onClick.AddListener(SwitchState);
         mode = MyCamera.Mode.WSAD;
         GetComponent<Image>().sprite = textures[(int)mode];
-        if (Global.currentGameMode == Global.GameMode.Play)
-        {
-            if (GamePlay.puzzleSetting != null)
-            if (!GamePlay.puzzleSetting.CameraSwitcher)
-                gameObject.SetActive(false);
-        }
     }
 
     // Update is called once per frame

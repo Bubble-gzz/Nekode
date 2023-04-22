@@ -72,6 +72,9 @@ public class MyTile : MonoBehaviour
     List<Type> logicTiles = new List<Type>() {
         Type.EQU, Type.GEQ, Type.LEQ, Type.LSS, Type.GTR, Type.NEQ
     };
+    List<Type> fixedTileTypes = new List<Type>() {
+        Type.InputTile, Type.OutputTile, Type.Destination, Type.Blank
+    };
     [SerializeField]
     List<Sprite> logicTileInactiveTexture = new List<Sprite>();
     Camera myCamera;
@@ -192,7 +195,7 @@ public class MyTile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (permission == Permission.Free || (type == Type.Blank || type == Type.Destination)) sprite.color = new Color(1,1,1,1);
+        if (permission == Permission.Free || fixedTileTypes.Contains(type)) sprite.color = new Color(1,1,1,1);
         else sprite.color = ReadOnlyColor;
 
         if (permission != Permission.ReadOnly) valueText.color = myGrid.tileTextColors[(int)type];
@@ -247,13 +250,13 @@ public class MyTile : MonoBehaviour
         animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.LinearBack, 0.07f));
         buttons.Clear();
 
-        bool isWorkshop = Global.currentGameMode == Global.GameMode.Workshop;
+        bool isWorkshop = Global.inWorkshop;
         bool deletable, editable = hasValue, canBeFree, canBeProtected, canBeReadOnly, hasLabel;
         
         canBeFree = permission != Permission.Free && isWorkshop;
         canBeProtected = permission != Permission.Protected && isWorkshop;
         canBeReadOnly = permission != Permission.ReadOnly && isWorkshop && hasValue;
-        hasLabel = Global.currentGameMode == Global.GameMode.Workshop;
+        hasLabel = Global.inWorkshop;
 
         if (isWorkshop)
         {
@@ -578,7 +581,7 @@ public class MyTile : MonoBehaviour
     {
         Permission _permission = permission;
         Type _type = type;
-        if (Global.currentGameMode == Global.GameMode.Workshop)
+        if (Global.inWorkshop)
         {
             if (permission == Permission.Free)
             {

@@ -28,6 +28,7 @@ public class Puzzle1_1 : PuzzleLogic
     public override void GenerateTestCase()
     {
         base.GenerateTestCase();
+        //Debug.Log("Generating Test Case ... ... ");
         grid.tileTable["A"][0].UpdateValue(233);
         answerTable["B"] = 233;
     }

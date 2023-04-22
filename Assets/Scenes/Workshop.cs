@@ -13,7 +13,8 @@ public class Workshop : MonoBehaviour
     TMP_Text title;
     void Awake()
     {
-        Global.currentGameMode = Global.GameMode.Workshop;
+        Global.inWorkshop = true;
+        Global.gameMode = Global.GameMode.Debug;
         Global.mouseOverUI = false;
         Global.mouseOverArrow = false;
     }
