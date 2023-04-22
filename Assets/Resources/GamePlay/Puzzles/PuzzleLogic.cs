@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class PuzzleLogic : MonoBehaviour
 {
-    MyGrid grid;
-    Dictionary<string, int> answer;
+    protected MyGrid grid;
+    
+    int curTestCase;
+    protected int totalTestCase;
+
+    protected Dictionary<string, int> answerTable;
+
     virtual protected void Awake()
     {
-        answer = new Dictionary<string, int>();
+        answerTable = new Dictionary<string, int>();
+        totalTestCase = 1;
+        curTestCase = 0;
     }
     virtual protected void Start()
     {
         Global.puzzleComplete = false;
         grid = Global.grid;
-        GamePlay.onNekoReset.AddListener(PuzzleReset);
-        GamePlay.onNekoRun.AddListener(PuzzleRun);
+        GamePlay.onNekoSubmit.AddListener(CheckAnswers);
         StartCoroutine(PuzzleInit());
     }
 
@@ -27,21 +33,53 @@ public class PuzzleLogic : MonoBehaviour
             PuzzleComplete();
         }
     }
-    virtual public void PuzzleComplete()
+    virtual public void GenerateTestCase()
+    {
+        
+    }
+
+    public void PuzzleComplete()
     {
         Debug.Log("puzzle complete");
     }
-    virtual public void PuzzleRun()
-    {
-
-    }
-    virtual public void PuzzleReset()
-    {
-
-    }
-    virtual public IEnumerator PuzzleInit()
+    public IEnumerator PuzzleInit()
     {
         yield return new WaitForEndOfFrame();
         
     }
+    protected void SetTarget(string target)
+    {
+        Global.puzzleTarget.SetNewMessage(target);
+    }
+    public void CheckAnswers()
+    {
+        bool accpeted = true;
+        foreach(string label in answerTable.Keys)
+        {
+            if (grid.tileTable[label][0].value != answerTable[label])
+                accpeted = false;
+        }
+        if (accpeted)
+        {
+            if (curTestCase == totalTestCase)
+            {
+                PuzzleComplete();
+                return;
+            }
+            NextTestCase();
+        }
+        else{
+            TestCaseFail();
+        }
+    }
+    void TestCaseFail()
+    {
+
+    }
+    void NextTestCase()
+    {
+        curTestCase++;
+        GenerateTestCase();
+    }
+
 }

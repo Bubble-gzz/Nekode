@@ -15,15 +15,13 @@ public class GamePlay : MonoBehaviour
     TileInventory mainInventory, arithInventory, logicInventory;
     MyGrid grid;
     static public PuzzlePreset puzzleSetting;
-    static public UnityEvent onNekoRun = new UnityEvent();
-    static public UnityEvent onNekoReset = new UnityEvent();
-    static public bool hasNekoStart;
+
+    static public UnityEvent onNekoSubmit;
+
     void Awake()
     {
         Global.currentGameMode = Global.GameMode.Play;
-        onNekoRun = new UnityEvent();
-        onNekoReset = new UnityEvent();
-        hasNekoStart = false;
+        onNekoSubmit = new UnityEvent();
         
         Global.mouseOverUI = false;
         Global.mouseOverArrow = false;

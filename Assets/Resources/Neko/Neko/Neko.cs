@@ -29,7 +29,6 @@ public class Neko : MonoBehaviour
     SpriteRenderer sprite;
     Animator bubble;
     TMP_Text bubbleText;
-    public bool playMode;
     bool running;
     AnimationBuffer animationBuffer;
     void Awake()
@@ -37,7 +36,7 @@ public class Neko : MonoBehaviour
         sprite = transform.Find("Sprite").GetComponent<SpriteRenderer>();
         bubble = transform.Find("Bubble").GetComponent<Animator>();
         bubbleText = transform.Find("Bubble").GetComponentInChildren<TMP_Text>();
-        playMode = false; running = false;
+        running = false;
         Global.currentNeko = this;
         Global.nekoPlaySpeed = 1;
         animationBuffer = gameObject.AddComponent<AnimationBuffer>();
@@ -61,7 +60,7 @@ public class Neko : MonoBehaviour
     {
         bubble.SetInteger("state", (int)mode);
         bubbleText.color = bubbleTextColors[(int)mode];
-        if (playMode)
+        if (Global.gameState == Global.GameState.Playing)
         {
             if (!running)
                 StartCoroutine(RunOneStep());
@@ -115,7 +114,15 @@ public class Neko : MonoBehaviour
         targetPos.z = z_pos;
         AnimationInfo moveAnimation = new UpdatePosAnimatorInfo(gameObject, targetPos, true, 0.2f/Global.nekoPlaySpeed, true);
         animationBuffer.Add(moveAnimation);
-        while (!moveAnimation.completed) yield return null;
+        while (!moveAnimation.completed) {
+            if (Global.gameState == Global.GameState.Editing)
+            {
+                moveAnimation.completed = true;
+                running = false;
+                yield break;
+            }
+            yield return null;
+        }
         i = _i; j = _j;
         Interact(i, j);
         yield return new WaitForSeconds(0.5f / Global.nekoPlaySpeed);

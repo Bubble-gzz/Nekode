@@ -582,7 +582,6 @@ public class MyTile : MonoBehaviour
         {
             if (permission == Permission.Free)
             {
-                _type = Type.Blank;
                 _permission = Permission.Protected;
             }
         }

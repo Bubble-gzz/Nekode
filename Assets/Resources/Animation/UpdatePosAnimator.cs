@@ -43,6 +43,9 @@ public class UpdatePosAnimator : MyAnimation
                     if (!animationOrder.isLatest(myOrder)) {
                         yield break;
                     }
+                    if (block && info.completed) {
+                        yield break;
+                    }
                 }
             }
             else
@@ -59,6 +62,9 @@ public class UpdatePosAnimator : MyAnimation
                     else transform.localPosition += (Vector3)delta.normalized * speed * Time.deltaTime;
                     yield return null;
                     if (!animationOrder.isLatest(myOrder)) {
+                        yield break;
+                    }
+                    if (block && info.completed) {
                         yield break;
                     }
                 }

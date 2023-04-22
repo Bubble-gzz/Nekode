@@ -14,7 +14,7 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     bool mouseEnter;
     [SerializeField]
     bool notUIelement;
-    void Awake()
+    virtual protected void Awake()
     {
         animationBuffer = gameObject.AddComponent<AnimationBuffer>();
         gameObject.AddComponent<PopAnimator>();

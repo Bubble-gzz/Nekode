@@ -16,10 +16,6 @@ public class Workshop : MonoBehaviour
         Global.currentGameMode = Global.GameMode.Workshop;
         Global.mouseOverUI = false;
         Global.mouseOverArrow = false;
-        
-        GamePlay.onNekoReset = new UnityEvent();
-        GamePlay.onNekoRun = new UnityEvent();
-        GamePlay.hasNekoStart = false;
     }
     void Start()
     {

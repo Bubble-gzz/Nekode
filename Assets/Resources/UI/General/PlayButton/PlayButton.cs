@@ -8,52 +8,53 @@ public class PlayButton : MyButton
     // Start is called before the first frame update
     [SerializeField]
     Sprite[] textures = new Sprite[2];
-    enum State{
-        Playing,
-        Pause
+    enum Icon{
+        Pause,
+        Play
     }
-    State state;
-    RectTransform rect;
+    Image icon;
+    override protected void Awake()
+    {
+        base.Awake();
+        Global.gameState = Global.GameState.Editing;
+        icon = GetComponent<Image>();
+    }
     override protected void Start()
     {
-        state = State.Pause;
-        GetComponent<Image>().sprite = textures[(int)state];
-        onClick.AddListener(SwitchState);
-        GamePlay.onNekoReset.AddListener(Pause);
-        rect = GetComponent<RectTransform>();
-        if (Global.currentPuzzleName == "你好世界")
-        {
-            rect.anchoredPosition = new Vector2(Screen.width * 0.46f, Screen.height * 0.2f);
-        }
+        GetComponent<Image>().sprite = textures[(int)Icon.Play];
+        onClick.AddListener(OnClick);
+        Global.onGameStateChanged.AddListener(OnGameStateChanged);
+        //rect = GetComponent<RectTransform>();
+        // if (Global.currentPuzzleName == "你好世界")
+        // {
+        //     rect.anchoredPosition = new Vector2(Screen.width * 0.46f, Screen.height * 0.2f);
+        // }
     }
 
-    void SwitchState()
+    void OnGameStateChanged()
     {
-        if (state == State.Pause)
+        if (Global.gameState == Global.GameState.Playing)
         {
-            state = State.Playing;
-            //Debug.Log("hasNekoStart: " + GamePlay.hasNekoStart);
-            if (!GamePlay.hasNekoStart)
-            {
-                Global.grid.MapBackUp();
-                GamePlay.onNekoRun.Invoke();
-            }
-            GamePlay.hasNekoStart = true;
-
-            if (Global.currentNeko != null) Global.currentNeko.playMode = true;
+            icon.sprite = textures[(int)Icon.Pause];
         }
         else
         {
-            state = State.Pause;
-            if (Global.currentNeko != null) Global.currentNeko.playMode = false;
+            icon.sprite = textures[(int)Icon.Play];
         }
-        GetComponent<Image>().sprite = textures[(int)state];
     }
-    // Update is called once per frame
-    void Pause()
+
+    void OnClick()
     {
-        state = State.Pause;
-        if (Global.currentNeko != null) Global.currentNeko.playMode = false;    
-        GetComponent<Image>().sprite = textures[(int)state];
+        if (Global.gameState == Global.GameState.Editing)
+        {
+            Global.grid.MapBackUp();
+        }
+        if (Global.gameState == Global.GameState.Playing)
+        {
+            Global.SetGameState(Global.GameState.Paused);
+        }
+        else {
+            Global.SetGameState(Global.GameState.Playing);
+        }
     }
 }
