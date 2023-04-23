@@ -246,8 +246,9 @@ public class MyTile : MonoBehaviour
     {
         if (Global.mouseOverUI || Global.mouseOverArrow) return;
         if (!mouseEnter || editing || isGhost) return;
+        if (Global.gameState != Global.GameState.Editing) return;
+
         editing = true;
-        animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.LinearBack, 0.07f));
         buttons.Clear();
 
         bool isWorkshop = Global.inWorkshop;
@@ -270,14 +271,22 @@ public class MyTile : MonoBehaviour
         }
 
         if (deletable) AddButton(Delete, (int)ButtonType.Delete);
-        if (editable && hasValue) AddButton(StartEditValueActively, (int)ButtonType.Edit);
+        if (editable && hasValue) {
+            if (!(fixedTileTypes.Contains(type) && Global.gameMode == Global.GameMode.Test))
+            {
+                AddButton(StartEditValueActively, (int)ButtonType.Edit);
+            }
+        }
         if (canBeFree) AddButton(SetFree, (int)ButtonType.Free);
         if (canBeProtected) AddButton(SetProtected, (int)ButtonType.Protected);
         if (canBeReadOnly) AddButton(SetReadOnly, (int)ButtonType.ReadOnly);
         if (hasLabel) AddButton(StartEditLabel, (int)ButtonType.Label);
 
         int n = buttons.Count;
-        if (n == 0) return;
+        if (n == 0) {
+            editing = false;
+            return;
+        }
         float size = myGrid.tileSize;
         float interval = size / (n + 1);
         for (int i = 0; i < n; i++)
@@ -291,6 +300,7 @@ public class MyTile : MonoBehaviour
             buttons[i].animationBuffer.Add(new PopAnimatorInfo(buttons[i].gameObject, PopAnimator.Type.Appear));
             */
         }
+        animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.LinearBack, 0.07f));
     }
     void AddButton(UnityAction buttonEvent, int id)
     {
