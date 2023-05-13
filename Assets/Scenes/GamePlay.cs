@@ -23,18 +23,16 @@ public class GamePlay : MonoBehaviour
         Global.inWorkshop = false;
         Global.gameMode = Global.GameMode.Test;
         Global.mouseOverUI = false;
-        Global.mouseOverArrow = false;
-        
+        Global.mouseOverArrow = false;        
         onNekoSubmit = new UnityEvent();
+    }
+    void Start()
+    {
         for (int i = 0; i < puzzlePresets.Count; i++)
             if (Global.currentPuzzleName == puzzlePresets[i].puzzleName) {
                 InitWithPreset(puzzlePresets[i]);
                 break;
             }
-    }
-    void Start()
-    {
-
     }
 
     // Update is called once per frame
@@ -43,7 +41,8 @@ public class GamePlay : MonoBehaviour
         puzzleSetting = preset;
         grid = GameObject.FindObjectOfType<MyGrid>();
         grid.SetTileCount(preset.tilePreset.tileCounts);
-        grid.LoadFromFile(Application.dataPath + "/Resources/MapData/" + Global.currentPuzzleName + ".json");
+        grid.LoadFromFile("MapData/" + Global.currentPuzzleName);
+        //grid.LoadFromFile("MapData/" + Global.currentPuzzleName);//grid.LoadFromFile(Application.dataPath + "/Resources/MapData/" + Global.currentPuzzleName + ".json");
         TilePreset tilePreset = preset.tilePreset;
         mainInventory.tileTypes = tilePreset.mainInventory;
         arithInventory.tileTypes = tilePreset.arithInventory;

@@ -216,7 +216,8 @@ public class MyGrid : MonoBehaviour
     }
     public void LoadFromFile(string path)
     {
-        string jsonData = File.ReadAllText(path);
+       // Debug.Log("loading from:" + path + "get: " + Resources.Load<TextAsset>(path));
+        string jsonData = Resources.Load<TextAsset>(path).text; //File.ReadAllText(path);
         LoadFromJson(jsonData);
         Global.mouseOverUI = false;
     }
