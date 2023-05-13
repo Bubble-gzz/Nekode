@@ -1,0 +1,160 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1612423342444531500
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2308128093940707987, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128093940707987, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: 7af79193c030b2c41baf366e2d3ea08a, type: 3}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: f5681fef7fdfedb49b11d219b3bb8790, type: 2}
+    - target: {fileID: 2308128093958194119, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 8400000, guid: f5681fef7fdfedb49b11d219b3bb8790, type: 2}
+    - target: {fileID: 2308128094342778043, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: title_CH
+      value: "\u7BAD\u5934"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778043, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: title_EN
+      value: Arrow
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778043, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: description_CH
+      value: "\u5229\u7528\u7BAD\u5934\u6765\u6539\u53D8\u732B\u54AA\u7684\u524D\u8FDB\u65B9\u5411
+        <sprite=3> "
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778043, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: description_EN
+      value: 'Change the kitten''s direction with arrows <sprite=3> '
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778046, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_Name
+      value: Arrow
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 750
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094456410932, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_Name
+      value: Title
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094456410934, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_text
+      value: Arrow
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094458634745, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094458634745, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -300
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094458634746, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_text
+      value: 'Change the kitten''s direction with arrows <sprite=3> '
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094458634746, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_spriteAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b8eeb3a0192bcf1499ea9ed140e0a285, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b5a36b97645f60840858595a76a24a3c, type: 3}

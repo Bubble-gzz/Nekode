@@ -1,0 +1,121 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
+
+public class HelpCardGroup : MonoBehaviour
+{
+    // Start is called before the first frame update
+    RectTransform rectTransform;
+    public int pageCount = 0;
+    public GameObject indexCirclePrefab;
+    public float indexCircleInterval = 20;
+    Transform indexGroup;
+    List<IndexCircle> indexCircles;
+    CanvasGroup canvasGroup;
+    List<HelpCard> cards;
+    TurnPageIcon turnLeftButton, turnRightButton;
+    MyButtonImage closeButton, gotIt;
+    int curPage;
+    void Awake()
+    {
+        rectTransform = GetComponent<RectTransform>();
+        cards = new List<HelpCard>();
+        indexCircles = new List<IndexCircle>();
+        canvasGroup = GetComponent<CanvasGroup>();
+        indexGroup = transform.Find("Indexes");
+        for (int i = 0; i < pageCount; i++)
+        {
+            GameObject newIndexCircle = Instantiate(indexCirclePrefab, indexGroup);
+            indexCircles.Add(newIndexCircle.GetComponent<IndexCircle>());
+        }
+        foreach (Transform child in transform)
+        {
+            HelpCard card = child.GetComponent<HelpCard>();
+            if (card != null) cards.Add(card);
+        }
+        turnLeftButton = transform.Find("TurnLeft").GetComponentInChildren<TurnPageIcon>();
+        turnRightButton = transform.Find("TurnRight").GetComponentInChildren<TurnPageIcon>();
+        closeButton = transform.Find("Close").GetComponentInChildren<MyButtonImage>();
+        gotIt = transform.Find("Got It!").GetComponentInChildren<MyButtonImage>();
+    }
+    void Start()
+    {
+        curPage = 0;
+        for (int i = 1; i < pageCount; i++)
+        {
+            cards[i].Disappear();
+            indexCircles[i].SetState(false);
+        }
+        cards[0].Appear();
+        indexCircles[0].SetState(true);
+        float posX = - (pageCount - 1) * indexCircleInterval * 1.0f / 2;
+        for (int i = 0; i < pageCount; i++)
+        {
+            indexCircles[i].GetComponent<RectTransform>().localPosition = new Vector3(posX, 0, 0);
+            posX += indexCircleInterval;
+        }
+        if (pageCount > 1) turnRightButton.Appear();
+        turnLeftButton.Disappear();
+
+        closeButton.Appear();
+        if (pageCount > 1) gotIt.Disappear();
+        else gotIt.Appear();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    bool ChangePage(int delta)
+    {
+        if (curPage + delta < 0 || curPage + delta >= cards.Count) return false;
+        cards[curPage].Disappear();
+        indexCircles[curPage].SetState(false);
+        curPage += delta;
+        rectTransform.DOSizeDelta(cards[curPage].CardSize, 0.3f).SetEase(Ease.OutSine);
+        
+        cards[curPage].Appear();
+        indexCircles[curPage].SetState(true);   
+        return true;
+    }
+    public void NextPage()
+    {
+        if (!ChangePage(1)) return;
+        if (curPage == 1) {
+            turnLeftButton.Appear();
+        }
+        if (curPage == pageCount - 1) {
+            turnRightButton.Disappear();
+            gotIt.Appear();
+        }
+        else {
+            turnRightButton.Clicked();
+        }
+    }
+    public void LastPage()
+    {
+        if (!ChangePage(-1)) return;
+        gotIt.Disappear();
+        if (curPage == pageCount - 2) {
+            turnRightButton.Appear();
+        }
+        if (curPage == 0) {
+            turnLeftButton.Disappear();
+        }
+        else {
+            turnLeftButton.Clicked();
+        }
+    }
+    public void Appear()
+    {
+        canvasGroup.enabled = true;
+    }
+    public void Disappear()
+    {
+        canvasGroup.enabled = false;
+    }
+}

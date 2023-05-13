@@ -33,7 +33,6 @@ public class MyGrid : MonoBehaviour
     public List<int> tileCount = new List<int>();
     [SerializeField]
     
-    public List<TilePresetPair> tileCountPreset;
     int tileKindN;
     void Awake()
     {
