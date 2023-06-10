@@ -15,7 +15,7 @@ public class HelpCardGroup : MonoBehaviour
     List<IndexCircle> indexCircles;
     CanvasGroup canvasGroup;
     List<HelpCard> cards;
-    TurnPageIcon turnLeftButton, turnRightButton;
+    MyButtonImage turnLeftButton, turnRightButton;
     MyButtonImage closeButton, gotIt;
     int curPage;
     void Awake()
@@ -35,8 +35,8 @@ public class HelpCardGroup : MonoBehaviour
             HelpCard card = child.GetComponent<HelpCard>();
             if (card != null) cards.Add(card);
         }
-        turnLeftButton = transform.Find("TurnLeft").GetComponentInChildren<TurnPageIcon>();
-        turnRightButton = transform.Find("TurnRight").GetComponentInChildren<TurnPageIcon>();
+        turnLeftButton = transform.Find("TurnLeft").GetComponentInChildren<MyButtonImage>();
+        turnRightButton = transform.Find("TurnRight").GetComponentInChildren<MyButtonImage>();
         closeButton = transform.Find("Close").GetComponentInChildren<MyButtonImage>();
         gotIt = transform.Find("Got It!").GetComponentInChildren<MyButtonImage>();
     }

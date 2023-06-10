@@ -22,6 +22,7 @@ public class MyButtonImage : MonoBehaviour
     {
         image = GetComponentInChildren<Image>();
         canvasGroup = GetComponent<CanvasGroup>();
+        show = true;
     }
     void Start()
     {
@@ -97,13 +98,14 @@ public class MyButtonImage : MonoBehaviour
         if (!show) return;
         StopTween();
         transform.DORotate(new Vector3(0, 0, 0), 0.2f);
+        image.color = ClickedColor;
         animationSequence = DOTween.Sequence();
         animationSequence.Append(transform.DOScale(size_on * 0.6f, tweenInterval * 0.5f));
         animationSequence.Append(transform.DOScale(size_on * 1.05f, tweenInterval));
         animationSequence.Append(transform.DOScale(size_on, tweenInterval));
-        animationSequence.Insert(0, image.DOColor(ClickedColor, tweenInterval * 0.5f));
+       // animationSequence.Insert(0, image.DOColor(ClickedColor, tweenInterval * 0.5f));
         
-        animationSequence.Insert(1, image.DOColor(HoverColor, tweenInterval*2));
+        animationSequence.Insert(0, image.DOColor(HoverColor, tweenInterval*2));
         
     }
     public void Disappear()

@@ -8,7 +8,8 @@ public class PuzzleLogic : MonoBehaviour
     
     int curTestCase;
     protected int totalTestCase;
-
+    public MyDialogueBox dialogue;
+    public MyPanel helpCardPanel;
     protected Dictionary<string, int> answerTable;
 
     virtual protected void Awake()
@@ -60,19 +61,19 @@ public class PuzzleLogic : MonoBehaviour
     }
     public void CheckAnswers()
     {
-        bool accpeted = true;
+        bool accepted = true;
         foreach(string label in answerTable.Keys)
         {
             if (grid.tileTable[label][0].value != answerTable[label])
             {
-                accpeted = false;
+                accepted = false;
             }
             else
             {
                 Debug.Log("[" + label + "] Value Correct.");
             }
         }
-        if (accpeted)
+        if (accepted)
         {
             if (curTestCase == totalTestCase)
             {

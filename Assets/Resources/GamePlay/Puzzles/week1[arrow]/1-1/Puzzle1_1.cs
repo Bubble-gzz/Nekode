@@ -22,6 +22,36 @@ public class Puzzle1_1 : PuzzleLogic
     {
         if (Settings.language == "CH") SetTarget("读取A端口中的数，输出到B端口");
         else SetTarget("Read the data from port A and output it to port B");
+
+        dialogue.Open();
+        
+        if (Settings.language == "CH") dialogue.Play("首先让我们通过这个例子感受一下猫咪是如何完成任务的。");
+        else dialogue.Play("Here's an example and let's see how the kitten gets the job done.", new Vector2(650, 150));
+        while (dialogue.isPlaying) yield return null;
+
+        if (Settings.language == "CH") dialogue.Play("这里，我们想让小猫将蓝色方块的数字搬运到绿色方块中。");
+        else dialogue.Play("Here, we want the kitten to copy the number from the blue tile to the green tile.", new Vector2(650, 170));
+        while (dialogue.isPlaying) yield return null;
+
+        if (Settings.language == "CH") dialogue.Play("你肯定会问蓝色方块和绿色方块是什么意思 ^_^*");
+        else dialogue.Play("You may be wondering, what does all this stuff mean? ^_^*", new Vector2(650, 150));
+        while (dialogue.isPlaying) yield return null;
+
+        if (Settings.language == "CH") dialogue.Play("看看这些卡片吧");
+        else dialogue.Play("These cards should help you understand.", new Vector2(650, 150));
+        while (dialogue.isPlaying) yield return null;
+        
+        dialogue.Close();
+
+        yield return new WaitForSeconds(0.2f);
+        helpCardPanel.Appear();
+        while (helpCardPanel.showing) yield return null;
+        
+        dialogue.Open();
+        dialogue.Play("Let's go!", new Vector2(650, 150));
+        while (dialogue.isPlaying) yield return null; 
+        dialogue.Close();
+        
         yield return null;
     }
 

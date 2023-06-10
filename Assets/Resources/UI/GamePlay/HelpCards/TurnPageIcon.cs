@@ -25,9 +25,15 @@ public class TurnPageIcon : MonoBehaviour
     {
         
     }
+    void StopTween()
+    {
+        image?.DOKill();
+        transform?.DOKill();
+    }
     public async void PopOut()
     {
         if (!show) return;
+        StopTween();
         image.DOColor(HoverColor, tweenInterval * 3);
         await transform.DOScale(new Vector3(1.3f, 1.3f, 1.3f), tweenInterval).AsyncWaitForCompletion();
         await transform.DOScale(new Vector3(1.05f, 1.05f, 1.05f), tweenInterval).AsyncWaitForCompletion();
@@ -36,6 +42,7 @@ public class TurnPageIcon : MonoBehaviour
     public async void PopBack()
     {
         if (!show) return;
+        StopTween();
         image.DOColor(NormalColor, tweenInterval * 3);
         await transform.DOScale(new Vector3(0.9f, 0.9f, 0.9f), tweenInterval).AsyncWaitForCompletion();
         await transform.DOScale(new Vector3(1.05f, 1.05f, 1.05f), tweenInterval).AsyncWaitForCompletion();
@@ -44,7 +51,8 @@ public class TurnPageIcon : MonoBehaviour
     public async void Clicked()
     {
         if (!show) return;
-        image.DOColor(ClickedColor, 0.1f);
+        StopTween();
+        image.DOColor(ClickedColor, tweenInterval);
         await transform.DOScale(new Vector3(0.7f, 0.7f, 0.7f), tweenInterval * 0.5f).AsyncWaitForCompletion();
         image.DOColor(HoverColor, tweenInterval*2);
         await transform.DOScale(new Vector3(1.3f, 1.3f, 1.3f), tweenInterval).AsyncWaitForCompletion();
@@ -52,6 +60,7 @@ public class TurnPageIcon : MonoBehaviour
     }
     public void Disappear()
     {
+        StopTween();
         show = false;
         image.color = ClickedColor;
         image.DOFade(0, tweenInterval);
@@ -59,6 +68,7 @@ public class TurnPageIcon : MonoBehaviour
     }
     public async void Appear()
     {
+        StopTween();
         show = true;
         image.color = NormalColor;
         image.DOFade(0, 0.001f);

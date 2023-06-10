@@ -17,9 +17,12 @@ public class MyPanel : MonoBehaviour
     CanvasGroup canvasGroup;
     public GameObject content;
     Sequence animationSequence;
+    [HideInInspector]
+    public bool showing;
     void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 0;
     }
     void Start()
     {
@@ -36,6 +39,7 @@ public class MyPanel : MonoBehaviour
     }
     public void Appear()
     {
+        showing = true;
         animationSequence?.Kill();
         canvasGroup.DOKill();
         transform.DOKill();
@@ -50,6 +54,7 @@ public class MyPanel : MonoBehaviour
     }
     public void Disappear()
     {
+        showing = false;
         animationSequence?.Kill();
         animationSequence = DOTween.Sequence();
         if (style == Style.Pop) {
