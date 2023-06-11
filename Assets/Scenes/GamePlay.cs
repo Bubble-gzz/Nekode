@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class GamePlay : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class GamePlay : MonoBehaviour
     TileInventory mainInventory, arithInventory, logicInventory;
     MyGrid grid;
     static public PuzzlePreset puzzleSetting;
-
+    SceneSwitcher sceneSwitcher;
     static public UnityEvent onNekoSubmit;
 
     void Awake()
@@ -25,12 +26,14 @@ public class GamePlay : MonoBehaviour
         Global.mouseOverUI = false;
         Global.mouseOverArrow = false;        
         onNekoSubmit = new UnityEvent();
+        sceneSwitcher = GameObject.Find("SceneSwitcher").GetComponent<SceneSwitcher>();
     }
     void Start()
     {
         for (int i = 0; i < puzzlePresets.Count; i++)
             if (Global.currentPuzzleName == puzzlePresets[i].puzzleName) {
                 InitWithPreset(puzzlePresets[i]);
+                Global.currentPuzzleID = i;
                 break;
             }
     }
@@ -54,6 +57,30 @@ public class GamePlay : MonoBehaviour
     void Update()
     {
         
+    }
+    public void BackToPuzzleSelect()
+    {
+        SwitchScene("PuzzleSelect");
+    }
+    public void NextPuzzle()
+    {
+        string targetSceneName = "";
+        if (Global.currentPuzzleID >= puzzlePresets.Count - 1)
+            targetSceneName = "PuzzleSelect";
+        else {
+            Global.currentPuzzleName = puzzlePresets[Global.currentPuzzleID + 1].puzzleName;
+            targetSceneName = "GamePlay";
+        }
+        SwitchScene(targetSceneName);
+    }
+    public void Retry()
+    {
+        SwitchScene("GamePlay");
+    }
+    void SwitchScene(string targetSceneName)
+    {
+        if (sceneSwitcher) sceneSwitcher.SwitchTo(targetSceneName);
+        else SceneManager.LoadScene(targetSceneName);
     }
 }
 

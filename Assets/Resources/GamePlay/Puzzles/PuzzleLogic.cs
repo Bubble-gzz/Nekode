@@ -11,12 +11,15 @@ public class PuzzleLogic : MonoBehaviour
     public MyDialogueBox dialogue;
     public MyPanel helpCardPanel;
     protected Dictionary<string, int> answerTable;
-
+    ResultPanel resultPanel;
+    protected string[] conditions = new string[3];
+    protected bool[] conditionStatus = new bool[3];
     virtual protected void Awake()
     {
         answerTable = new Dictionary<string, int>();
         totalTestCase = 1;
         curTestCase = 0;
+        resultPanel = GameObject.Find("Result Panel").GetComponentInChildren<ResultPanel>();
     }
     virtual protected void Start()
     {
@@ -45,11 +48,6 @@ public class PuzzleLogic : MonoBehaviour
     {
         
     }
-
-    public void PuzzleComplete()
-    {
-        Debug.Log("puzzle complete");
-    }
     public IEnumerator PuzzleInit()
     {
         yield return new WaitForEndOfFrame();
@@ -61,24 +59,35 @@ public class PuzzleLogic : MonoBehaviour
     }
     public void CheckAnswers()
     {
+        StartCoroutine(C_CheckAnswers());
+    }
+    public IEnumerator C_CheckAnswers()
+    {
         bool accepted = true;
         foreach(string label in answerTable.Keys)
         {
-            if (grid.tileTable[label][0].value != answerTable[label])
+            MyTile tile0 = grid.tileTable[label][0];
+
+            if (tile0.value != answerTable[label])
             {
                 accepted = false;
+                foreach(MyTile tile in grid.tileTable[label])
+                    StartCoroutine(tile.ResultWrong());
             }
             else
             {
                 Debug.Log("[" + label + "] Value Correct.");
+                foreach(MyTile tile in grid.tileTable[label])
+                    StartCoroutine(tile.ResultCorrect());
             }
         }
+        yield return new WaitForSeconds(1f);
         if (accepted)
         {
             if (curTestCase == totalTestCase)
             {
                 PuzzleComplete();
-                return;
+                yield break;
             }
             NextTestCase();
         }
@@ -96,6 +105,61 @@ public class PuzzleLogic : MonoBehaviour
         curTestCase++;
         GenerateTestCase();
         Global.isGeneratingTestData = false;
+    }
+
+
+    public void PuzzleComplete()
+    {
+        Debug.Log("puzzle complete");
+        StartCoroutine(C_PuzzleComplete());
+    }
+    IEnumerator C_PuzzleComplete()
+    {
+        resultPanel.Appear();
+        yield return new WaitForSeconds(1f);
+        resultPanel.SetCondition(0, conditions[0]);
+        yield return new WaitForSeconds(0.3f);
+        resultPanel.SetCondition(1, conditions[1]);
+        yield return new WaitForSeconds(0.3f);
+        resultPanel.SetCondition(2, conditions[2]);
+
+        yield return new WaitForSeconds(1f);
+        yield return StartCoroutine(CheckCondition0());
+        yield return new WaitForSeconds(0.7f);
+        yield return StartCoroutine(CheckCondition1());
+        yield return new WaitForSeconds(0.7f);
+        yield return StartCoroutine(CheckCondition2());
+        yield return new WaitForSeconds(0.7f);
+        
+        resultPanel.PopStar(0, conditionStatus[0]);
+        yield return new WaitForSeconds(0.7f);
+        resultPanel.PopStar(1, conditionStatus[1]);
+        yield return new WaitForSeconds(0.7f);
+        resultPanel.PopStar(2, conditionStatus[2]);
+        yield return new WaitForSeconds(0.7f);
+
+        if (conditionStatus[0] && conditionStatus[1] && conditionStatus[2])
+            resultPanel.PlayChord();
+        //步数限制
+        //空间限制
+        //使用的方块限制
+    }
+    protected virtual IEnumerator CheckCondition0()
+    {
+        resultPanel.CheckCondition(0, conditionStatus[0]);
+        yield return null;
+    }
+    protected virtual IEnumerator CheckCondition1()
+    {
+
+        resultPanel.CheckCondition(1, conditionStatus[1]);
+        yield return null;
+    }
+    protected virtual IEnumerator CheckCondition2()
+    {
+
+        resultPanel.CheckCondition(2, conditionStatus[2]);
+        yield return null;
     }
 
 }

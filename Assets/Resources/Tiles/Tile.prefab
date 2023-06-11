@@ -369,6 +369,8 @@ MonoBehaviour:
   - {fileID: 2062693595241933419}
   - {fileID: 6166641535597671837}
   arrowPrefab: {fileID: 264590469042182450, guid: 7957da81c50e5da4f902f8c55975a1c6, type: 3}
+  CorrectIconPrefab: {fileID: 6154392521871440116, guid: a35947b20da061f4ba2357063fb31690, type: 3}
+  WrongIconPrefab: {fileID: 8729597717471854050, guid: 87203e41c9ae9534cbdd9e25f86a914b, type: 3}
 --- !u!61 &8959145686764915111
 BoxCollider2D:
   m_ObjectHideFlags: 0

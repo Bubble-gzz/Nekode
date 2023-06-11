@@ -26,7 +26,7 @@ public class MyButtonImage : MonoBehaviour
     }
     void Start()
     {
-
+        image.color = NormalColor;
     }
 
     void OnEnable()

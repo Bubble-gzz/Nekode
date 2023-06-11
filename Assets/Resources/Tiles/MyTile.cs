@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
+using DG.Tweening;
 
 public class MyTile : MonoBehaviour
 {
@@ -626,5 +627,35 @@ public class MyTile : MonoBehaviour
     }
     public bool IsArithmeticType() {
         return arithmeticTiles.Contains(type);
+    }
+
+    public GameObject CorrectIconPrefab, WrongIconPrefab;
+    public IEnumerator ResultCorrect()
+    {
+        bool animationComplete = false;
+        GameObject correct = Instantiate(CorrectIconPrefab, transform);
+        var sequence = DOTween.Sequence();
+        sequence.Append( correct.transform.DOScale(Vector3.one * 1.3f, 0.3f) );
+        sequence.Append( correct.transform.DOScale(Vector3.one * 0.9f, 0.1f) );
+        sequence.Append( correct.transform.DOScale(Vector3.one * 1f, 0.1f) );
+        sequence.OnComplete(()=>{
+            animationComplete = true;
+        });
+        correct.transform.localScale = new Vector3(0, 0, 0);
+        while (!animationComplete) yield return null;
+    }
+    public IEnumerator ResultWrong()
+    {
+        bool animationComplete = false;
+        GameObject correct = Instantiate(WrongIconPrefab, transform);
+        var sequence = DOTween.Sequence();
+        sequence.Append( correct.transform.DOScale(Vector3.one * 1.3f, 0.3f) );
+        sequence.Append( correct.transform.DOScale(Vector3.one * 0.9f, 0.1f) );
+        sequence.Append( correct.transform.DOScale(Vector3.one * 1f, 0.1f) );
+        sequence.OnComplete(()=>{
+            animationComplete = true;
+        });
+        correct.transform.localScale = new Vector3(0, 0, 0);
+        while (!animationComplete) yield return null;
     }
 }

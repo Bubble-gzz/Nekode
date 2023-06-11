@@ -6,13 +6,30 @@ using DG.Tweening;
 public class ResultPanel : MonoBehaviour
 {
     // Start is called before the first frame update
-    public List<Transform> stars;
+    MyPanel myPanel;
     Sequence starAnimSeq;
     static List<string>[] remarks = new List<string>[3]{
         new List<string>(){"Good", "Okay"},
         new List<string>(){"Great", "Nice"},
         new List<string>(){"Amazing", "Perfect", "Excellent"}
     };
+    List<MyCondition> conditions = new List<MyCondition>();
+    List<RatingStar> stars = new List<RatingStar>();
+    void Awake()
+    {
+        myPanel = transform.parent.GetComponent<MyPanel>();
+        foreach(Transform child in transform.Find("Conditions"))
+        {
+            conditions.Add(child.GetComponentInChildren<MyCondition>());
+        }
+        foreach(Transform child in transform.Find("Stars"))
+        {
+            stars.Add(child.GetComponentInChildren<RatingStar>());
+        }
+        Debug.Log("conditions.count:" + conditions.Count);
+        Debug.Log("stars.count:" + stars.Count);
+        
+    }
     void Start()
     {
         
@@ -23,22 +40,34 @@ public class ResultPanel : MonoBehaviour
     {
         
     }
-    public void Ponder()
+
+    public void SetCondition(int id, string content)
     {
-        Debug.Log("Pondering");
+        MyCondition condition = conditions[id];
+        condition.SetCondition(content);
+        //condition.GetComponentInChildren<TMP_Text>();
     }
-    public void Pass(int starID)
+    public void CheckCondition(int id, bool accepted)
     {
-        Debug.Log("Pass");
-        float unit = 0.2f;
-        starAnimSeq = DOTween.Sequence();
-        starAnimSeq.Append(stars[starID].DOScale(new Vector3(1.2f, 1.2f, 1.2f), unit));
-        starAnimSeq.Append(stars[starID].DOScale(new Vector3(0.9f, 0.9f, 0.9f), unit));
-        starAnimSeq.Append(stars[starID].DOScale(new Vector3(1f, 1f, 1f), unit));
+        MyCondition condition = conditions[id];
+        if (accepted)
+        {
+            condition.CheckBox();
+        }
     }
-    public void Fail(int starID)
+    public void PopStar(int id, bool accepted)
     {
-        Debug.Log("Fail");
+        Debug.Log("Pop Star: " + id);
+        if (accepted) stars[id].Pass();
+        else stars[id].Fail();
+    }
+    public void PlayChord()
+    {
+        Debug.Log("Play Chord");
+    }
+    public void Appear()
+    {
+        myPanel.Appear();
     }
     public void Remark(int starCount)
     {

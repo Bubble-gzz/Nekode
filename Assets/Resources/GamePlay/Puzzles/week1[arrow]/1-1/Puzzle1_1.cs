@@ -10,6 +10,9 @@ public class Puzzle1_1 : PuzzleLogic
         base.Start();
         totalTestCase = 1;
         StartCoroutine(GameProcess());
+        conditions[0] = "Follow the instruction";
+        conditions[1] = "Hit the play button";
+        conditions[2] = "Complete the tutorial";
     }
     
     // Update is called once per frame
@@ -61,5 +64,19 @@ public class Puzzle1_1 : PuzzleLogic
         //Debug.Log("Generating Test Case ... ... ");
         grid.tileTable["A"][0].UpdateValue(233);
         answerTable["B"] = 233;
+    }
+    protected override IEnumerator CheckCondition0()
+    {
+        conditionStatus[0] = true;
+        return base.CheckCondition0();
+    }
+    protected override IEnumerator CheckCondition1()
+    {
+        conditionStatus[1] = true;
+        return base.CheckCondition1();
+    }    protected override IEnumerator CheckCondition2()
+    {
+        conditionStatus[2] = false;
+        return base.CheckCondition2();
     }
 }
