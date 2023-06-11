@@ -69,7 +69,7 @@ public class MyButtonImage : MonoBehaviour
         canvasGroup?.DOKill();
         transform?.DOKill();
     }
-    public void PopOut()
+    public void OnMouseEnter()
     {
         if (!show) return;
         hover = true;
@@ -81,7 +81,7 @@ public class MyButtonImage : MonoBehaviour
         animationSequence.Append(transform.DOScale(size_on, tweenInterval));
         animationSequence.Insert(0, image.DOColor(HoverColor, tweenInterval * 3));
     }
-    public void PopBack()
+    public void OnMouseExit()
     {
         if (!show) return;
         hover = false;
@@ -93,7 +93,7 @@ public class MyButtonImage : MonoBehaviour
         animationSequence.Append(transform.DOScale(new Vector3(1f, 1f, 1f), tweenInterval));
         animationSequence.Insert(0, image.DOColor(NormalColor, tweenInterval * 3));
     }
-    public void Clicked()
+    public void OnClicked()
     {
         if (!show) return;
         StopTween();

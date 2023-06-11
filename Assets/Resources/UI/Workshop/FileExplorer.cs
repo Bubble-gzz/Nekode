@@ -17,7 +17,8 @@ public class FileExplorer : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public string initialPath = "";
     List<string> targetExtensions = new List<string>();
     string rootPath;
-    public UnityEvent<string> openFile = new UnityEvent<string>();
+    public UnityEvent<string, bool> openFile = new UnityEvent<string, bool>();
+    public bool loadFromResource;
     void Awake()
     {
         rootPath = Application.dataPath;
@@ -27,7 +28,8 @@ public class FileExplorer : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     }
     void Start()
     {
-        curPath = Application.dataPath + "/" + initialPath;
+        if (loadFromResource) curPath = initialPath;
+        else curPath = Application.dataPath + "/" + initialPath;
         ReloadItems(curPath);
     }
     void ResetPath(string newPath, bool reload = true)
@@ -49,23 +51,36 @@ public class FileExplorer : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     }
     void ReloadItems(string curPath)
     {
-        DirectoryInfo curDir = new DirectoryInfo(curPath);
-        ClearItems();
-        DirectoryInfo[] directories = curDir.GetDirectories();
-        foreach (var directory in directories)
+        if (loadFromResource)
         {
-            FileEntry newFileEntry = Instantiate(itemPrefab, contentRoot).GetComponent<FileEntry>();
-            newFileEntry.isFile = false;
-            newFileEntry.fileExplorer = this;
-            newFileEntry.SetName(directory.Name, directory.FullName);
+            Object[] objs = Resources.LoadAll(curPath);
+            foreach (var obj in objs)
+            {
+                FileEntry newFileEntry = Instantiate(itemPrefab, contentRoot).GetComponent<FileEntry>();
+                newFileEntry.fileExplorer = this;
+                newFileEntry.SetName(obj.name, curPath + "/" + obj.name);
+            }
         }
-        FileInfo[] files = curDir.GetFiles();
-        foreach (var file in files)
-        {
-            if (!FilterCheck(file)) continue;
-            FileEntry newFileEntry = Instantiate(itemPrefab, contentRoot).GetComponent<FileEntry>();
-            newFileEntry.fileExplorer = this;
-            newFileEntry.SetName(file.Name, file.FullName);
+        else {
+            DirectoryInfo curDir = new DirectoryInfo(curPath);
+            if (curDir.Exists) curDir.Create();
+            ClearItems();
+            DirectoryInfo[] directories = curDir.GetDirectories();
+            foreach (var directory in directories)
+            {
+                FileEntry newFileEntry = Instantiate(itemPrefab, contentRoot).GetComponent<FileEntry>();
+                newFileEntry.isFile = false;
+                newFileEntry.fileExplorer = this;
+                newFileEntry.SetName(directory.Name, directory.FullName);
+            }
+            FileInfo[] files = curDir.GetFiles();
+            foreach (var file in files)
+            {
+                if (!FilterCheck(file)) continue;
+                FileEntry newFileEntry = Instantiate(itemPrefab, contentRoot).GetComponent<FileEntry>();
+                newFileEntry.fileExplorer = this;
+                newFileEntry.SetName(file.Name, file.FullName);
+            }
         }
     }
     public void EnterDirectory(string dirName)
@@ -83,7 +98,7 @@ public class FileExplorer : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     }
     public void SelectFile(string filePath)
     {
-        openFile.Invoke(filePath);
+        openFile.Invoke(filePath, false);
         gameObject.SetActive(false);
     }
     void OnMouseEnter()

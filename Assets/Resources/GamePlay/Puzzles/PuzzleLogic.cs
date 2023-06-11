@@ -8,8 +8,10 @@ public class PuzzleLogic : MonoBehaviour
     
     int curTestCase;
     protected int totalTestCase;
-    public MyDialogueBox dialogue;
-    public MyPanel helpCardPanel;
+    public GameObject dialogueBoxPrefab;
+    protected MyDialogueBox dialogue;
+    public GameObject helpCardPanelPrefab;
+    protected MyPanel helpCardPanel;
     protected Dictionary<string, int> answerTable;
     ResultPanel resultPanel;
     protected string[] conditions = new string[3];
@@ -19,7 +21,6 @@ public class PuzzleLogic : MonoBehaviour
         answerTable = new Dictionary<string, int>();
         totalTestCase = 1;
         curTestCase = 0;
-        resultPanel = GameObject.Find("Result Panel").GetComponentInChildren<ResultPanel>();
     }
     virtual protected void Start()
     {
@@ -107,7 +108,11 @@ public class PuzzleLogic : MonoBehaviour
         Global.isGeneratingTestData = false;
     }
 
-
+    virtual protected IEnumerator GameProcess()
+    {
+        yield return new WaitForEndOfFrame();
+        dialogue = GameUIManager.PopOutPanel(dialogueBoxPrefab).GetComponentInChildren<MyDialogueBox>();
+    }
     public void PuzzleComplete()
     {
         Debug.Log("puzzle complete");
@@ -115,6 +120,7 @@ public class PuzzleLogic : MonoBehaviour
     }
     IEnumerator C_PuzzleComplete()
     {
+        resultPanel = GameUIManager.PopOutResultPanel().GetComponentInChildren<ResultPanel>();
         resultPanel.Appear();
         yield return new WaitForSeconds(1f);
         resultPanel.SetCondition(0, conditions[0]);

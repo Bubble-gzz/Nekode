@@ -48,9 +48,9 @@ public class MyDialogueBox : MonoBehaviour
     {
         panel.Appear();
     }
-    public void Close()
+    public void Close(bool destroy = false)
     {
-        panel.Disappear();
+        panel.Disappear(destroy);
     }
     public void Play(string newContent)
     {

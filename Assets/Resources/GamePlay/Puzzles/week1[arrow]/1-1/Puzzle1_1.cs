@@ -21,8 +21,10 @@ public class Puzzle1_1 : PuzzleLogic
         base.Update();
     }
 
-    IEnumerator GameProcess()
+    override protected IEnumerator GameProcess()
     {
+        yield return base.GameProcess();
+
         if (Settings.language == "CH") SetTarget("读取A端口中的数，输出到B端口");
         else SetTarget("Read the data from port A and output it to port B");
 
@@ -47,13 +49,13 @@ public class Puzzle1_1 : PuzzleLogic
         dialogue.Close();
 
         yield return new WaitForSeconds(0.2f);
-        helpCardPanel.Appear();
+        helpCardPanel = GameUIManager.PopOutPanel(helpCardPanelPrefab).GetComponentInChildren<MyPanel>();
         while (helpCardPanel.showing) yield return null;
         
         dialogue.Open();
         dialogue.Play("Let's go!", new Vector2(650, 150));
         while (dialogue.isPlaying) yield return null; 
-        dialogue.Close();
+        dialogue.Close(true);
         
         yield return null;
     }

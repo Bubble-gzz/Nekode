@@ -17,12 +17,12 @@ public class ResultPanel : MonoBehaviour
     List<RatingStar> stars = new List<RatingStar>();
     void Awake()
     {
-        myPanel = transform.parent.GetComponent<MyPanel>();
-        foreach(Transform child in transform.Find("Conditions"))
+        myPanel = GetComponent<MyPanel>();
+        foreach(Transform child in transform.Find("Content/Conditions"))
         {
             conditions.Add(child.GetComponentInChildren<MyCondition>());
         }
-        foreach(Transform child in transform.Find("Stars"))
+        foreach(Transform child in transform.Find("Content/Stars"))
         {
             stars.Add(child.GetComponentInChildren<RatingStar>());
         }

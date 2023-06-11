@@ -15,8 +15,8 @@ public class HelpCardGroup : MonoBehaviour
     List<IndexCircle> indexCircles;
     CanvasGroup canvasGroup;
     List<HelpCard> cards;
-    MyButtonImage turnLeftButton, turnRightButton;
-    MyButtonImage closeButton, gotIt;
+    MyButtonController turnLeftButton, turnRightButton;
+    MyButtonController closeButton, gotIt;
     int curPage;
     void Awake()
     {
@@ -35,10 +35,10 @@ public class HelpCardGroup : MonoBehaviour
             HelpCard card = child.GetComponent<HelpCard>();
             if (card != null) cards.Add(card);
         }
-        turnLeftButton = transform.Find("TurnLeft").GetComponentInChildren<MyButtonImage>();
-        turnRightButton = transform.Find("TurnRight").GetComponentInChildren<MyButtonImage>();
-        closeButton = transform.Find("Close").GetComponentInChildren<MyButtonImage>();
-        gotIt = transform.Find("Got It!").GetComponentInChildren<MyButtonImage>();
+        turnLeftButton = transform.Find("TurnLeft").GetComponentInChildren<MyButtonController>();
+        turnRightButton = transform.Find("TurnRight").GetComponentInChildren<MyButtonController>();
+        closeButton = transform.Find("Close").GetComponentInChildren<MyButtonController>();
+        gotIt = transform.Find("Got It!").GetComponentInChildren<MyButtonController>();
     }
     void Start()
     {
@@ -56,12 +56,12 @@ public class HelpCardGroup : MonoBehaviour
             indexCircles[i].GetComponent<RectTransform>().localPosition = new Vector3(posX, 0, 0);
             posX += indexCircleInterval;
         }
-        if (pageCount > 1) turnRightButton.Appear();
-        turnLeftButton.Disappear();
+        if (pageCount > 1) turnRightButton.SetActive(true);
+        turnLeftButton.SetActive(false);
 
-        closeButton.Appear();
-        if (pageCount > 1) gotIt.Disappear();
-        else gotIt.Appear();
+        closeButton.SetActive(true);
+        if (pageCount > 1) gotIt.SetActive(false);
+        else gotIt.SetActive(true);
     }
 
     // Update is called once per frame
@@ -86,11 +86,11 @@ public class HelpCardGroup : MonoBehaviour
     {
         if (!ChangePage(1)) return;
         if (curPage == 1) {
-            turnLeftButton.Appear();
+            turnLeftButton.SetActive(true);
         }
         if (curPage == pageCount - 1) {
-            turnRightButton.Disappear();
-            gotIt.Appear();
+            turnRightButton.SetActive(false);
+            gotIt.SetActive(true);
         }
         else {
             turnRightButton.Clicked();
@@ -99,12 +99,12 @@ public class HelpCardGroup : MonoBehaviour
     public void LastPage()
     {
         if (!ChangePage(-1)) return;
-        gotIt.Disappear();
+        gotIt.SetActive(false);
         if (curPage == pageCount - 2) {
-            turnRightButton.Appear();
+            turnRightButton.SetActive(true);
         }
         if (curPage == 0) {
-            turnLeftButton.Disappear();
+            turnLeftButton.SetActive(false);
         }
         else {
             turnLeftButton.Clicked();

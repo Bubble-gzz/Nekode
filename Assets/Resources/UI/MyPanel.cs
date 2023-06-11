@@ -14,21 +14,21 @@ public class MyPanel : MonoBehaviour
     }
     public Style style;
     public float tweenTimeUnit;
-    CanvasGroup canvasGroup;
+    public CanvasGroup canvasGroup;
     public GameObject content;
     Sequence animationSequence;
     [HideInInspector]
     public bool showing;
+    public bool appearOnStart;
     void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
-        canvasGroup.alpha = 0;
+        showing = appearOnStart;
     }
     void Start()
     {
-        
+        if (appearOnStart) Appear();
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -46,13 +46,15 @@ public class MyPanel : MonoBehaviour
         content.SetActive(true);
         animationSequence = DOTween.Sequence();
         if (style == Style.Pop) {
+            canvasGroup.alpha = 0;
+            transform.localScale = Vector3.zero;
             canvasGroup.DOFade(1, tweenTimeUnit * 0.5f);
             animationSequence.Append(transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f), tweenTimeUnit * 0.2f).SetEase(Ease.OutQuad));
             animationSequence.Append(transform.DOScale(new Vector3(0.95f, 0.95f, 0.95f), tweenTimeUnit * 0.1f));
             animationSequence.Append(transform.DOScale(new Vector3(1f, 1f, 1f), tweenTimeUnit * 0.05f));
         }
     }
-    public void Disappear()
+    public void Disappear(bool destroy = false)
     {
         showing = false;
         animationSequence?.Kill();
@@ -64,6 +66,7 @@ public class MyPanel : MonoBehaviour
         }
         animationSequence.OnComplete(() => {
             content.SetActive(false);
+            if (destroy) Destroy(gameObject);
         });
     }
 }

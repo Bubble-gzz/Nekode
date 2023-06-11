@@ -661,61 +661,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onMouseEnter:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5832879711490587015}
-        m_TargetAssemblyTypeName: MyButtonImage, Assembly-CSharp
-        m_MethodName: PopOut
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onMouseExit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5832879711490587015}
-        m_TargetAssemblyTypeName: MyButtonImage, Assembly-CSharp
-        m_MethodName: PopBack
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onMouseClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5832879711490587015}
-        m_TargetAssemblyTypeName: MyButtonImage, Assembly-CSharp
-        m_MethodName: Clicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 5832879713230824211}
         m_TargetAssemblyTypeName: MyPanel, Assembly-CSharp
         m_MethodName: Disappear
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
+  active: 1
+  image: {fileID: 5832879711490587015}
 --- !u!1 &5832879712070873020
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,49 +772,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onMouseEnter:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4931965894642411942}
-        m_TargetAssemblyTypeName: MyButtonImage, Assembly-CSharp
-        m_MethodName: PopOut
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onMouseExit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4931965894642411942}
-        m_TargetAssemblyTypeName: MyButtonImage, Assembly-CSharp
-        m_MethodName: PopBack
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onMouseClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4931965894642411942}
-        m_TargetAssemblyTypeName: MyButtonImage, Assembly-CSharp
-        m_MethodName: Clicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 5832879712475830872}
         m_TargetAssemblyTypeName: HelpCardGroup, Assembly-CSharp
         m_MethodName: NextPage
@@ -861,6 +791,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  active: 1
+  image: {fileID: 4931965894642411942}
 --- !u!1 &5832879712145477342
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,61 +890,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onMouseEnter:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5832879711173104512}
-        m_TargetAssemblyTypeName: MyButtonImage, Assembly-CSharp
-        m_MethodName: PopOut
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onMouseExit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5832879711173104512}
-        m_TargetAssemblyTypeName: MyButtonImage, Assembly-CSharp
-        m_MethodName: PopBack
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onMouseClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5832879711173104512}
-        m_TargetAssemblyTypeName: MyButtonImage, Assembly-CSharp
-        m_MethodName: Clicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 5832879713230824211}
         m_TargetAssemblyTypeName: MyPanel, Assembly-CSharp
         m_MethodName: Disappear
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
+  active: 1
+  image: {fileID: 5832879711173104512}
 --- !u!114 &5832879712274090441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1376,49 +1274,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onMouseEnter:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 9104665183545616215}
-        m_TargetAssemblyTypeName: MyButtonImage, Assembly-CSharp
-        m_MethodName: PopOut
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onMouseExit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 9104665183545616215}
-        m_TargetAssemblyTypeName: MyButtonImage, Assembly-CSharp
-        m_MethodName: PopBack
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onMouseClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9104665183545616215}
-        m_TargetAssemblyTypeName: MyButtonImage, Assembly-CSharp
-        m_MethodName: Clicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 5832879712475830872}
         m_TargetAssemblyTypeName: HelpCardGroup, Assembly-CSharp
         m_MethodName: LastPage
@@ -1431,6 +1293,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  active: 1
+  image: {fileID: 9104665183545616215}
 --- !u!1 &5832879713230824209
 GameObject:
   m_ObjectHideFlags: 0
@@ -1483,8 +1347,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   style: 3
   tweenTimeUnit: 1
+  canvasGroup: {fileID: 0}
   content: {fileID: 5832879712475830820}
   showing: 0
+  appearOnStart: 1
 --- !u!225 &5832879713230824210
 CanvasGroup:
   m_ObjectHideFlags: 0
