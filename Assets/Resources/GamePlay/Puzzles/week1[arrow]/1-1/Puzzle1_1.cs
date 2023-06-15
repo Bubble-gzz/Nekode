@@ -25,9 +25,6 @@ public class Puzzle1_1 : PuzzleLogic
     {
         yield return base.GameProcess();
 
-        if (Settings.language == "CH") SetTarget("读取A端口中的数，输出到B端口");
-        else SetTarget("Read the data from port A and output it to port B");
-
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("首先让我们通过这个例子感受一下猫咪是如何完成任务的。");
@@ -57,6 +54,9 @@ public class Puzzle1_1 : PuzzleLogic
         while (dialogue.isPlaying) yield return null; 
         dialogue.Close(true);
         
+        if (Settings.language == "CH") SetTarget("读取A端口中的数，输出到B端口");
+        else SetTarget("Read the data from port A and output it to port B");
+        GameUIManager.UnFoldUI();
         yield return null;
     }
 
@@ -64,7 +64,7 @@ public class Puzzle1_1 : PuzzleLogic
     {
         base.GenerateTestCase();
         //Debug.Log("Generating Test Case ... ... ");
-        grid.tileTable["A"][0].UpdateValue(233);
+        //grid.tileTable["A"][0].UpdateValue(233);
         answerTable["B"] = 233;
     }
     protected override IEnumerator CheckCondition0()
@@ -78,7 +78,7 @@ public class Puzzle1_1 : PuzzleLogic
         return base.CheckCondition1();
     }    protected override IEnumerator CheckCondition2()
     {
-        conditionStatus[2] = false;
+        conditionStatus[2] = true;
         return base.CheckCondition2();
     }
 }

@@ -16,6 +16,7 @@ public class MyDialogueBox : MonoBehaviour
     public bool isPlaying;
     public bool fastforward;
     MyPanel panel;
+    Transform targetObject = null;
     void Awake()
     {
         rect = GetComponent<RectTransform>();
@@ -133,5 +134,17 @@ public class MyDialogueBox : MonoBehaviour
         {
             yield return null;
         }
+    }
+    public void SetPos(Vector2 newPos)
+    {
+
+    }
+    public void SetPivot(Vector2 newPivot)
+    {
+
+    }
+    public void SetTarget(Vector2 target)
+    {
+
     }
 }

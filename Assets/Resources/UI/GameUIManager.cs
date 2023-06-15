@@ -4,24 +4,43 @@ using UnityEngine;
 
 public class GameUIManager : MonoBehaviour
 {
-    public static MyPanel resultPanel;
+    static GameUIManager instance;
     public MyPanel resultPanelInTheScene;
-    static Transform canvasRoot;
+    public GameObject dialogueBoxPrefab;
+    public Transform instructorCat;
     void Awake()
     {
-        canvasRoot = transform;
-        resultPanel = resultPanelInTheScene;
+        instance = this;
+        instructorCat = GameObject.Find("Instructor")?.transform;
     }
     static public GameObject PopOutPanel(GameObject prefab)
     {
-        GameObject obj = Instantiate(prefab, canvasRoot);
-        MyPanel panel = obj.GetComponent<MyPanel>();
+        GameObject obj = Instantiate(prefab, instance.transform);
         //panel.Appear();
         return obj;
     }
+    static public GameObject PopOutDialogueBox()
+    {
+        GameObject obj = Instantiate(instance.dialogueBoxPrefab, instance.transform);
+        MyPanel panel = obj.GetComponent<MyPanel>();
+        //panel.Appear();
+        return obj;        
+    }
     static public MyPanel PopOutResultPanel()
     {
-        resultPanel.Appear();
-        return resultPanel;
+        instance.resultPanelInTheScene.Appear();
+        return instance.resultPanelInTheScene;
+    }
+    static public void FoldUI()
+    {
+
+    }
+    static public void UnFoldUI()
+    {
+
+    }
+    static public void SetPuzzleTarget(string target)
+    {
+
     }
 }

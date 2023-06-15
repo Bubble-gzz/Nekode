@@ -111,7 +111,8 @@ public class PuzzleLogic : MonoBehaviour
     virtual protected IEnumerator GameProcess()
     {
         yield return new WaitForEndOfFrame();
-        dialogue = GameUIManager.PopOutPanel(dialogueBoxPrefab).GetComponentInChildren<MyDialogueBox>();
+        dialogue = GameUIManager.PopOutDialogueBox().GetComponentInChildren<MyDialogueBox>();
+        //dialogue = GameUIManager.PopOutPanel(dialogueBoxPrefab).GetComponentInChildren<MyDialogueBox>();
     }
     public void PuzzleComplete()
     {
@@ -120,6 +121,7 @@ public class PuzzleLogic : MonoBehaviour
     }
     IEnumerator C_PuzzleComplete()
     {
+        GameUIManager.FoldUI();
         resultPanel = GameUIManager.PopOutResultPanel().GetComponentInChildren<ResultPanel>();
         resultPanel.Appear();
         yield return new WaitForSeconds(1f);
