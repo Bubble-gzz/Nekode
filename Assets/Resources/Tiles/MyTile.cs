@@ -631,6 +631,7 @@ public class MyTile : MonoBehaviour
     }
 
     public GameObject CorrectIconPrefab, WrongIconPrefab;
+    Transform resultOfTest;
     public IEnumerator ResultCorrect()
     {
         bool animationComplete = false;
@@ -643,20 +644,34 @@ public class MyTile : MonoBehaviour
             animationComplete = true;
         });
         correct.transform.localScale = new Vector3(0, 0, 0);
+        resultOfTest = correct.transform;
         while (!animationComplete) yield return null;
     }
     public IEnumerator ResultWrong()
     {
         bool animationComplete = false;
-        GameObject correct = Instantiate(WrongIconPrefab, transform);
+        GameObject wrong = Instantiate(WrongIconPrefab, transform);
         var sequence = DOTween.Sequence();
-        sequence.Append( correct.transform.DOScale(Vector3.one * 1.3f, 0.3f) );
-        sequence.Append( correct.transform.DOScale(Vector3.one * 0.9f, 0.1f) );
-        sequence.Append( correct.transform.DOScale(Vector3.one * 1f, 0.1f) );
+        sequence.Append( wrong.transform.DOScale(Vector3.one * 1.3f, 0.3f) );
+        sequence.Append( wrong.transform.DOScale(Vector3.one * 0.9f, 0.1f) );
+        sequence.Append( wrong.transform.DOScale(Vector3.one * 1f, 0.1f) );
         sequence.OnComplete(()=>{
             animationComplete = true;
         });
-        correct.transform.localScale = new Vector3(0, 0, 0);
+        wrong.transform.localScale = new Vector3(0, 0, 0);
+        resultOfTest = wrong.transform;
         while (!animationComplete) yield return null;
+    }
+    public IEnumerator ClearResultOfTest()
+    {
+        bool animationComplete = false;
+        var sequence = DOTween.Sequence();
+        sequence.Append( resultOfTest.DOScale(Vector3.one * 1.2f, 0.1f) );
+        sequence.Append( resultOfTest.transform.DOScale(Vector3.one * 0f, 0.3f) );
+        sequence.OnComplete(()=>{
+            animationComplete = true;
+            Destroy(resultOfTest.gameObject);
+        });
+        while (!animationComplete) yield return null;        
     }
 }

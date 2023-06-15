@@ -16,11 +16,13 @@ public class PuzzleLogic : MonoBehaviour
     ResultPanel resultPanel;
     protected string[] conditions = new string[3];
     protected bool[] conditionStatus = new bool[3];
+    bool isTestResultClean;
     virtual protected void Awake()
     {
         answerTable = new Dictionary<string, int>();
         totalTestCase = 1;
         curTestCase = 0;
+        isTestResultClean = true;
     }
     virtual protected void Start()
     {
@@ -28,6 +30,7 @@ public class PuzzleLogic : MonoBehaviour
         Global.onTestStart.AddListener(OnTestStart);
         grid = Global.grid;
         GamePlay.onNekoSubmit.AddListener(CheckAnswers);
+        GameMessage.OnResetGridState.AddListener(ClearResultOfTest);
         StartCoroutine(PuzzleInit());
     }
 
@@ -82,6 +85,7 @@ public class PuzzleLogic : MonoBehaviour
                     StartCoroutine(tile.ResultCorrect());
             }
         }
+        isTestResultClean = false;
         yield return new WaitForSeconds(1f);
         if (accepted)
         {
@@ -96,12 +100,24 @@ public class PuzzleLogic : MonoBehaviour
             TestCaseFail();
         }
     }
+    void ClearResultOfTest()
+    {
+        if (isTestResultClean) return;
+        foreach(string label in answerTable.Keys)
+        {
+            MyTile tile0 = grid.tileTable[label][0];
+            foreach(MyTile tile in grid.tileTable[label])
+                StartCoroutine(tile.ClearResultOfTest());
+        }        
+        isTestResultClean = true;
+    }
     void TestCaseFail()
     {
 
     }
     void NextTestCase()
     {
+        ClearResultOfTest();
         Global.isGeneratingTestData = true;
         curTestCase++;
         GenerateTestCase();
@@ -124,14 +140,14 @@ public class PuzzleLogic : MonoBehaviour
         GameUIManager.FoldUI();
         resultPanel = GameUIManager.PopOutResultPanel().GetComponentInChildren<ResultPanel>();
         resultPanel.Appear();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.3f);
         resultPanel.SetCondition(0, conditions[0]);
         yield return new WaitForSeconds(0.3f);
         resultPanel.SetCondition(1, conditions[1]);
         yield return new WaitForSeconds(0.3f);
         resultPanel.SetCondition(2, conditions[2]);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         yield return StartCoroutine(CheckCondition0());
         yield return new WaitForSeconds(0.7f);
         yield return StartCoroutine(CheckCondition1());
@@ -140,11 +156,11 @@ public class PuzzleLogic : MonoBehaviour
         yield return new WaitForSeconds(0.7f);
         
         resultPanel.PopStar(0, conditionStatus[0]);
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.3f);
         resultPanel.PopStar(1, conditionStatus[1]);
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.3f);
         resultPanel.PopStar(2, conditionStatus[2]);
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.3f);
 
         if (conditionStatus[0] && conditionStatus[1] && conditionStatus[2])
             resultPanel.PlayChord();

@@ -128,6 +128,7 @@ public class Arrow : MonoBehaviour
         //Debug.Log("arrow to tile: " + (int)ArrowToTileType(type));
         if (tile.myGrid.tileCount[(int)ArrowToTileType(type)] >= 0) tile.myGrid.tileCount[(int)ArrowToTileType(type)]++;
         tile.DeleteArrow(id);
+        GameMessage.OnArrowIsDeleted.Invoke();
     }
     public ArrowData ConvertToData()
     {

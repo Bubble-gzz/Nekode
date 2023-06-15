@@ -10,6 +10,16 @@ public class Puzzle1_2 : PuzzleLogic
         base.Start();
         totalTestCase = 1;
         StartCoroutine(GameProcess());
+        conditionStatus[0] = true;
+        conditionStatus[1] = true;
+        conditionStatus[2] = false;
+        
+        conditions[0] = "Navigate the kitten correctly";
+        conditions[1] = "Use up all the arrows";
+        conditions[2] = "Try to delete a placed arrow";
+
+        GameMessage.OnArrowIsDeleted.AddListener(ArrowIsDeleted);
+        //GameMessage.ToolReturnedToSlot.AddListener(ToolReturnedToSlot);
     }
     
     // Update is called once per frame
@@ -59,5 +69,9 @@ public class Puzzle1_2 : PuzzleLogic
         //Debug.Log("Generating Test Case ... ... ");
         grid.tileTable["A"][0].UpdateValue(100);
         answerTable["B"] = 100;
+    }
+    void ArrowIsDeleted()
+    {
+        conditionStatus[2] = true;
     }
 }

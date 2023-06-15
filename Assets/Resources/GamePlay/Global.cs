@@ -17,6 +17,7 @@ public class Global
     static public bool puzzleComplete;
     static public PuzzleTarget puzzleTarget;
     static public bool isTyping;
+    static public int stepCount;
     public enum GameMode{
         Test,
         Debug

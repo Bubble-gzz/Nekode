@@ -34,5 +34,6 @@ public class ResetButton : MyButton
     {
         Global.SetGameState(Global.GameState.Editing);
         Global.grid.MapRecover();
+        GameMessage.OnResetGridState.Invoke();
     }
 }

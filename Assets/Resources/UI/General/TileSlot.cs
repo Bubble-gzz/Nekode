@@ -39,7 +39,10 @@ public class TileSlot : MonoBehaviour
             return ;
         }
         if (inventory.myGrid.tileCount[(int)type] == 0) return;
-        if (MyGrid.currentTileType == type) MyGrid.currentTileType = MyTile.Type.NULL;
+        if (MyGrid.currentTileType == type) {
+            MyGrid.currentTileType = MyTile.Type.NULL;
+            GameMessage.OnToolReturnedToSlot.Invoke();
+        }
         else MyGrid.currentTileType = type;
         //Debug.Log(MyGrid.currentTileType);
     }
