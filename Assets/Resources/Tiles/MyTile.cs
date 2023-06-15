@@ -179,6 +179,7 @@ public class MyTile : MonoBehaviour
             myGrid.tileTable[label].Add(this);
         }
         lastLabel = label;
+        labelText.text = label;
 
         lastLogicState = !logicState; //force initial update
     }
