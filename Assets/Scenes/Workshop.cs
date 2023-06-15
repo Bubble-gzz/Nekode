@@ -21,8 +21,11 @@ public class Workshop : MonoBehaviour
     void Start()
     {
         MyGrid grid = GameObject.FindObjectOfType<MyGrid>();
-        if (puzzleName == "") grid.Init();
-        else grid.LoadFromFile(Application.dataPath+"/TempMapData/"+puzzleName+".json", false);
+        bool presetExist = false;
+        if (puzzleName != "") {
+            presetExist |= grid.LoadFromFileWithReturnValue(Application.dataPath+"/TempMapData/"+puzzleName+".json", false);
+        }
+        if (!presetExist) grid.Init();
     }
     
     // Update is called once per frame

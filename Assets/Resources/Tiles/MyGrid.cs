@@ -214,20 +214,29 @@ public class MyGrid : MonoBehaviour
             }
         if (neko != null) Destroy(neko.gameObject);
     }
+    
     public void LoadFromFile(string path, bool fromResource = true)
     {
+        LoadFromFileWithReturnValue(path, fromResource);
+    }
+
+    public bool LoadFromFileWithReturnValue(string path, bool fromResource = true)
+    {
         Debug.Log("loading from:" + path + "get: " + Resources.Load<TextAsset>(path));
-        string jsonData;
+        string jsonData = null;
         if (fromResource)
         {
             jsonData = Resources.Load<TextAsset>(path).text; //File.ReadAllText(path);
         }
         else
         {
-            jsonData = File.ReadAllText(path);
+            if (File.Exists(path))
+                jsonData = File.ReadAllText(path);
         }
+        if (jsonData == null) return false;
         LoadFromJson(jsonData);
         Global.mouseOverUI = false;
+        return true;
     }
     void LoadFromJson(string jsonData)
     {

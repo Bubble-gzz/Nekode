@@ -1448,7 +1448,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.3
+  orthographic size: 4.8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1506,7 +1506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ecdcfbdfd038d74e89675d849f68722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleName: 2-2
+  puzzleName: 5-6
   title: {fileID: 1414557623}
 --- !u!1 &1671401318
 GameObject:
