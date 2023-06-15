@@ -43,3 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e48b9975831b31940b1e5f5adff589bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueBoxPrefab: {fileID: 0}
+  helpCardPanelPrefab: {fileID: 3099178146264289874, guid: b72b18f37c138b14ab073753a27e19ab, type: 3}

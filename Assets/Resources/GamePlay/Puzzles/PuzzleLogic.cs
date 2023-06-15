@@ -8,7 +8,7 @@ public class PuzzleLogic : MonoBehaviour
     
     int curTestCase;
     protected int totalTestCase;
-    public GameObject dialogueBoxPrefab;
+    //public GameObject dialogueBoxPrefab;
     protected MyDialogueBox dialogue;
     public GameObject helpCardPanelPrefab;
     protected MyPanel helpCardPanel;

@@ -20,10 +20,14 @@ public class MyPanel : MonoBehaviour
     [HideInInspector]
     public bool showing;
     public bool appearOnStart;
+    public Vector2 posWhenHide, posWhenShow;
+    RectTransform rect;
+
     void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
         showing = appearOnStart;
+        rect=  GetComponent<RectTransform>();
     }
     void Start()
     {
@@ -53,6 +57,11 @@ public class MyPanel : MonoBehaviour
             animationSequence.Append(transform.DOScale(new Vector3(0.95f, 0.95f, 0.95f), tweenTimeUnit * 0.1f));
             animationSequence.Append(transform.DOScale(new Vector3(1f, 1f, 1f), tweenTimeUnit * 0.05f));
         }
+        else if (style == Style.Fold) {
+            canvasGroup.alpha = 1;
+            rect.anchoredPosition = posWhenHide;
+            animationSequence.Append(rect.DOAnchorPos(posWhenShow, 0.3f).SetEase(Ease.OutCubic));
+        }
     }
     public void Disappear(bool destroy = false)
     {
@@ -64,8 +73,13 @@ public class MyPanel : MonoBehaviour
             animationSequence.Append(transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f), tweenTimeUnit * 0.1f));
             animationSequence.Append(transform.DOScale(new Vector3(0f, 0f, 0f), tweenTimeUnit * 0.2f).SetEase(Ease.OutQuad));
         }
+        else if (style == Style.Fold)
+        {
+            animationSequence.Append(rect.DOAnchorPos(posWhenHide, 0.3f).SetEase(Ease.OutCubic));
+        }
         animationSequence.OnComplete(() => {
             content.SetActive(false);
+            canvasGroup.alpha = 0;
             if (destroy) Destroy(gameObject);
         });
     }
