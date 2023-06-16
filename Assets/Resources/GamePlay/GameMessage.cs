@@ -8,7 +8,9 @@ public class GameMessage : MonoBehaviour
     // Start is called before the first frame update
     static public UnityEvent OnArrowIsDeleted = new UnityEvent();
     static public UnityEvent OnToolReturnedToSlot = new UnityEvent();
-    static public UnityEvent OnResetGridState = new UnityEvent();
+    static public UnityEvent OnResetGridState = new UnityEvent(); // simply reset grid
+    static public UnityEvent OnReset = new UnityEvent(); // return to the game state before testing
+    static public UnityEvent OnPlay = new UnityEvent();
     void Start()
     {
         

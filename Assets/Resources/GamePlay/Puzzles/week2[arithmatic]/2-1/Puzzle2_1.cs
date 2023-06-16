@@ -14,7 +14,7 @@ public class Puzzle2_1 : PuzzleLogic
     override protected void Start()
     {
         base.Start();
-        totalTestCase = 1;
+        totalTestCase = 5;
         StartCoroutine(GameProcess());
         conditionStatus[0] = true;
         conditionStatus[1] = true;
@@ -84,6 +84,7 @@ public class Puzzle2_1 : PuzzleLogic
         //grid.tileTable["A0"][0].UpdateValue(1);
        //grid.tileTable["A1"][0].UpdateValue(2);
         //grid.tileTable["A2"][0].UpdateValue(3);
+        grid.tileTable["A"][0].UpdateValue(curTestCase);
 
         answerTable["B"] = grid.tileTable["A"][0].value + 1;
     }

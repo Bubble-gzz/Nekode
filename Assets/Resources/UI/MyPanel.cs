@@ -14,7 +14,7 @@ public class MyPanel : MonoBehaviour
     }
     public Style style;
     public float tweenTimeUnit;
-    public CanvasGroup canvasGroup;
+    CanvasGroup canvasGroup;
     public GameObject content;
     Sequence animationSequence;
     [HideInInspector]
@@ -32,7 +32,13 @@ public class MyPanel : MonoBehaviour
     void Start()
     {
         if (appearOnStart) Appear();
-        else canvasGroup.alpha = 0;
+        else {
+            canvasGroup.alpha = 0;
+            if (style == Style.Fold)
+            {
+                rect.anchoredPosition = posWhenHide;
+            }
+        }
     }
     // Update is called once per frame
     void Update()
@@ -52,7 +58,7 @@ public class MyPanel : MonoBehaviour
         animationSequence?.Kill();
         canvasGroup.DOKill();
         transform.DOKill();
-        content.SetActive(true);
+        content?.SetActive(true);
         animationSequence = DOTween.Sequence();
         if (style == Style.Pop) {
             canvasGroup.alpha = 0;
@@ -87,7 +93,7 @@ public class MyPanel : MonoBehaviour
             animationSequence.Append(rect.DOAnchorPos(posWhenHide, 0.3f).SetEase(Ease.OutCubic));
         }
         animationSequence.OnComplete(() => {
-            content.SetActive(false);
+            content?.SetActive(false);
             canvasGroup.alpha = 0;
             if (destroy) Destroy(gameObject);
         });

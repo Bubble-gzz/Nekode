@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class PuzzleLogic : MonoBehaviour
 {
     protected MyGrid grid;
@@ -16,6 +16,8 @@ public class PuzzleLogic : MonoBehaviour
     protected string[] conditions = new string[3];
     protected bool[] conditionStatus = new bool[3];
     bool isTestResultClean;
+    static public TestProgress testProgress;
+    bool isTesting = false;
     virtual protected void Awake()
     {
         answerTable = new Dictionary<string, int>();
@@ -30,6 +32,7 @@ public class PuzzleLogic : MonoBehaviour
         Global.onTestStart.AddListener(OnTestStart);
         grid = Global.grid;
         GamePlay.onNekoSubmit.AddListener(CheckAnswers);
+        GameMessage.OnReset.AddListener(OnReset);
         GameMessage.OnResetGridState.AddListener(ClearResultOfTest);
         StartCoroutine(PuzzleInit());
     }
@@ -45,8 +48,14 @@ public class PuzzleLogic : MonoBehaviour
     protected void OnTestStart()
     {
         curTestCase = 1;
+        testProgress?.GenerateBulbs(totalTestCase);
+        testProgress?.Appear();
         GenerateTestCase();
         Global.isGeneratingTestData = false;
+    }
+    void OnReset()
+    {
+        testProgress?.Close();
     }
     virtual public void GenerateTestCase()
     {
@@ -55,7 +64,6 @@ public class PuzzleLogic : MonoBehaviour
     public IEnumerator PuzzleInit()
     {
         yield return new WaitForEndOfFrame();
-        
     }
     protected void SetTarget(string target)
     {
@@ -63,7 +71,8 @@ public class PuzzleLogic : MonoBehaviour
     }
     public void CheckAnswers()
     {
-        StartCoroutine(C_CheckAnswers());
+        IEnumerator coroutine = C_CheckAnswers();
+        ResetButton.coroutinesToBeKilledOnReset.Add(StartCoroutine(C_CheckAnswers()));
     }
     public IEnumerator C_CheckAnswers()
     {
@@ -86,9 +95,10 @@ public class PuzzleLogic : MonoBehaviour
             }
         }
         isTestResultClean = false;
-        yield return new WaitForSeconds(1f);
         if (accepted)
         {
+            testProgress?.SetCurrentResult(true);
+            yield return new WaitForSeconds(1f);
             if (curTestCase == totalTestCase)
             {
                 PuzzleComplete();
@@ -97,6 +107,7 @@ public class PuzzleLogic : MonoBehaviour
             yield return NextTestCase();
         }
         else{
+            testProgress?.SetCurrentResult(false);
             TestCaseFail();
         }
     }
@@ -120,12 +131,13 @@ public class PuzzleLogic : MonoBehaviour
         yield return new WaitForSeconds(1f);
         ClearResultOfTest();
         GameMessage.OnResetGridState.Invoke();
+        testProgress?.NextCase();
         Global.isGeneratingTestData = true;
         //yield return new WaitForSeconds(0.5f);
         curTestCase++;
         GenerateTestCase();
-        Global.isGeneratingTestData = false;
         yield return new WaitForSeconds(1f);
+        Global.isGeneratingTestData = false;
     }
 
     virtual protected IEnumerator GameProcess()
@@ -141,6 +153,7 @@ public class PuzzleLogic : MonoBehaviour
     }
     IEnumerator C_PuzzleComplete()
     {
+        testProgress?.Close();
         GameUIManager.FoldUI();
         resultPanel = GameUIManager.PopOutResultPanel().GetComponentInChildren<ResultPanel>();
         resultPanel.Appear();

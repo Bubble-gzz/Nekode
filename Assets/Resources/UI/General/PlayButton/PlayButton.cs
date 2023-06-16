@@ -49,6 +49,7 @@ public class PlayButton : MyButton
         {
             Global.grid.MapBackUp();
             GameUIManager.FoldEditUI();
+            GameMessage.OnPlay.Invoke();
         }
         if (Global.gameState == Global.GameState.Playing)
         {
