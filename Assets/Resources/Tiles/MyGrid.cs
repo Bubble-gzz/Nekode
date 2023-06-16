@@ -42,6 +42,8 @@ public class MyGrid : MonoBehaviour
         lastGhost = null;
         tileKindN = 25;
         Global.grid = this;
+        GameMessage.OnResetGridState.AddListener(MapRecover);
+
         tileTable = new Dictionary<string, List<MyTile>>();
         for (int i = 0; i < tileKindN; i++)
             tileCount.Add(-1);
@@ -280,6 +282,7 @@ public class MyGrid : MonoBehaviour
                 if (grid[i, j] != null)
                 {
                     grid[i, j].GetComponent<MyTile>().Recover();
+                    grid[i, j].GetComponent<MyTile>().RefreshAnimation();
                 }       
     }
 }

@@ -31,6 +31,10 @@ public class Neko : MonoBehaviour
     TMP_Text bubbleText;
     bool running;
     AnimationBuffer animationBuffer;
+    List<MoveAttempt> moveAttempts = new List<MoveAttempt>();
+    class MoveAttempt{
+        public bool valid = true;
+    }
     void Awake()
     {
         sprite = transform.Find("Sprite").GetComponent<SpriteRenderer>();
@@ -114,14 +118,20 @@ public class Neko : MonoBehaviour
         targetPos.z = z_pos;
         AnimationInfo moveAnimation = new UpdatePosAnimatorInfo(gameObject, targetPos, true, 0.2f/Global.nekoPlaySpeed, true);
         animationBuffer.Add(moveAnimation);
+        MoveAttempt attempt = new MoveAttempt();
+        moveAttempts.Add(attempt);
         while (!moveAnimation.completed) {
-            if (Global.gameState == Global.GameState.Editing)
+            if (!attempt.valid)
             {
                 moveAnimation.completed = true;
-                running = false;
-                yield break;
+                break;
             }
             yield return null;
+        }
+        if (!attempt.valid) {
+            running = false;
+            moveAttempts.Remove(attempt);
+            yield break;
         }
         i = _i; j = _j;
         Interact(i, j);
@@ -351,6 +361,7 @@ public class Neko : MonoBehaviour
     }
     public void Recover()
     {
+        foreach(var attempt in moveAttempts) attempt.valid = false;
         i = backup_i; j = backup_j;
         transform.position = grid.GetWorldPos(i, j);
         UpdateDirection(backup_direction);

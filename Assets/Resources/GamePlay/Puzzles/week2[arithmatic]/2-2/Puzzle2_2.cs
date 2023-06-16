@@ -14,7 +14,7 @@ public class Puzzle2_2 : PuzzleLogic
     override protected void Start()
     {
         base.Start();
-        totalTestCase = 1;
+        totalTestCase = 3;
         StartCoroutine(GameProcess());
         conditionStatus[0] = true;
         conditionStatus[1] = true;
@@ -56,6 +56,10 @@ public class Puzzle2_2 : PuzzleLogic
         else dialogue.Play("By the way, we would be happy to see a more economical solution.", new Vector2(650, 170));
         while (dialogue.isPlaying) yield return null;
 
+        if (Settings.language == "CH") dialogue.Play("此外，我们首次采用了多组测试数据来保证您的设计的可靠性");
+        else dialogue.Play("In addition, we have incorporated multiple test cases for the first time to ensure the reliability of your design.", new Vector2(800, 300));
+        while (dialogue.isPlaying) yield return null;
+
         dialogue.Close(true);
 
         yield return new WaitForSeconds(0.2f);
@@ -76,6 +80,24 @@ public class Puzzle2_2 : PuzzleLogic
     public override void GenerateTestCase()
     {
         base.GenerateTestCase();
+        if (curTestCase == 1)
+        {
+            grid.tileTable["A0"][0].UpdateValue(1);
+            grid.tileTable["A1"][0].UpdateValue(2);
+            grid.tileTable["A2"][0].UpdateValue(3);           
+        }
+        else if (curTestCase == 2)
+        {
+            grid.tileTable["A0"][0].UpdateValue(2);
+            grid.tileTable["A1"][0].UpdateValue(3);
+            grid.tileTable["A2"][0].UpdateValue(1);              
+        }
+        else if (curTestCase == 3)
+        {
+            grid.tileTable["A0"][0].UpdateValue(3);
+            grid.tileTable["A1"][0].UpdateValue(1);
+            grid.tileTable["A2"][0].UpdateValue(2);    
+        }
         //Debug.Log("Generating Test Case ... ... ");
         //grid.tileTable["A0"][0].UpdateValue(1);
        //grid.tileTable["A1"][0].UpdateValue(2);

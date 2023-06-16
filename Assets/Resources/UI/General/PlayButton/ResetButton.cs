@@ -34,7 +34,8 @@ public class ResetButton : MyButton
     {
         Global.SetGameState(Global.GameState.Editing);
         GameUIManager.UnFoldEditUI();
-        Global.grid.MapRecover();
         GameMessage.OnResetGridState.Invoke();
+        if (Global.gameMode == Global.GameMode.Test)
+            PuzzleLogic.curTestCase = 1;
     }
 }

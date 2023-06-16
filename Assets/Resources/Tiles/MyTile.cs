@@ -564,8 +564,51 @@ public class MyTile : MonoBehaviour
     {
         if (label != "")
             foreach(var tile in myGrid.tileTable[label])
+            {
                 tile.value = newValue;
-        else value = newValue;
+                if (animated) tile.UpdateValueAnimation();
+            }
+        else {
+            value = newValue;
+            if (animated) UpdateValueAnimation();
+        }
+    }
+    Sequence animationSequence;
+    public void RefreshAnimation()
+    {
+        transform.DOKill();
+        animationSequence?.Kill();
+        animationSequence = DOTween.Sequence();
+        float f = Random.Range(0.1f, 0.2f);
+        float duration = Random.Range(0.05f, 0.1f);
+        animationSequence.Append(transform.DOScale(Vector3.one * (1+f), duration));
+        animationSequence.Append(transform.DOScale(Vector3.one * (1-0.5f*f), duration));
+        animationSequence.Append(transform.DOScale(Vector3.one * 1, duration));
+
+        float sgn = 1;
+        if (Random.Range(0f, 1f) < 0.5f) sgn *= -1;
+        float offset = 0;
+        duration = Random.Range(0.1f, 0.2f);
+        animationSequence.Insert(0, transform.DORotate(new Vector3(0, 0, sgn * 60 * f), duration));
+        offset += duration;
+        animationSequence.Insert(offset, transform.DORotate(new Vector3(0, 0, - sgn * 30 * f), duration));
+        offset += duration;
+        animationSequence.Insert(offset, transform.DORotate(new Vector3(0, 0, sgn * 15f * f), duration));
+        offset += duration;
+        animationSequence.Insert(offset, transform.DORotate(new Vector3(0, 0, - sgn * 7.5f * f), duration));
+        offset += duration;
+        animationSequence.Insert(offset, transform.DORotate(new Vector3(0, 0, 0), 0.1f));
+    }
+    Sequence textAnimationSeq;
+    public void UpdateValueAnimation()
+    {
+        if (!hasValue) return;
+        float f = 0.2f;
+        textAnimationSeq?.Kill();
+        textAnimationSeq = DOTween.Sequence();
+        textAnimationSeq.Append(valueText.transform.DOScale(Vector3.one * (1+f), 0.1f));
+        textAnimationSeq.Append(valueText.transform.DOScale(Vector3.one * (1-0.5f), 0.1f));
+        textAnimationSeq.Append(valueText.transform.DOScale(Vector3.one * 1, 0.1f));
     }
     public void SetLogitState(bool newState)
     {

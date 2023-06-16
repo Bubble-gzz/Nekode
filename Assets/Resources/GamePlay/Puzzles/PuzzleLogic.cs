@@ -5,8 +5,7 @@ using UnityEngine;
 public class PuzzleLogic : MonoBehaviour
 {
     protected MyGrid grid;
-    
-    int curTestCase;
+    static public int curTestCase;
     protected int totalTestCase;
     //public GameObject dialogueBoxPrefab;
     protected MyDialogueBox dialogue;
@@ -95,7 +94,7 @@ public class PuzzleLogic : MonoBehaviour
                 PuzzleComplete();
                 yield break;
             }
-            NextTestCase();
+            yield return NextTestCase();
         }
         else{
             TestCaseFail();
@@ -116,13 +115,17 @@ public class PuzzleLogic : MonoBehaviour
     {
 
     }
-    void NextTestCase()
+    IEnumerator NextTestCase()
     {
+        yield return new WaitForSeconds(1f);
         ClearResultOfTest();
+        GameMessage.OnResetGridState.Invoke();
         Global.isGeneratingTestData = true;
+        //yield return new WaitForSeconds(0.5f);
         curTestCase++;
         GenerateTestCase();
         Global.isGeneratingTestData = false;
+        yield return new WaitForSeconds(1f);
     }
 
     virtual protected IEnumerator GameProcess()
