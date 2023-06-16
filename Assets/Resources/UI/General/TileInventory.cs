@@ -33,7 +33,7 @@ public class TileInventory : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         foreach (var tileType in tileTypes)
         {
             TileSlot tileSlot = Instantiate(tileSlotPrefab, transform).GetComponent<TileSlot>();
-            tileSlot.GetComponent<Image>().sprite = myGrid.GetTileTexture(tileType);
+            tileSlot.GetComponentInChildren<Image>().sprite = myGrid.GetTileTexture(tileType);
             tileSlot.id = curID++;
             tileSlot.type = tileType;
             tileSlot.inventory = this;

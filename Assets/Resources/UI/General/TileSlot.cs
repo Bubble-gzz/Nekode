@@ -13,11 +13,13 @@ public class TileSlot : MonoBehaviour
     TMP_Text count;
     [SerializeField]
     public MyTile.Type type;
-    AnimationBuffer animationBuffer;
+    //AnimationBuffer animationBuffer;
     [SerializeField]
     GameObject messageBubblePrefab;
     Image sprite;
     int lastCount;
+    Sequence animationSequence;
+
     public void OnPickUp()
     {
         //Debug.Log(type);
@@ -51,29 +53,46 @@ public class TileSlot : MonoBehaviour
     void Awake()
     {
         count = transform.Find("Count").GetComponent<TMP_Text>();
-        sprite = GetComponent<Image>();
+        sprite = GetComponentInChildren<Image>();
         sprite.enabled = false;
         count.enabled = false;
         originSize = transform.localScale;  
     }
     void Start()
     {
-        animationBuffer = GetComponent<AnimationBuffer>();
+        lastCount = inventory.myGrid.tileCount[(int)type];
         StartCoroutine(Appear());
+    }
+    void StopTween()
+    {
+        animationSequence?.Kill();
+        transform?.DOKill();
     }
     IEnumerator Appear()
     {
         yield return new WaitForSeconds(Random.Range(0, 0.2f));
         sprite.enabled = true;
         count.enabled = true;
-        animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.Appear, 0.1f));
+        Sequence seq = DOTween.Sequence();
+        transform.localScale = Vector3.zero;
+        seq.Append(transform.DOScale(Vector3.one * 1.2f, 0.1f));
+        seq.Append(transform.DOScale(Vector3.one * 0.9f, 0.07f));
+        seq.Append(transform.DOScale(Vector3.one * 1f, 0.07f));
+        
+        //animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.Appear, 0.1f));
+
     }
 
     void Update()
     {
         if (lastCount != inventory.myGrid.tileCount[(int)type])
         {
-            animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.Emphasize, 0.1f));
+            StopTween();
+            animationSequence = DOTween.Sequence();
+            animationSequence.Append(transform.DOScale(Vector3.one * 1.2f, 0.1f));
+            animationSequence.Append(transform.DOScale(Vector3.one * 0.95f, 0.1f));
+            animationSequence.Append(transform.DOScale(Vector3.one * 1f, 0.1f));
+            //animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.Emphasize, 0.1f));
         }
         if (!MyTile.NotTile(type) && inventory.myGrid.tileCount[(int)type] == 0)
         {
