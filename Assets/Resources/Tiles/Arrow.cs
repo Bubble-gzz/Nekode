@@ -74,8 +74,11 @@ public class Arrow : MonoBehaviour
     void Update()
     {
         if (isGhost) return;
-        if (Input.GetMouseButtonDown(0) && mouseEnter) Delete();
-        if (Input.GetMouseButtonDown(1) && mouseEnter) Turn(1);
+        if (Global.gameState == Global.GameState.Editing)
+        {
+            if (Input.GetMouseButtonDown(0) && mouseEnter) Delete();
+            if (Input.GetMouseButtonDown(1) && mouseEnter) Turn(1);
+        }
         CheckState();
     }
     void CheckState()
@@ -103,6 +106,7 @@ public class Arrow : MonoBehaviour
     {
         if (isGhost) return;
         if (Global.mouseOverUI) return;
+        if (Global.gameState != Global.GameState.Editing) return;
         Global.mouseOverArrow = true;
         mouseEnter = true;
         animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.PopOut_TileText, 0.07f));
@@ -110,6 +114,7 @@ public class Arrow : MonoBehaviour
     void OnMouseExit()
     {
         if (isGhost) return;
+        if (Global.gameState != Global.GameState.Editing) return;
         Global.mouseOverArrow = false;
         mouseEnter = false;
         animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.PopBack, 0.07f));
@@ -125,6 +130,7 @@ public class Arrow : MonoBehaviour
     }
     public void Delete()
     {
+        if (Global.gameState != Global.GameState.Editing) return;
         //Debug.Log("arrow to tile: " + (int)ArrowToTileType(type));
         if (tile.myGrid.tileCount[(int)ArrowToTileType(type)] >= 0) tile.myGrid.tileCount[(int)ArrowToTileType(type)]++;
         tile.DeleteArrow(id);

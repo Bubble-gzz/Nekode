@@ -48,6 +48,7 @@ public class PlayButton : MyButton
         if (Global.gameState == Global.GameState.Editing)
         {
             Global.grid.MapBackUp();
+            GameUIManager.FoldEditUI();
         }
         if (Global.gameState == Global.GameState.Playing)
         {

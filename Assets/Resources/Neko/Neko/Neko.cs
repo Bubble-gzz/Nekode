@@ -43,6 +43,7 @@ public class Neko : MonoBehaviour
         gameObject.AddComponent<UpdatePosAnimator>();
         mouseEnter = false;
         atDestination = false;
+        GameMessage.OnResetGridState.AddListener(ClearStepCount);
     }
     void Start()
     {
@@ -107,6 +108,7 @@ public class Neko : MonoBehaviour
             yield break;
         }
         Leave(i, j);
+        Global.stepCount += 1;
         //Debug.Log("Pass2");       
         Vector3 targetPos = grid.GetWorldPos(_i, _j);
         targetPos.z = z_pos;
@@ -123,7 +125,7 @@ public class Neko : MonoBehaviour
         }
         i = _i; j = _j;
         Interact(i, j);
-        yield return new WaitForSeconds(0.5f / Global.nekoPlaySpeed);
+        yield return new WaitForSeconds(0.3f / Global.nekoPlaySpeed);
         running = false;
     }
     void CalcDirection()
@@ -354,5 +356,9 @@ public class Neko : MonoBehaviour
         UpdateDirection(backup_direction);
         UpdateValue(backup_value);
         SwitchMode(backup_mode);
+    }
+    public void ClearStepCount()
+    {
+        Global.stepCount = 0;
     }
 }

@@ -9,6 +9,7 @@ public class GameUIManager : MonoBehaviour
     public GameObject dialogueBoxPrefab;
     public Transform instructorCat;
     public List<MyPanel> panelsInControl;
+    public List<MyPanel> editPanelsInControl;
     void Awake()
     {
         instance = this;
@@ -49,5 +50,19 @@ public class GameUIManager : MonoBehaviour
     static public void SetPuzzleTarget(string target)
     {
 
+    }
+    static public void FoldEditUI()
+    {
+        foreach (var panel in instance.editPanelsInControl)
+        {
+            panel.Disappear();
+        }
+    }
+    static public void UnFoldEditUI()
+    {
+        foreach (var panel in instance.editPanelsInControl)
+        {
+            panel.Appear();
+        }
     }
 }

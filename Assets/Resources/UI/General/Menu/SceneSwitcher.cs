@@ -5,11 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
+    static SceneSwitcher instance;
     CanvasGroup image;
     void Awake()
     {
         image = GetComponentInChildren<CanvasGroup>();
         image.alpha = 0;
+        instance = this;
     }
     void Start()
     {
@@ -34,13 +36,16 @@ public class SceneSwitcher : MonoBehaviour
         }
         image.alpha = Mathf.Lerp(s, t, 1);
     }
-    public void SwitchTo(string sceneName)
+    static public void SwitchTo(string sceneName)
     {
         if (sceneName == "ExitGame") {
             Application.Quit();
             Debug.Log("quit game");
         }
-        else StartCoroutine(_SwitchTo(sceneName));
+        else {
+            if (instance) instance.StartCoroutine(instance._SwitchTo(sceneName));
+            else SceneManager.LoadScene(sceneName);
+        }
     }
     IEnumerator _SwitchTo(string sceneName)
     {

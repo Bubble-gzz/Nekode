@@ -26,6 +26,7 @@ public class PuzzleLogic : MonoBehaviour
     }
     virtual protected void Start()
     {
+        Global.stepCount = 0;
         Global.puzzleComplete = false;
         Global.onTestStart.AddListener(OnTestStart);
         grid = Global.grid;
@@ -185,5 +186,8 @@ public class PuzzleLogic : MonoBehaviour
         resultPanel.CheckCondition(2, conditionStatus[2]);
         yield return null;
     }
-
+    protected int RemainingTiles(MyTile.Type type)
+    {
+        return Global.grid.tileCount[(int)type];
+    }
 }

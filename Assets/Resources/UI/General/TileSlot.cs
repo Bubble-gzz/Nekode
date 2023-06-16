@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class TileSlot : MonoBehaviour
 {
@@ -51,13 +52,13 @@ public class TileSlot : MonoBehaviour
     {
         count = transform.Find("Count").GetComponent<TMP_Text>();
         sprite = GetComponent<Image>();
+        sprite.enabled = false;
+        count.enabled = false;
+        originSize = transform.localScale;  
     }
     void Start()
     {
-        sprite.enabled = false;
-        count.enabled = false;
         animationBuffer = GetComponent<AnimationBuffer>();
-        originSize = transform.localScale;  
         StartCoroutine(Appear());
     }
     IEnumerator Appear()

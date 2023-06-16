@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Puzzle1_3 : PuzzleLogic
+public class Puzzle1_4 : PuzzleLogic
 {
     TMP_Text debugInfo;
     protected override void Awake()
@@ -17,12 +17,12 @@ public class Puzzle1_3 : PuzzleLogic
         totalTestCase = 1;
         StartCoroutine(GameProcess());
         conditionStatus[0] = true;
-        conditionStatus[1] = false;
-        conditionStatus[2] = false;
+        conditionStatus[1] = true;
+        conditionStatus[2] = true;
         
         conditions[0] = "Set all 3 output ports to 1.";
-        conditions[1] = "Finish the task in 21 steps";
-        conditions[2] = "Use no more than 11 arrows";
+        conditions[1] = "Can not come up with other stuff here...";
+        conditions[2] = "You made it!";
 
         //GameMessage.ToolReturnedToSlot.AddListener(ToolReturnedToSlot);
     }
@@ -31,7 +31,7 @@ public class Puzzle1_3 : PuzzleLogic
     override protected void Update()
     {
         base.Update();
-        //debugInfo.text = "step:" + Global.stepCount + "  arrow:" + RemainingArrows();
+        //debugInfo.text = "step:" + Global.stepCount;
     }
 
     override protected IEnumerator GameProcess()
@@ -40,20 +40,31 @@ public class Puzzle1_3 : PuzzleLogic
 
         dialogue.Open();
         
-        if (Settings.language == "CH") dialogue.Play("聪明如你，想必你已经能够熟练使用箭头了。");
-        else dialogue.Play("As a quick learner, you must have been able to use the arrows skilfully.", new Vector2(650, 150));
+        if (Settings.language == "CH") dialogue.Play("抱歉，我似乎忘了告诉你一件重要的事……");
+        else dialogue.Play("Oops, forgot to tell you something important", new Vector2(650, 150));
         while (dialogue.isPlaying) yield return null;
 
-        if (Settings.language == "CH") dialogue.Play("看到散落在棋盘上的三个输出端口了吗？");
-        else dialogue.Play("Here we have 3 output ports on the grid.", new Vector2(650, 170));
+        if (Settings.language == "CH") {
+            dialogue.Play("其实一个方格的四条边是互相独立的，所以可以同时放置箭头。");
+            while (dialogue.isPlaying) yield return null;
+        }
+        else {
+            dialogue.Play("In fact, the four sides of a tile are independent of each other.", new Vector2(650, 170));
+            while (dialogue.isPlaying) yield return null;
+            dialogue.Play("So at most 4 arrows can be placed in one tile simultaneously.", new Vector2(650, 170));
+            while (dialogue.isPlaying) yield return null;
+        }
+
+        if (Settings.language == "CH") dialogue.Play("小猫离开方格的方向取决于他面前的那个箭头。");
+        else dialogue.Play("The direction the kitten leaves the grid depends on the arrow in front of him.", new Vector2(650, 150));
         while (dialogue.isPlaying) yield return null;
 
-        if (Settings.language == "CH") dialogue.Play("你能将它们的值都设置为1吗？");
-        else dialogue.Play("Try to set all of them to 1.", new Vector2(650, 150));
+        if (Settings.language == "CH") dialogue.Play("抱歉我可能说的不太清楚，你试试就知道啦。");
+        else dialogue.Play("Apologies if my explanation wasn't clear enough. Perhaps you'll grasp it better through practical experience.", new Vector2(700, 200));
         while (dialogue.isPlaying) yield return null;
 
-        if (Settings.language == "CH") dialogue.Play("如果你对转向还有些疑惑，随时点击右上角的卡片！");
-        else dialogue.Play("You can check the manual in the upper-right corner anytime.", new Vector2(650, 150));
+        if (Settings.language == "CH") dialogue.Play("像上次那样，试着将3个输出端口置为1吧！");
+        else dialogue.Play("Now let's try to set the 3 output ports to 1 just like before.", new Vector2(650, 150));
         while (dialogue.isPlaying) yield return null;
         
         dialogue.Close(true);
@@ -77,21 +88,5 @@ public class Puzzle1_3 : PuzzleLogic
         answerTable["F0"] = 1;
         answerTable["F1"] = 1;
         answerTable["F2"] = 1;   
-    }
-
-    protected override IEnumerator CheckCondition1()
-    {
-        conditionStatus[1] = (Global.stepCount <= 21);
-        return base.CheckCondition1();
-    }    
-    protected override IEnumerator CheckCondition2()
-    {
-        conditionStatus[2] = (RemainingArrows() >= 4);
-        return base.CheckCondition2();
-    }
-    int RemainingArrows()
-    {
-        int arrowID = (int)MyTile.Type.Arrow;
-        return Global.grid.tileCount[arrowID];
     }
 }

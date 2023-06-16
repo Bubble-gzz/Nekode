@@ -33,6 +33,7 @@ public class ResetButton : MyButton
     public void OnClick()
     {
         Global.SetGameState(Global.GameState.Editing);
+        GameUIManager.UnFoldEditUI();
         Global.grid.MapRecover();
         GameMessage.OnResetGridState.Invoke();
     }

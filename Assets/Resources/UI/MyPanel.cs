@@ -27,11 +27,12 @@ public class MyPanel : MonoBehaviour
     {
         canvasGroup = GetComponent<CanvasGroup>();
         showing = appearOnStart;
-        rect=  GetComponent<RectTransform>();
+        rect = GetComponent<RectTransform>();
     }
     void Start()
     {
         if (appearOnStart) Appear();
+        else canvasGroup.alpha = 0;
     }
     // Update is called once per frame
     void Update()
@@ -43,6 +44,7 @@ public class MyPanel : MonoBehaviour
     }
     public void Appear()
     {
+        if (showing) return;
         showing = true;
         animationSequence?.Kill();
         canvasGroup.DOKill();
@@ -65,6 +67,7 @@ public class MyPanel : MonoBehaviour
     }
     public void Disappear(bool destroy = false)
     {
+        if (!showing) return;
         showing = false;
         animationSequence?.Kill();
         animationSequence = DOTween.Sequence();

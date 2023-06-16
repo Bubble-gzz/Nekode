@@ -125,7 +125,7 @@ public class MyGrid : MonoBehaviour
     }
     public GameObject NewTile(MyTile.Type type, int i, int j, int value = 0, MyTile.Permission permission = MyTile.Permission.Free)
     {
-        MyTile newTile = Instantiate(tilePrefab).GetComponent<MyTile>();
+        MyTile newTile = Instantiate(tilePrefab, transform).GetComponent<MyTile>();
         newTile.myGrid = this;
         newTile.type = type;
         //SpriteRenderer sprite = newTile.transform.Find("Texture").GetComponent<SpriteRenderer>();

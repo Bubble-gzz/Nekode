@@ -26,6 +26,7 @@ public class Workshop : MonoBehaviour
             presetExist |= grid.LoadFromFileWithReturnValue(Application.dataPath+"/TempMapData/"+puzzleName+".json", false);
         }
         if (!presetExist) grid.Init();
+        GameUIManager.UnFoldUI();
     }
     
     // Update is called once per frame

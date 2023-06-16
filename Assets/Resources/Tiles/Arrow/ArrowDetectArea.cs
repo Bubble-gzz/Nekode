@@ -27,6 +27,7 @@ public class ArrowDetectArea : MonoBehaviour
     void OnMouseEnter()
     {
         if (!Arrow.IsArrow(MyGrid.currentTileType)) return;
+        if (Global.gameState != Global.GameState.Editing) return;
         arrowGhost = Instantiate(arrowPrefab, transform);
         arrowGhost.transform.position = transform.position;
         arrowGhost.GetComponent<Arrow>().isGhost = true;
@@ -40,12 +41,14 @@ public class ArrowDetectArea : MonoBehaviour
     }
     void OnMouseExit()
     {
+        if (Global.gameState != Global.GameState.Editing) return;
         mouseEnter = false;
         if (arrowGhost != null) Destroy(arrowGhost);
         Global.mouseOverArrow = false;
     }
     void OnMouseDown()
     {
+        if (Global.gameState != Global.GameState.Editing) return;
         if (!Arrow.IsArrow(MyGrid.currentTileType)) return;
         mouseEnter = false;
         if (arrowGhost != null) Destroy(arrowGhost);

@@ -16,7 +16,6 @@ public class GamePlay : MonoBehaviour
     TileInventory mainInventory, arithInventory, logicInventory;
     MyGrid grid;
     static public PuzzlePreset puzzleSetting;
-    SceneSwitcher sceneSwitcher;
     static public UnityEvent onNekoSubmit;
 
     void Awake()
@@ -26,7 +25,6 @@ public class GamePlay : MonoBehaviour
         Global.mouseOverUI = false;
         Global.mouseOverArrow = false;        
         onNekoSubmit = new UnityEvent();
-        sceneSwitcher = GameObject.Find("SceneSwitcher").GetComponent<SceneSwitcher>();
     }
     void Start()
     {
@@ -52,7 +50,7 @@ public class GamePlay : MonoBehaviour
         logicInventory.tileTypes = tilePreset.logicInventory;
         mainInventory.gameObject.SetActive(true);
         Global.mainCam.orthographicSize = preset.cameraSize;
-        Instantiate(preset.puzzleLogic); 
+        Instantiate(preset.puzzleLogic, transform); 
     }
     void Update()
     {
@@ -79,8 +77,7 @@ public class GamePlay : MonoBehaviour
     }
     void SwitchScene(string targetSceneName)
     {
-        if (sceneSwitcher) sceneSwitcher.SwitchTo(targetSceneName);
-        else SceneManager.LoadScene(targetSceneName);
+        SceneSwitcher.SwitchTo(targetSceneName);
     }
 }
 

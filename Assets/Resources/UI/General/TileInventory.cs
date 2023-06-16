@@ -17,6 +17,7 @@ public class TileInventory : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField]
     public MyGrid myGrid;
     RectTransform rect;
+    bool clean = true;
     void Awake()
     {
         rect = GetComponent<RectTransform>();
@@ -27,6 +28,7 @@ public class TileInventory : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     }
     void OnEnable()
     {
+        if (!clean) return;
         int curID = 0;
         foreach (var tileType in tileTypes)
         {
@@ -36,6 +38,7 @@ public class TileInventory : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             tileSlot.type = tileType;
             tileSlot.inventory = this;
         }
+        clean = false;
     }
     void Update()
     {
@@ -54,6 +57,7 @@ public class TileInventory : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         foreach(Transform child in transform)
             Destroy(child.gameObject);
+        clean = true;
         gameObject.SetActive(false);
     }
     public void SwitchTo(GameObject otherInventory)
