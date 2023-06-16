@@ -54,6 +54,7 @@ public class Puzzle1_2 : PuzzleLogic
 
         yield return new WaitForSeconds(0.2f);
         helpCardPanel = GameUIManager.PopOutPanel(helpCardPanelPrefab).GetComponentInChildren<MyPanel>();
+        yield return new WaitForSeconds(0.5f);
         while (helpCardPanel.showing) yield return null;
         
         

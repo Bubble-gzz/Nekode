@@ -26,7 +26,7 @@ public class MyPanel : MonoBehaviour
     void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
-        showing = appearOnStart;
+        showing = false;
         rect = GetComponent<RectTransform>();
     }
     void Start()
@@ -44,7 +44,10 @@ public class MyPanel : MonoBehaviour
     }
     public void Appear()
     {
-        if (showing) return;
+        if (showing) {
+            Debug.Log("repetitive calling of Appear()");
+            return;
+        }
         showing = true;
         animationSequence?.Kill();
         canvasGroup.DOKill();
@@ -67,7 +70,10 @@ public class MyPanel : MonoBehaviour
     }
     public void Disappear(bool destroy = false)
     {
-        if (!showing) return;
+        if (!showing) {
+            Debug.Log("repetitive calling of Disappear()");
+            return;
+        }
         showing = false;
         animationSequence?.Kill();
         animationSequence = DOTween.Sequence();

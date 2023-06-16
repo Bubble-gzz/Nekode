@@ -514,6 +514,7 @@ MonoBehaviour:
   instructorCat: {fileID: 0}
   panelsInControl:
   - {fileID: 1545785076}
+  editPanelsInControl: []
 --- !u!224 &324171273 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5832879713230824208, guid: 3ebb94d7288b83d4b883da6ab0edcb98, type: 3}
@@ -1535,7 +1536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ecdcfbdfd038d74e89675d849f68722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleName: 1-5
+  puzzleName: 1-6
   title: {fileID: 1414557623}
 --- !u!1 &1671401318
 GameObject:
