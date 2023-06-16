@@ -21,10 +21,16 @@ public class TileInventory : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     void Awake()
     {
         rect = GetComponent<RectTransform>();
+        GameMessage.OnPlay.AddListener(CancelSelectedTile);
     }
     void Start()
     {
 
+    }
+    void CancelSelectedTile()
+    {
+        MyGrid.currentTileType = MyTile.Type.NULL;
+        //GameMessage.OnToolReturnedToSlot.Invoke();
     }
     void OnEnable()
     {
