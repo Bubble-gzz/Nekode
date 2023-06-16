@@ -1034,7 +1034,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4143400277766522392, guid: 9e2964b509864a64ebe7928d438d90ae, type: 3}
       propertyPath: m_Name
-      value: 1-8
+      value: 2-2
       objectReference: {fileID: 0}
     - target: {fileID: 4143400277766522393, guid: 9e2964b509864a64ebe7928d438d90ae, type: 3}
       propertyPath: m_RootOrder
@@ -1114,7 +1114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4143400277766522399, guid: 9e2964b509864a64ebe7928d438d90ae, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: "DIY\u732B"
+      value: 2-2
       objectReference: {fileID: 0}
     - target: {fileID: 4143400277766522399, guid: 9e2964b509864a64ebe7928d438d90ae, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1122,7 +1122,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4143400279068232393, guid: 9e2964b509864a64ebe7928d438d90ae, type: 3}
       propertyPath: m_text
-      value: "1-8 DIY\u732B"
+      value: "2-2 DIY\u732B"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e2964b509864a64ebe7928d438d90ae, type: 3}
@@ -1531,7 +1531,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4143400277766522392, guid: 9e2964b509864a64ebe7928d438d90ae, type: 3}
       propertyPath: m_Name
-      value: 1-7
+      value: 2-1
       objectReference: {fileID: 0}
     - target: {fileID: 4143400277766522393, guid: 9e2964b509864a64ebe7928d438d90ae, type: 3}
       propertyPath: m_RootOrder
@@ -1611,7 +1611,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4143400277766522399, guid: 9e2964b509864a64ebe7928d438d90ae, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: "\u4E09\u811A\u732B"
+      value: 2-1
       objectReference: {fileID: 0}
     - target: {fileID: 4143400277766522399, guid: 9e2964b509864a64ebe7928d438d90ae, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1619,7 +1619,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4143400279068232393, guid: 9e2964b509864a64ebe7928d438d90ae, type: 3}
       propertyPath: m_text
-      value: "1-7 \u4E09\u811A\u732B"
+      value: "2-1 \u4E09\u811A\u732B"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e2964b509864a64ebe7928d438d90ae, type: 3}

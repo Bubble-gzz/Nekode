@@ -19,6 +19,7 @@ public class TileSlot : MonoBehaviour
     Image sprite;
     int lastCount;
     Sequence animationSequence;
+    MyButtonImage buttonImage;
 
     public void OnPickUp()
     {
@@ -52,8 +53,9 @@ public class TileSlot : MonoBehaviour
 
     void Awake()
     {
-        count = transform.Find("Count").GetComponent<TMP_Text>();
+        count = transform.Find("Image/Count").GetComponent<TMP_Text>();
         sprite = GetComponentInChildren<Image>();
+        buttonImage = GetComponentInChildren<MyButtonImage>();
         sprite.enabled = false;
         count.enabled = false;
         originSize = transform.localScale;  
@@ -98,10 +100,12 @@ public class TileSlot : MonoBehaviour
         {
             sprite.color = new Color(1,1,1,0.5f);
             count.color = new Color(0,0,0,0.5f);
+            buttonImage.SetActive(false);
         }
         else {
             sprite.color = new Color(1,1,1,1);
             count.color = new Color(0,0,0,1);  
+            buttonImage.SetActive(true);
         }
         if (MyTile.NotTile(type) || inventory.myGrid.tileCount[(int)type] < 0) count.text = "";
         else count.text = inventory.myGrid.tileCount[(int)type].ToString();

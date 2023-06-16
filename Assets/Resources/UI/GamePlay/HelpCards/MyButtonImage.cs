@@ -16,13 +16,14 @@ public class MyButtonImage : MonoBehaviour
     public bool shakeNotice = false;
     public float timeBeforeShake = 3f, shakeTimeUnit = 1, shakeInterval = 1;
     public float shakeAngle = 30;
-    bool show, hover;
+    bool show, hover, active;
     Sequence animationSequence;
     void Awake()
     {
         image = GetComponentInChildren<Image>();
         canvasGroup = GetComponent<CanvasGroup>();
         show = true;
+        active = true;
     }
     void Start()
     {
@@ -71,7 +72,7 @@ public class MyButtonImage : MonoBehaviour
     }
     public void OnMouseEnter()
     {
-        if (!show) return;
+        if (!show || !active) return;
         hover = true;
         StopTween();
         transform.DORotate(new Vector3(0, 0, 0), 0.2f);
@@ -83,7 +84,7 @@ public class MyButtonImage : MonoBehaviour
     }
     public void OnMouseExit()
     {
-        if (!show) return;
+        if (!show || !active) return;
         hover = false;
         StopTween();
         transform.DORotate(new Vector3(0, 0, 0), 0.2f);
@@ -95,7 +96,7 @@ public class MyButtonImage : MonoBehaviour
     }
     public void OnClicked()
     {
-        if (!show) return;
+        if (!show || !active) return;
         StopTween();
         transform.DORotate(new Vector3(0, 0, 0), 0.2f);
         image.color = ClickedColor;
@@ -146,5 +147,9 @@ public class MyButtonImage : MonoBehaviour
         animationSequence.Append(transform.DOScale(new Vector3(1.2f,1.2f,1.2f), tweenInterval));
         animationSequence.Append(transform.DOScale(new Vector3(0.9f,0.9f,0.9f), tweenInterval));
         animationSequence.Append(transform.DOScale(new Vector3(1f,1f,1f), tweenInterval));
+    }
+    public void SetActive(bool flag)
+    {
+        active = flag;
     }
 }
