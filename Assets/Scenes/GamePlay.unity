@@ -2142,6 +2142,22 @@ MonoBehaviour:
     tilePreset: {fileID: 11400000, guid: 531dddb74695e1f47b5bed397752503f, type: 2}
     puzzleLogic: {fileID: 4651727516832775878, guid: a65f579a5598bf5409792e4cede239d9, type: 3}
     cameraSize: 4.5
+  - puzzleName: 2-3
+    tilePreset: {fileID: 11400000, guid: d2c4aa4dc0dcbc740b19411a405a618c, type: 2}
+    puzzleLogic: {fileID: 6779873195799856572, guid: 9d052d9a504d14e4891e31d9df9433b5, type: 3}
+    cameraSize: 4
+  - puzzleName: 2-4
+    tilePreset: {fileID: 11400000, guid: c66287913388d354e96c6a029af0af3d, type: 2}
+    puzzleLogic: {fileID: 4570818813441924048, guid: ab04b9bf203f2564c81770ecfd6ea0cf, type: 3}
+    cameraSize: 4
+  - puzzleName: 2-5
+    tilePreset: {fileID: 11400000, guid: f1628a1f2f2288b4990a406f4b46d295, type: 2}
+    puzzleLogic: {fileID: 2470176170471219512, guid: f61de6f9fdfd3a84693b430177adb53e, type: 3}
+    cameraSize: 4.2
+  - puzzleName: 2-6
+    tilePreset: {fileID: 11400000, guid: 173c0abe992d0d24cb3cee990baa0ca9, type: 2}
+    puzzleLogic: {fileID: 518044121294794455, guid: c5060480bb334984d9d443cc247fb18e, type: 3}
+    cameraSize: 4
   puzzleLogics: []
   mainInventory: {fileID: 468300230}
   arithInventory: {fileID: 558332627}
