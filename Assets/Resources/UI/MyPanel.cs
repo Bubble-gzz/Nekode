@@ -98,4 +98,8 @@ public class MyPanel : MonoBehaviour
             if (destroy) Destroy(gameObject);
         });
     }
+    public void SetStyle(Style newStyle)
+    {
+        style = newStyle;
+    }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
 {
@@ -10,10 +11,16 @@ public class GameUIManager : MonoBehaviour
     public Transform instructorCat;
     public List<MyPanel> panelsInControl;
     public List<MyPanel> editPanelsInControl;
+    static Slider speedSlider;
     void Awake()
     {
         instance = this;
         instructorCat = GameObject.Find("Instructor")?.transform;
+        speedSlider = GameObject.Find("SpeedController")?.GetComponentInChildren<Slider>();
+        if (speedSlider != null)
+        {
+            speedSlider.onValueChanged.AddListener(ChangeSpeed);
+        }
     }
     static public GameObject PopOutPanel(GameObject prefab)
     {
@@ -64,5 +71,9 @@ public class GameUIManager : MonoBehaviour
         {
             panel.Appear();
         }
+    }
+    void ChangeSpeed(float value)
+    {
+        Global.nekoPlaySpeed = value;
     }
 }

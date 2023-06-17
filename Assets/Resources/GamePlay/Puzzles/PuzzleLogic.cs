@@ -128,7 +128,7 @@ public class PuzzleLogic : MonoBehaviour
     }
     IEnumerator NextTestCase()
     {
-        yield return new WaitForSeconds(1f);
+        //yield return new WaitForSeconds(0.7f);
         ClearResultOfTest();
         GameMessage.OnResetGridState.Invoke();
         testProgress?.NextCase();
@@ -136,7 +136,7 @@ public class PuzzleLogic : MonoBehaviour
         //yield return new WaitForSeconds(0.5f);
         curTestCase++;
         GenerateTestCase();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.7f);
         Global.isGeneratingTestData = false;
     }
 
