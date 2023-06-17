@@ -18,12 +18,14 @@ public class PuzzleLogic : MonoBehaviour
     bool isTestResultClean;
     static public TestProgress testProgress;
     bool isTesting = false;
+    Transform DrBubble;
     virtual protected void Awake()
     {
         answerTable = new Dictionary<string, int>();
         totalTestCase = 1;
         curTestCase = 0;
         isTestResultClean = true;
+        DrBubble = GameObject.Find("Dr.Bubble").transform;
     }
     virtual protected void Start()
     {

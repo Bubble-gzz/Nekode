@@ -17,7 +17,6 @@ public class GamePlay : MonoBehaviour
     MyGrid grid;
     static public PuzzlePreset puzzleSetting;
     static public UnityEvent onNekoSubmit;
-
     void Awake()
     {
         Global.inWorkshop = false;
@@ -28,6 +27,7 @@ public class GamePlay : MonoBehaviour
     }
     void Start()
     {
+        AudioManager.PlayMusicByName("Gameplay_bgm_relaxing");
         for (int i = 0; i < puzzlePresets.Count; i++)
             if (Global.currentPuzzleName == puzzlePresets[i].puzzleName) {
                 InitWithPreset(puzzlePresets[i]);

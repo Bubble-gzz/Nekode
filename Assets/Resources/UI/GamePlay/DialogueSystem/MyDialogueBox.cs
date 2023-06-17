@@ -17,6 +17,11 @@ public class MyDialogueBox : MonoBehaviour
     public bool fastforward;
     MyPanel panel;
     Transform targetObject = null;
+    public Vector2 boxOffset;
+    Transform tail;
+    Camera mainCam;
+    public Vector2 tailOffset;
+    public TMP_FontAsset font_CH, font_EN;
     void Awake()
     {
         rect = GetComponent<RectTransform>();
@@ -24,10 +29,14 @@ public class MyDialogueBox : MonoBehaviour
         isPlaying = false;
         panel = GetComponent<MyPanel>();
         fastforward = false;
+        tail = transform.Find("Tail");
     }
     void Start()
     {
-        
+        mainCam = Global.mainCam;
+        targetObject = DrBubble.instance.transform;
+        if (Settings.language == "CH") content.font = font_CH;
+        else content.font = font_EN;
     }
 
     // Update is called once per frame
@@ -43,10 +52,20 @@ public class MyDialogueBox : MonoBehaviour
             //StartCoroutine(UpdateMesh(0));
         }
         if (Input.anyKeyDown) fastforward = true;
+        tail.position = rect.position + (Vector3)tailOffset; //mainCam.ScreenToWorldPoint(tailOffset);
         //UpdateMesh();
+    }
+    public void Open(Vector2 size)
+    {
+        rect.sizeDelta = size;
+        Open();
     }
     public void Open()
     {
+        if (mainCam == null) mainCam = Global.mainCam;
+        if (targetObject == null) targetObject = DrBubble.instance.transform;
+        Debug.Log("dialogue.mainCam " + mainCam + "  /  global:" + Global.mainCam);
+        transform.position = mainCam.WorldToScreenPoint(targetObject.transform.position) + (Vector3)boxOffset;
         panel.Appear();
     }
     public void Close(bool destroy = false)
@@ -141,10 +160,29 @@ public class MyDialogueBox : MonoBehaviour
     }
     public void SetPivot(Vector2 newPivot)
     {
-
+        rect.pivot = newPivot;
+        rect.anchoredPosition = Vector2.zero;
     }
-    public void SetTarget(Vector2 target)
+    public void SetTailOffset(Vector2 newOffset)
     {
-
+        tailOffset = newOffset;
+    }
+    public void SetTailRotation(Vector3 rotation)
+    {
+        tail.rotation = Quaternion.Euler(rotation);
+    }
+    public void SetTailLR()
+    {
+        SetPivot(new Vector2(1, 0));
+        SetTailOffset(new Vector2(-25, 20));
+        SetTailRotation(new Vector3(0, 0, -30));
+        boxOffset = new Vector2(-50, 50);
+    }
+    public void SetTailLM()
+    {
+        SetPivot(new Vector2(0.5f, 0));
+        SetTailOffset(new Vector2(0, 0));
+        SetTailRotation(new Vector3(0, 0, -90));
+        boxOffset = new Vector2(0, 80);        
     }
 }

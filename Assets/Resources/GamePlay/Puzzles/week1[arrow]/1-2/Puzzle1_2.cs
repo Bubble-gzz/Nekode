@@ -31,23 +31,25 @@ public class Puzzle1_2 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(30.75f, 30.6f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLM();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("第二堂课，我们来学习如何让小猫转向！");
-        else dialogue.Play("Lesson 2, learn to navigate the kitten.", new Vector2(650, 150));
+        else dialogue.Play("Lesson 2, learn to navigate the kitten.", new Vector2(750, 120));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("这次，目标仍然是将输入端口的数字搬运到输出端口中。");
-        else dialogue.Play("This time, we still want to copy the number from input port to output port.", new Vector2(650, 170));
+        else dialogue.Play("This time, we still want to copy the number from input port to output port.", new Vector2(800, 150));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("不过路径不再是直线了。");
-        else dialogue.Play("Except that the path is no longer straight.", new Vector2(650, 150));
+        else dialogue.Play("Except that the path is no longer straight.", new Vector2(850, 120));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("关于转向的知识，看看这些卡片吧");
-        else dialogue.Play("Feel free to check these cards for details.", new Vector2(650, 150));
+        else dialogue.Play("Feel free to check these cards for details.", new Vector2(850, 120));
         while (dialogue.isPlaying) yield return null;
         
         dialogue.Close(true);

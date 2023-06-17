@@ -24,23 +24,25 @@ public class Puzzle1_1 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(33.15f, 31.5f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLR();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("首先让我们通过这个例子感受一下猫咪是如何完成任务的。");
-        else dialogue.Play("Here's an example and let's see how the kitten gets the job done.", new Vector2(650, 150));
+        else dialogue.Play("Here's an example and let's see how the kitten gets the job done.", new Vector2(750, 150));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("这里，我们想让小猫将蓝色方块的数字搬运到绿色方块中。");
-        else dialogue.Play("Here, we want the kitten to copy the number from the blue tile to the green tile.", new Vector2(650, 170));
+        else dialogue.Play("Here, we want the kitten to copy the number from the blue tile to the green tile.", new Vector2(850, 150));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("你肯定会问蓝色方块和绿色方块是什么意思 ^_^*");
-        else dialogue.Play("You may be wondering, what does all this stuff mean? ^_^*", new Vector2(650, 150));
+        else dialogue.Play("You may be wondering,\n what does all this stuff mean? ^_^*", new Vector2(750, 150));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("看看这些卡片吧");
-        else dialogue.Play("These cards should help you understand.", new Vector2(650, 150));
+        else dialogue.Play("These cards should help you understand.", new Vector2(800, 120));
         while (dialogue.isPlaying) yield return null;
         
         dialogue.Close();
@@ -50,8 +52,8 @@ public class Puzzle1_1 : PuzzleLogic
         yield return new WaitForSeconds(0.5f);
         while (helpCardPanel.showing) yield return null;
         
-        dialogue.Open();
-        dialogue.Play("Let's go!", new Vector2(650, 150));
+        dialogue.Open(new Vector2(250, 120));
+        dialogue.Play("Let's go!", new Vector2(250, 120));
         while (dialogue.isPlaying) yield return null; 
         dialogue.Close(true);
         
