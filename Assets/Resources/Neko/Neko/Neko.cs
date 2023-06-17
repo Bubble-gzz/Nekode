@@ -99,6 +99,10 @@ public class Neko : MonoBehaviour
         running = true;
         while (Global.gameMode == Global.GameMode.Test && Global.isGeneratingTestData)
             yield return null;
+        if (grid.grid[i, j].GetComponent<MyTile>().type == MyTile.Type.Destination) {
+            running = false;
+            yield break;
+        }
         CalcDirection();
         int _i = i + dx[direction], _j = j + dy[direction];
         //Debug.Log("(" + i + ", " + j + ") (" + _i +", " + _j + ")");
