@@ -70,7 +70,7 @@ public class MyTile : MonoBehaviour
     List<Type> arithmeticTiles = new List<Type>() {
         Type.ADD, Type.SUB, Type.MUL, Type.DIV, Type.MOD
     };
-    List<Type> logicTiles = new List<Type>() {
+    static List<Type> logicTiles = new List<Type>() {
         Type.EQU, Type.GEQ, Type.LEQ, Type.LSS, Type.GTR, Type.NEQ
     };
     List<Type> fixedTileTypes = new List<Type>() {
@@ -670,6 +670,9 @@ public class MyTile : MonoBehaviour
             if (arrows[i] != null) arrows[i].Recover();   
     }
     public bool IsLogicType() {
+        return IsLogicType(type);
+    }
+    static public bool IsLogicType(Type type) {
         return logicTiles.Contains(type);
     }
     public bool IsArithmeticType() {

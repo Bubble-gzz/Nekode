@@ -11,6 +11,7 @@ public class SpeedController : MonoBehaviour
         panel = GetComponent<MyPanel>();
         GameMessage.OnPlay.AddListener(Appear);
         GameMessage.OnReset.AddListener(Disappear);
+        GameMessage.OnPuzzleComplete.AddListener(Disappear);
     }
     void Start()
     {

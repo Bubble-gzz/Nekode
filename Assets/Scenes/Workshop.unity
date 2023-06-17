@@ -1536,7 +1536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ecdcfbdfd038d74e89675d849f68722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleName: 5-3
+  puzzleName: 5-5
   title: {fileID: 1414557623}
 --- !u!1 &1671401318
 GameObject:
@@ -1704,6 +1704,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 304999816}
     m_Modifications:
+    - target: {fileID: 19152049284053844, guid: cb9c960c73ae67b41a964b2576f93a0f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104302261507938481, guid: cb9c960c73ae67b41a964b2576f93a0f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4794383646529040622, guid: cb9c960c73ae67b41a964b2576f93a0f, type: 3}
       propertyPath: m_Name
       value: PlayButtons

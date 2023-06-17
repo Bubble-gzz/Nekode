@@ -165,6 +165,7 @@ public class Neko : MonoBehaviour
     {
         MyTile tile = grid.grid[i, j].GetComponent<MyTile>();
         MyTile.Type tileType = tile.type;
+        if (MyTile.IsLogicType(tileType)) GameMessage.OnPassLogicTile.Invoke();
         atDestination = false;
         switch (tileType)
         {

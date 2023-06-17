@@ -11,6 +11,9 @@ public class GameMessage : MonoBehaviour
     static public UnityEvent OnResetGridState = new UnityEvent(); // simply reset grid
     static public UnityEvent OnReset = new UnityEvent(); // return to the game state before testing
     static public UnityEvent OnPlay = new UnityEvent();
+    static public UnityEvent OnPuzzleComplete = new UnityEvent();
+
+    static public UnityEvent OnPassLogicTile = new UnityEvent();
     void Start()
     {
         

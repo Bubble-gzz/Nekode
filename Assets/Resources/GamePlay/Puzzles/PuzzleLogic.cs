@@ -153,6 +153,7 @@ public class PuzzleLogic : MonoBehaviour
     }
     IEnumerator C_PuzzleComplete()
     {
+        GameMessage.OnPuzzleComplete.Invoke();
         testProgress?.Close();
         GameUIManager.FoldUI();
         resultPanel = GameUIManager.PopOutResultPanel().GetComponentInChildren<ResultPanel>();

@@ -1010,13 +1010,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a3dbd2edea0ead4c9b2f97823fd1a20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  style: 1
+  style: 3
   tweenTimeUnit: 1
   content: {fileID: 1425043628}
   showing: 0
   appearOnStart: 0
-  posWhenHide: {x: 0, y: -70}
-  posWhenShow: {x: 0, y: 100}
+  posWhenHide: {x: 0, y: 200}
+  posWhenShow: {x: 0, y: -100}
 --- !u!1 &1389535882
 GameObject:
   m_ObjectHideFlags: 0
@@ -2264,9 +2264,9 @@ RectTransform:
   m_Father: {fileID: 293457391}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 70}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -140}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &2036772284
@@ -2312,8 +2312,8 @@ MonoBehaviour:
   content: {fileID: 2124640476}
   showing: 0
   appearOnStart: 0
-  posWhenHide: {x: 0, y: -70}
-  posWhenShow: {x: 0, y: 70}
+  posWhenHide: {x: 0, y: 140}
+  posWhenShow: {x: 0, y: -140}
 --- !u!1 &2074029082
 GameObject:
   m_ObjectHideFlags: 0
@@ -2486,6 +2486,18 @@ MonoBehaviour:
   - puzzleName: 5-3
     tilePreset: {fileID: 11400000, guid: 8be38db9d6f788e4a84ee98c90f6d338, type: 2}
     puzzleLogic: {fileID: 3954243922402810919, guid: 9fc923b0b5ee5174c9ec757976c27e34, type: 3}
+    cameraSize: 4
+  - puzzleName: 5-4
+    tilePreset: {fileID: 11400000, guid: 582e870d614b79c4897714e3662944fc, type: 2}
+    puzzleLogic: {fileID: 2357468633431914514, guid: 0d7d1b737a9e4e64bb8710f593bcd64f, type: 3}
+    cameraSize: 4.2
+  - puzzleName: 5-5
+    tilePreset: {fileID: 11400000, guid: 1dd92075e10a35b4f903a83053829ae8, type: 2}
+    puzzleLogic: {fileID: 3153777963453545754, guid: caffd54f6bca59d40a78096d92c31e22, type: 3}
+    cameraSize: 4
+  - puzzleName: 5-6
+    tilePreset: {fileID: 11400000, guid: d076f0113ebda1440bd4cfcd34031e0b, type: 2}
+    puzzleLogic: {fileID: 1017659862919568342, guid: 1fd8c9b9de585214d8b0f4858abda23b, type: 3}
     cameraSize: 4
   puzzleLogics: []
   mainInventory: {fileID: 468300230}

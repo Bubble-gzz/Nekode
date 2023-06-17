@@ -9,6 +9,7 @@ public class PuzzleTarget : MonoBehaviour
     public TMP_FontAsset Font_CH, Font_EN;
     TMP_Text message;
     AnimationBuffer animationBuffer;
+    MyPanel panel;
     void Awake()
     {
         Global.puzzleTarget = this;
@@ -18,6 +19,9 @@ public class PuzzleTarget : MonoBehaviour
         message.text = "";
         if (Settings.language.ToUpper() == "CH") message.font = Font_CH;
         else message.font = Font_EN; 
+        panel = GetComponent<MyPanel>();
+        GameMessage.OnPlay.AddListener(Disappear);
+        GameMessage.OnReset.AddListener(Appear);
     }
 
     // Update is called once per frame
@@ -28,6 +32,16 @@ public class PuzzleTarget : MonoBehaviour
     public void SetNewMessage(string newMessage)
     {
         message.text = newMessage;
-        animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.Emphasize, 0.1f));
+        panel.Appear();
+        panel.SetStyle(MyPanel.Style.Fold);
+        //animationBuffer.Add(new PopAnimatorInfo(gameObject, PopAnimator.Type.Emphasize, 0.1f));
+    }
+    public void Appear()
+    {
+        panel.Appear();
+    }
+    public void Disappear()
+    {
+        panel.Disappear();
     }
 }
