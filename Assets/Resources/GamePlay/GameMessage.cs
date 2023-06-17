@@ -14,6 +14,7 @@ public class GameMessage : MonoBehaviour
     static public UnityEvent OnPuzzleComplete = new UnityEvent();
 
     static public UnityEvent OnPassLogicTile = new UnityEvent();
+    static public bool playingStory;
     void Start()
     {
         

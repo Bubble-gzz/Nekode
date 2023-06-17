@@ -1977,9 +1977,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 0
-  damping: 3
-  accelRate: 15
+  damping: 8
+  accelRate: 20
   speedLimit: 5
+  freelyMove: 1
 --- !u!1 &1698181987
 GameObject:
   m_ObjectHideFlags: 0

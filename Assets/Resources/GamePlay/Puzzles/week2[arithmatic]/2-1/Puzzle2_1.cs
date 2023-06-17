@@ -15,7 +15,7 @@ public class Puzzle2_1 : PuzzleLogic
     {
         base.Start();
         totalTestCase = 5;
-        StartCoroutine(GameProcess());
+
         conditionStatus[0] = true;
         conditionStatus[1] = true;
         conditionStatus[2] = true;

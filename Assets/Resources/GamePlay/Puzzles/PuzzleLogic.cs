@@ -37,9 +37,16 @@ public class PuzzleLogic : MonoBehaviour
         GameMessage.OnReset.AddListener(OnReset);
         GameMessage.OnResetGridState.AddListener(ClearResultOfTest);
         StartCoroutine(PuzzleInit());
+        StartCoroutine(GameProcessWrapper());
     }
 
     // Update is called once per frame
+    IEnumerator GameProcessWrapper()
+    {
+        GameMessage.playingStory = true;
+        yield return GameProcess();
+        GameMessage.playingStory = false;
+    }
     virtual protected void Update()
     {
         if (Global.puzzleComplete)

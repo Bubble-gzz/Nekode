@@ -22,6 +22,8 @@ public class MyDialogueBox : MonoBehaviour
     Camera mainCam;
     public Vector2 tailOffset;
     public TMP_FontAsset font_CH, font_EN;
+    Transform triangle;
+    Vector3 triangleOrigin;
     void Awake()
     {
         rect = GetComponent<RectTransform>();
@@ -30,6 +32,8 @@ public class MyDialogueBox : MonoBehaviour
         panel = GetComponent<MyPanel>();
         fastforward = false;
         tail = transform.Find("Tail");
+        triangle = transform.Find("Triangle");
+        triangle.GetComponent<CanvasGroup>().alpha = 0;
     }
     void Start()
     {
@@ -43,7 +47,7 @@ public class MyDialogueBox : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.D))
+        /*if (Input.GetKeyDown(KeyCode.D))
         {
             Play("So let's start with the basics.\nSo let's start with the basics.\nSo let's start with the basics.\nSo let's start with the basics.", new Vector2(400, 400));//Play("So let's start with the basics.", new Vector2(550,150));
         }
@@ -51,6 +55,7 @@ public class MyDialogueBox : MonoBehaviour
         {
             //StartCoroutine(UpdateMesh(0));
         }
+        */
         if (Input.anyKeyDown) fastforward = true;
         tail.position = rect.position + (Vector3)tailOffset; //mainCam.ScreenToWorldPoint(tailOffset);
         //UpdateMesh();
@@ -128,7 +133,13 @@ public class MyDialogueBox : MonoBehaviour
             //await Task.Delay(50);
         }
         yield return new WaitForEndOfFrame();
+        triangleOrigin = triangle.position;
+        triangle.position = triangleOrigin + new Vector3(0, 2, 0);
+        triangle.DOMove(triangleOrigin - new Vector3(0, 4, 0), 0.3f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+        triangle.GetComponent<CanvasGroup>().DOFade(1, 0.1f);
         while (!Input.anyKeyDown) yield return null;
+        triangle.GetComponent<CanvasGroup>().DOFade(0, 0.05f);
+        triangle.transform.DOKill();
         //await Task.Delay(1000);
         isPlaying = false;
     }

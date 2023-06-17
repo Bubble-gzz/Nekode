@@ -19,11 +19,15 @@ public class MyCamera : MonoBehaviour
     [SerializeField]
     float speedLimit;
     Vector2 velocity;
+    Vector3 lastMousePos;
+    bool mouseMiddleButtonDown;
+    public bool freelyMove;
     void Awake()
     {
         Global.mainCam = GetComponent<Camera>();
         mode = Mode.WSAD;
         velocity = new Vector2(0, 0);
+        mouseMiddleButtonDown = false;
     }
     void Start()
     {
@@ -33,6 +37,11 @@ public class MyCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (freelyMove) CheckMove();
+    }
+    void CheckMove()
+    {
+        if (GameMessage.playingStory) return;
         if (mode == Mode.WSAD && !Global.isTyping)
         {
             Vector2 accel = new Vector2(0, 0);
@@ -45,7 +54,21 @@ public class MyCamera : MonoBehaviour
             if (velocity.magnitude > speedLimit) velocity = velocity.normalized * speedLimit;
             if (velocity.magnitude > damping * Time.deltaTime)
                 velocity -= velocity.normalized * damping * Time.deltaTime;
-            else velocity = new Vector2(0, 0);
+            else velocity = Vector2.zero;
+
+            Vector3 mousePos = Input.mousePosition;
+            if (mouseMiddleButtonDown)
+            {
+                if (Global.mainCam != null)
+                    transform.position += Global.mainCam.ScreenToWorldPoint(mousePos) - Global.mainCam.ScreenToWorldPoint(lastMousePos);
+            }
+            if (Input.GetMouseButton(2)) {
+                velocity = Vector2.zero;
+                mouseMiddleButtonDown = true;
+                lastMousePos = mousePos;
+            }
+            else mouseMiddleButtonDown = false;
+
             transform.position += (Vector3)velocity * Time.deltaTime;
         }
         if (mode == Mode.Follow)

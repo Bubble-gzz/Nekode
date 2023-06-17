@@ -9,7 +9,6 @@ public class Puzzle1_1 : PuzzleLogic
     {
         base.Start();
         totalTestCase = 1;
-        StartCoroutine(GameProcess());
         conditions[0] = "Follow the instruction";
         conditions[1] = "Hit the play button";
         conditions[2] = "Complete the tutorial";
@@ -56,7 +55,7 @@ public class Puzzle1_1 : PuzzleLogic
         dialogue.Play("Let's go!", new Vector2(250, 120));
         while (dialogue.isPlaying) yield return null; 
         dialogue.Close(true);
-        
+
         if (Settings.language == "CH") SetTarget("读取A端口中的数，输出到B端口");
         else SetTarget("Read the data from port A and output it to port B");
         GameUIManager.UnFoldUI();
