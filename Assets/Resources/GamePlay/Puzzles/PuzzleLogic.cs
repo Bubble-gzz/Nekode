@@ -45,7 +45,7 @@ public class PuzzleLogic : MonoBehaviour
             PuzzleComplete();
         }
     }
-    protected void OnTestStart()
+    virtual protected void OnTestStart()
     {
         curTestCase = 1;
         testProgress?.GenerateBulbs(totalTestCase);
@@ -69,7 +69,7 @@ public class PuzzleLogic : MonoBehaviour
     {
         Global.puzzleTarget.SetNewMessage(target);
     }
-    public void CheckAnswers()
+    virtual public void CheckAnswers()
     {
         IEnumerator coroutine = C_CheckAnswers();
         ResetButton.coroutinesToBeKilledOnReset.Add(StartCoroutine(C_CheckAnswers()));

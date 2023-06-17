@@ -2402,6 +2402,18 @@ MonoBehaviour:
     tilePreset: {fileID: 11400000, guid: 76a321f64869d9b46810ca6357fec076, type: 2}
     puzzleLogic: {fileID: 1620858630679553757, guid: 3a150de02c4f6974c8b60263fdc5499d, type: 3}
     cameraSize: 4
+  - puzzleName: 5-1
+    tilePreset: {fileID: 11400000, guid: da43724b4ccc90741893187da99f5bc4, type: 2}
+    puzzleLogic: {fileID: 6875902133934835176, guid: 24465866989b1c041b1c35a3279236b9, type: 3}
+    cameraSize: 4
+  - puzzleName: 5-2
+    tilePreset: {fileID: 11400000, guid: 0c849d485d5c0794ca8fa9df02046f36, type: 2}
+    puzzleLogic: {fileID: 2131784335121687325, guid: aeb783eff97d2f0458825b25c01004ba, type: 3}
+    cameraSize: 4
+  - puzzleName: 5-3
+    tilePreset: {fileID: 11400000, guid: 8be38db9d6f788e4a84ee98c90f6d338, type: 2}
+    puzzleLogic: {fileID: 3954243922402810919, guid: 9fc923b0b5ee5174c9ec757976c27e34, type: 3}
+    cameraSize: 4
   puzzleLogics: []
   mainInventory: {fileID: 468300230}
   arithInventory: {fileID: 558332627}

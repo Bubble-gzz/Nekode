@@ -80,7 +80,7 @@ public class MyTile : MonoBehaviour
     List<Sprite> logicTileInactiveTexture = new List<Sprite>();
     Camera myCamera;
     bool deleted;
-    public bool logicState = true, lastLogicState;
+    public bool logicState = false, lastLogicState = true;
     public enum Permission{
         ReadOnly, // read
         Protected, // read | edit
@@ -217,6 +217,7 @@ public class MyTile : MonoBehaviour
     }
     void LogicStateCheck()
     {
+        if (!IsLogicType()) return;
         if (lastLogicState == logicState) return;
         if (logicState)
         {
@@ -612,6 +613,7 @@ public class MyTile : MonoBehaviour
     }
     public void SetLogitState(bool newState)
     {
+        if (!IsLogicType()) return;
         logicState = newState;
     }
     static public bool NotTile(Type type)
@@ -662,6 +664,7 @@ public class MyTile : MonoBehaviour
     }
     public void Recover()
     {
+        SetLogitState(false);
         UpdateValue(backupValue);
         for (int i = 0; i < 4; i++)
             if (arrows[i] != null) arrows[i].Recover();   
