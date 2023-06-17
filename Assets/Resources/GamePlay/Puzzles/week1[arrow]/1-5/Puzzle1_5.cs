@@ -30,21 +30,23 @@ public class Puzzle1_5 : PuzzleLogic
     override protected void Update()
     {
         base.Update();
-        debugInfo.text = "step:" + Global.stepCount + "  arrow:" + RemainingArrows();
+        //debugInfo.text = "step:" + Global.stepCount + "  arrow:" + RemainingArrows();
     }
 
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(32f, 31.5f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLR();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("熟能生巧，业精于勤。");
-        else dialogue.Play("Practice makes perfect.", new Vector2(650, 150));
+        else dialogue.Play("Practice makes perfect.", new Vector2(500, 120));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("试试将3个输入端口的值分别拷贝到对应的输出端口。");
-        else dialogue.Play("Try to copy the values of 3 input ports to the output ports respectively.", new Vector2(650, 170));
+        else dialogue.Play("Try to copy the values of 3 input ports to the output ports respectively.", new Vector2(800, 160));
         while (dialogue.isPlaying) yield return null;
         
         dialogue.Close(true);

@@ -36,19 +36,21 @@ public class Puzzle1_6 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(25.5f, 29.5f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLL();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("这是我们给你准备的挑战");
-        else dialogue.Play("Here is a challenge prepared for you.", new Vector2(650, 150));
+        else dialogue.Play("Here is a challenge prepared for you.", new Vector2(700, 120));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("但我相信这难不倒聪明的你。。");
-        else dialogue.Play("But I believe that you are clever enough to solve it, aren't you?", new Vector2(650, 150));
+        else dialogue.Play("But I believe that you are clever enough to solve it, aren't you?", new Vector2(760, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("将4个输入端口的值分别拷贝到对应的输出端口。");
-        else dialogue.Play("Try to copy the values of 4 input ports to the output ports respectively.", new Vector2(650, 170));
+        else dialogue.Play("Try to copy the values of 4 input ports to the output ports respectively.", new Vector2(760, 160));
         while (dialogue.isPlaying) yield return null;
         
         dialogue.Close(true);

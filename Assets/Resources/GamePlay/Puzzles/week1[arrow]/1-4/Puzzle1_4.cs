@@ -36,11 +36,13 @@ public class Puzzle1_4 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(29.5f, 31.6f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLR();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("抱歉，我似乎忘了告诉你一件重要的事……");
-        else dialogue.Play("Oops, forgot to tell you something important", new Vector2(650, 150));
+        else dialogue.Play("Oops, forgot to tell you something important", new Vector2(680, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") {
@@ -48,22 +50,22 @@ public class Puzzle1_4 : PuzzleLogic
             while (dialogue.isPlaying) yield return null;
         }
         else {
-            dialogue.Play("In fact, the four sides of a tile are independent of each other.", new Vector2(650, 170));
+            dialogue.Play("In fact, the four sides of a tile are independent of each other.", new Vector2(680, 160));
             while (dialogue.isPlaying) yield return null;
-            dialogue.Play("So at most 4 arrows can be placed in one tile simultaneously.", new Vector2(650, 170));
+            dialogue.Play("So at most 4 arrows can be placed in one tile simultaneously.", new Vector2(680, 160));
             while (dialogue.isPlaying) yield return null;
         }
 
         if (Settings.language == "CH") dialogue.Play("小猫离开方格的方向取决于他面前的那个箭头。");
-        else dialogue.Play("The direction the kitten leaves the grid depends on the arrow in front of him.", new Vector2(650, 150));
+        else dialogue.Play("The direction the kitten leaves the grid depends on the arrow in front of him.", new Vector2(760, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("抱歉我可能说的不太清楚，你试试就知道啦。");
-        else dialogue.Play("Apologies if my explanation wasn't clear enough. Perhaps you'll grasp it better through practical experience.", new Vector2(700, 200));
+        else dialogue.Play("Apologies if my explanation wasn't clear enough. Perhaps you'll grasp it better through practical experience.", new Vector2(750, 200));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("像上次那样，试着将3个输出端口置为1吧！");
-        else dialogue.Play("Now let's try to set the 3 output ports to 1 just like before.", new Vector2(650, 150));
+        else dialogue.Play("Now let's try to set the 3 output ports to 1 just like before.", new Vector2(750, 160));
         while (dialogue.isPlaying) yield return null;
         
         dialogue.Close(true);

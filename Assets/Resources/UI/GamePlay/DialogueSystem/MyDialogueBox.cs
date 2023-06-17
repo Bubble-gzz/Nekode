@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 public class MyDialogueBox : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Vector2 defaultBoxSize;
+    public Vector2 defaultBoxSize = new Vector2(800,160);
     TMP_Text content;
     RectTransform rect;
     List<float> charSizes;
@@ -195,5 +195,12 @@ public class MyDialogueBox : MonoBehaviour
         SetTailOffset(new Vector2(0, 0));
         SetTailRotation(new Vector3(0, 0, -90));
         boxOffset = new Vector2(0, 80);        
+    }
+    public void SetTailLL()
+    {
+        SetPivot(new Vector2(0f, 0));
+        SetTailOffset(new Vector2(25, 20));
+        SetTailRotation(new Vector3(0, 0, 230));
+        boxOffset = new Vector2(50, 50);        
     }
 }

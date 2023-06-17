@@ -37,7 +37,9 @@ public class Puzzle2_1 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(30.7f, 31.5f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLM();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("恭喜你学完了基本的知识。");
