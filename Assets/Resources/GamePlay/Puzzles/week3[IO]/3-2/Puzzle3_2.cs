@@ -37,15 +37,17 @@ public class Puzzle3_2 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(29.6f, 31.6f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLL();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("我此刻很激动。");
-        else dialogue.Play("I'm exciting right now.", new Vector2(600, 100));
+        else dialogue.Play("I'm exciting right now.", new Vector2(460, 120));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("因为我们终于要有一个加法器了。");
-        else dialogue.Play("Because we are finally going to have an ADDER.", new Vector2(600, 150));
+        else dialogue.Play("Because we are finally going to have an ADDER.", new Vector2(700, 160));
         while (dialogue.isPlaying) yield return null;
 
         dialogue.Close(true);

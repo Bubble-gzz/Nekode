@@ -37,19 +37,21 @@ public class Puzzle2_3 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(28.4f, 30.7f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLL();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("有了加法，任何猫咪都能够从1数到3了。");
-        else dialogue.Play("Any kitten can count from 1 to 3 now thanks to ADD tiles.", new Vector2(650, 150));
+        else dialogue.Play("Any kitten can count from 1 to 3 now thanks to ADD tiles.", new Vector2(630, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("在这个小小的棋盘中，完成这项创举！");
-        else dialogue.Play("Could you accomplish the feat in this tiny grid?", new Vector2(650, 150));
+        else dialogue.Play("Could you accomplish the feat in this tiny grid?", new Vector2(630, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("记住，方块用得越少越好~");
-        else dialogue.Play("Remember that the fewer, the better.", new Vector2(650, 170));
+        else dialogue.Play("Remember that the fewer, the better.", new Vector2(750, 120));
 
         while (dialogue.isPlaying) yield return null;
 

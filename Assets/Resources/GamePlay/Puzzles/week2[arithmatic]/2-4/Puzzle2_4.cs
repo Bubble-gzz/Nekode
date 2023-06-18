@@ -37,15 +37,17 @@ public class Puzzle2_4 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(31.9f, 31.7f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLM();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("一个优秀的工程师应该能够灵活应对不同的地形。");
-        else dialogue.Play("An excellent engineer should be adaptive to different terrains.", new Vector2(650, 150));
+        else dialogue.Play("An excellent engineer should be adaptive to different terrains.", new Vector2(780, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("分别将A0,A1,A2加上7,8,9,输出到对应的B0,B1,B2中");
-        else dialogue.Play("Add A0,A1,A2 by 7,8,9 respectively and place the results into according output ports.", new Vector2(800, 170));
+        else dialogue.Play("Add A0,A1,A2 by 7,8,9 respectively and place the results into according output ports.", new Vector2(800, 160));
         while (dialogue.isPlaying) yield return null;
 
         dialogue.Close(true);

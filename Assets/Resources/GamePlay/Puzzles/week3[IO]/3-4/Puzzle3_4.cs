@@ -36,11 +36,13 @@ public class Puzzle3_4 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(30.8f, 31.6f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLM();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("今天我们来做双倍放大器！");
-        else dialogue.Play("Today let's make a double amplifier!", new Vector2(600, 100));
+        else dialogue.Play("Today let's make a double amplifier!", new Vector2(720, 120));
         while (dialogue.isPlaying) yield return null;
 
         dialogue.Close(true);

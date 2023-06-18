@@ -43,27 +43,27 @@ public class Puzzle2_1 : PuzzleLogic
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("恭喜你学完了基本的知识。");
-        else dialogue.Play("Congratulations on covering the basics.", new Vector2(650, 150));
+        else dialogue.Play("Congratulations on covering the basics.", new Vector2(760, 120));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("下面让我们做一些比拷贝更有意义的事情。");
-        else dialogue.Play("Now let's do something more meaningful than simply copying.", new Vector2(650, 150));
+        else dialogue.Play("Now let's do something more meaningful than simply copying.", new Vector2(750, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("看到输入端口了吗？");
-        else dialogue.Play("Look at the input port,", new Vector2(650, 170));
+        else dialogue.Play("Look at the input port,", new Vector2(520, 120));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("请你将它的值加1后放到输出端口。");
-        else dialogue.Play("Try to add 1 to its value and place the result in the output port.", new Vector2(650, 170));
+        else dialogue.Play("Try to add 1 to its value and place the result in the output port.", new Vector2(750, 160));
         while (dialogue.isPlaying) yield return null;
         
         if (Settings.language == "CH") dialogue.Play("这需要用到新的工具——");
-        else dialogue.Play("The job will involve a new tool--", new Vector2(650, 170));
+        else dialogue.Play("The job will involve a new tool--", new Vector2(650, 120));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("加法方块!");
-        else dialogue.Play("ADD TILE!", new Vector2(650, 170));
+        else dialogue.Play("ADD TILE!", new Vector2(300, 120));
         while (dialogue.isPlaying) yield return null;
 
         dialogue.Close(true);

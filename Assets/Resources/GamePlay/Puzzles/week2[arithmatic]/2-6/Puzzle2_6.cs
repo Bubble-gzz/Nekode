@@ -37,23 +37,25 @@ public class Puzzle2_6 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(26f, 29.3f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLL();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("我们在研究数列。");
-        else dialogue.Play("We are studying number sequences.", new Vector2(600, 100));
+        else dialogue.Play("We are studying number sequences.", new Vector2(700, 120));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("现在有一个数列A，每一项都是前一项的两倍加2。");
-        else dialogue.Play("Now we have a sequence A, where each term is obtained by doubling the previous term and adding 2.", new Vector2(600, 150));
+        else dialogue.Play("Now we have a sequence A, where each term is obtained by doubling the previous term and adding 2.", new Vector2(800, 200));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("已知A0=1，也就是小猫现在所想的数。");
-        else dialogue.Play("Given that A0=1, which is the number the kitten is currently thinking of", new Vector2(750, 150));
+        else dialogue.Play("Given that A0=1, which is the number the kitten is currently thinking of", new Vector2(780, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("我们想请你帮忙推导出A1~A6.");
-        else dialogue.Play("We would like to ask for your help in deducing A1 to A6.", new Vector2(700, 150));
+        else dialogue.Play("We would like to ask for your help in deducing A1 to A6.", new Vector2(700, 160));
         while (dialogue.isPlaying) yield return null;
 
         dialogue.Close(true);

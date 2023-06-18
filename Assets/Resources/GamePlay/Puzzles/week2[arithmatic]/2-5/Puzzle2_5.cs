@@ -37,7 +37,9 @@ public class Puzzle2_5 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(27.2f, 30.5f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLL();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("在猫咪的日常生活中，前天，昨天，今天，后天，明天是很重要的日子。");
@@ -45,11 +47,11 @@ public class Puzzle2_5 : PuzzleLogic
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("如果抽象成数字，就是要知道一个数附近的5个数。");
-        else dialogue.Play("In abstract form, it is about knowing the five numbers surrounding a given number.", new Vector2(800, 170));
+        else dialogue.Play("In abstract form, it is about knowing the five numbers surrounding a given number.", new Vector2(750, 200));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("我们想请你设计出这样的日历表。");
-        else dialogue.Play("Could you please help us design such a lookup table?", new Vector2(800, 170));
+        else dialogue.Play("Could you please help us design such a lookup table?", new Vector2(730, 160));
         while (dialogue.isPlaying) yield return null;
 
         dialogue.Close(true);

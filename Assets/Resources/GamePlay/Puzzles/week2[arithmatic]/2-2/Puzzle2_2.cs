@@ -37,27 +37,29 @@ public class Puzzle2_2 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(30.7f, 28.5f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLM();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("第二课，会让你更加熟练地使用加法方块！");
-        else dialogue.Play("Lesson 2, try to get more familiar with ADD TILE!", new Vector2(650, 150));
+        else dialogue.Play("Lesson 2, try to get more familiar with ADD TILE!", new Vector2(750, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("依然是给输入加上一个数，而这次我们有三对端口。");
-        else dialogue.Play("Once again, let's add a number to the input, and this time we have three pairs of ports.", new Vector2(650, 150));
+        else dialogue.Play("Once again, let's add a number to the input, and this time we have three pairs of ports.", new Vector2(650, 200));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("分别将A0,A1,A2加上5，输出到对应的B0,B1,B2中。");
-        else dialogue.Play("Add A0,A1,A2 by 5 and place the results into according output ports.", new Vector2(650, 170));
+        else dialogue.Play("Add A0,A1,A2 by 5 and place the results into according output ports.", new Vector2(820, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("对了，可以试试给出更加节约资源的方案哦");
-        else dialogue.Play("By the way, we would be happy to see a more economical solution.", new Vector2(650, 170));
+        else dialogue.Play("By the way, we would be happy to see a more economical solution.", new Vector2(800, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("此外，我们首次采用了多组测试数据来保证您的设计的可靠性");
-        else dialogue.Play("In addition, we have incorporated multiple test cases for the first time to ensure the reliability of your design.", new Vector2(800, 300));
+        else dialogue.Play("In addition, we have incorporated multiple test cases for the first time to ensure the reliability of your design.", new Vector2(800, 200));
         while (dialogue.isPlaying) yield return null;
 
         dialogue.Close(true);
