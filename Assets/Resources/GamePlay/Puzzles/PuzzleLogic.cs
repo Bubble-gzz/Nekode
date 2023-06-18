@@ -167,6 +167,17 @@ public class PuzzleLogic : MonoBehaviour
         GameUIManager.FoldUI();
         resultPanel = GameUIManager.PopOutResultPanel().GetComponentInChildren<ResultPanel>();
         resultPanel.Appear();
+
+        /*update puzzle complete information*/
+        yield return StartCoroutine(CheckCondition0());
+        yield return StartCoroutine(CheckCondition1());
+        yield return StartCoroutine(CheckCondition2());
+        int starCount = 0;
+        for (int i = 0; i < 3; i++)
+            if (conditionStatus[i]) starCount++;
+        PuzzleManager.UpdatePuzzleInfo(PuzzleManager.currentPuzzleID, starCount);
+        /*update puzzle complete information*/
+
         yield return new WaitForSeconds(0.3f);
         resultPanel.SetCondition(0, conditions[0]);
         yield return new WaitForSeconds(0.3f);
@@ -175,13 +186,16 @@ public class PuzzleLogic : MonoBehaviour
         resultPanel.SetCondition(2, conditions[2]);
 
         yield return new WaitForSeconds(0.5f);
-        yield return StartCoroutine(CheckCondition0());
+
+        resultPanel.CheckCondition(0, conditionStatus[0]);
         yield return new WaitForSeconds(0.7f);
-        yield return StartCoroutine(CheckCondition1());
+
+        resultPanel.CheckCondition(1, conditionStatus[1]);
         yield return new WaitForSeconds(0.7f);
-        yield return StartCoroutine(CheckCondition2());
+
+        resultPanel.CheckCondition(2, conditionStatus[2]);
         yield return new WaitForSeconds(0.7f);
-        
+
         resultPanel.PopStar(0, conditionStatus[0]);
         yield return new WaitForSeconds(0.3f);
         resultPanel.PopStar(1, conditionStatus[1]);
@@ -197,19 +211,18 @@ public class PuzzleLogic : MonoBehaviour
     }
     protected virtual IEnumerator CheckCondition0()
     {
-        resultPanel.CheckCondition(0, conditionStatus[0]);
+        //resultPanel.CheckCondition(0, conditionStatus[0]);
         yield return null;
     }
     protected virtual IEnumerator CheckCondition1()
     {
 
-        resultPanel.CheckCondition(1, conditionStatus[1]);
+        //resultPanel.CheckCondition(1, conditionStatus[1]);
         yield return null;
     }
     protected virtual IEnumerator CheckCondition2()
     {
-
-        resultPanel.CheckCondition(2, conditionStatus[2]);
+        //resultPanel.CheckCondition(2, conditionStatus[2]);
         yield return null;
     }
     protected int RemainingTiles(MyTile.Type type)

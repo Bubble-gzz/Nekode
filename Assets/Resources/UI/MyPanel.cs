@@ -78,6 +78,7 @@ public class MyPanel : MonoBehaviour
     public void Disappear(bool destroy = false)
     {
         if (!showing) {
+            content?.SetActive(false);
             Debug.Log("repetitive calling of Disappear()");
             return;
         }

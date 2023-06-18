@@ -20,7 +20,7 @@ public class PuzzleEntry : MonoBehaviour
         canvasGroup = GetComponent<CanvasGroup>();
         area = transform.Find("Area").gameObject;
     }
-    void Start()
+    void OnEnable()
     {
         StartCoroutine(Init());
     }
@@ -54,6 +54,7 @@ public class PuzzleEntry : MonoBehaviour
     {
         if (puzzleID < 0 || puzzleID >= PuzzleManager.puzzleCount) return;
         Global.currentPuzzleName = puzzleName;
+        PuzzleManager.currentPuzzleID = puzzleID;
         SceneSwitcher.SwitchTo("GamePlay");
     }
     void Update()

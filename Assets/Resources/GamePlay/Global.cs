@@ -13,7 +13,6 @@ public class Global
     static public MyGrid grid;
     static public Neko currentNeko;
     static public string currentPuzzleName;
-    static public int currentPuzzleID;
     static public bool puzzleComplete;
     static public PuzzleTarget puzzleTarget;
     static public bool isTyping;

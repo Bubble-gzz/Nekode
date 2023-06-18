@@ -27,13 +27,17 @@ public class GamePlay : MonoBehaviour
     }
     void Start()
     {
+        InitWithPreset(puzzlePresets[PuzzleManager.currentPuzzleID]);
         AudioManager.PlayMusicByName("Gameplay_bgm_relaxing");
+        
+        /*
         for (int i = 0; i < puzzlePresets.Count; i++)
             if (Global.currentPuzzleName == puzzlePresets[i].puzzleName) {
                 InitWithPreset(puzzlePresets[i]);
                 Global.currentPuzzleID = i;
                 break;
             }
+        */
     }
 
     // Update is called once per frame
@@ -63,11 +67,12 @@ public class GamePlay : MonoBehaviour
     public void NextPuzzle()
     {
         string targetSceneName = "";
-        if (Global.currentPuzzleID >= puzzlePresets.Count - 1)
+        if (PuzzleManager.currentPuzzleID >= PuzzleManager.puzzleCount - 1)
             targetSceneName = "PuzzleSelect";
         else {
-            Global.currentPuzzleName = puzzlePresets[Global.currentPuzzleID + 1].puzzleName;
+            Global.currentPuzzleName = puzzlePresets[PuzzleManager.currentPuzzleID + 1].puzzleName;
             targetSceneName = "GamePlay";
+            PuzzleManager.currentPuzzleID++;
         }
         SwitchScene(targetSceneName);
     }
