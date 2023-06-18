@@ -18,10 +18,17 @@ public class TileGhost : MonoBehaviour
     }
 
     // Update is called once per frame
+    MyTile.Type lastType = MyTile.Type.NULL;
     void Update()
     {
 
         transform.position = (Vector2)myCamera.ScreenToWorldPoint(Input.mousePosition);
+        if (MyGrid.currentTileType != lastType)
+        {
+            if (MyGrid.currentTileType == MyTile.Type.NULL) CursorManager.Show();
+            else CursorManager.Hide();
+            lastType = MyGrid.currentTileType;
+        }
         if (MyGrid.currentTileType == MyTile.Type.NULL) sprite.enabled = false;
         else {
             if (Arrow.IsArrow(MyGrid.currentTileType))
