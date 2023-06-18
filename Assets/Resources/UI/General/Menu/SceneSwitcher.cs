@@ -9,9 +9,14 @@ public class SceneSwitcher : MonoBehaviour
     CanvasGroup image;
     void Awake()
     {
-        image = GetComponentInChildren<CanvasGroup>();
-        image.alpha = 0;
-        instance = this;
+        if (instance == null)
+        {
+            image = GetComponentInChildren<CanvasGroup>();
+            image.alpha = 0;
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else Destroy(gameObject);
     }
     void Start()
     {
@@ -50,6 +55,7 @@ public class SceneSwitcher : MonoBehaviour
     IEnumerator _SwitchTo(string sceneName)
     {
         yield return StartCoroutine(Fade(0, 1));
-        SceneManager.LoadScene(sceneName);
+        yield return SceneManager.LoadSceneAsync(sceneName);
+        FadeIn();
     }
 }

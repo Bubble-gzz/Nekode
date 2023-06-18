@@ -27,7 +27,7 @@ public class MyButtonImage : MonoBehaviour
     }
     void Start()
     {
-        image.color = NormalColor;
+        if (image != null) image.color = NormalColor;
     }
 
     void OnEnable()
@@ -80,7 +80,8 @@ public class MyButtonImage : MonoBehaviour
         animationSequence.Append(transform.DOScale(size_on * 1.1f, tweenInterval));
         animationSequence.Append(transform.DOScale(size_on * 0.95f, tweenInterval));
         animationSequence.Append(transform.DOScale(size_on, tweenInterval));
-        animationSequence.Insert(0, image.DOColor(HoverColor, tweenInterval * 3));
+        if (image != null)
+            animationSequence.Insert(0, image.DOColor(HoverColor, tweenInterval * 3));
     }
     public void OnMouseExit()
     {
@@ -92,21 +93,21 @@ public class MyButtonImage : MonoBehaviour
         animationSequence.Append(transform.DOScale(new Vector3(0.9f, 0.9f, 0.9f), tweenInterval));
         animationSequence.Append(transform.DOScale(new Vector3(1.05f, 1.05f, 1.05f), tweenInterval));
         animationSequence.Append(transform.DOScale(new Vector3(1f, 1f, 1f), tweenInterval));
-        animationSequence.Insert(0, image.DOColor(NormalColor, tweenInterval * 3));
+        if (image != null) animationSequence.Insert(0, image.DOColor(NormalColor, tweenInterval * 3));
     }
     public void OnClicked()
     {
         if (!show || !active) return;
         StopTween();
         transform.DORotate(new Vector3(0, 0, 0), 0.2f);
-        image.color = ClickedColor;
+        if (image != null) image.color = ClickedColor;
         animationSequence = DOTween.Sequence();
         animationSequence.Append(transform.DOScale(size_on * 0.6f, tweenInterval * 0.5f));
         animationSequence.Append(transform.DOScale(size_on * 1.05f, tweenInterval));
         animationSequence.Append(transform.DOScale(size_on, tweenInterval));
        // animationSequence.Insert(0, image.DOColor(ClickedColor, tweenInterval * 0.5f));
         
-        animationSequence.Insert(0, image.DOColor(HoverColor, tweenInterval*2));
+        if (image != null) animationSequence.Insert(0, image.DOColor(HoverColor, tweenInterval*2));
         
     }
     public void Disappear()
@@ -121,7 +122,7 @@ public class MyButtonImage : MonoBehaviour
             canvasGroup.DOFade(0, tweenInterval);
         }
         else {
-            image.DOFade(0, tweenInterval);
+            if (image != null) image.DOFade(0, tweenInterval);
         }
         transform.DOScale(new Vector3(0.7f, 0.7f, 0.7f), tweenInterval);  
     }
@@ -137,10 +138,13 @@ public class MyButtonImage : MonoBehaviour
         }
         else
         {
-            Color color = NormalColor;
-            color.a = 0;
-            image.color = color;
-            image.DOFade(NormalColor.a, tweenInterval * 3);
+            if (image != null)
+            {
+                Color color = NormalColor;
+                color.a = 0;
+                image.color = color;
+                image.DOFade(NormalColor.a, tweenInterval * 3);
+            }
         }
 
         animationSequence.Append(transform.DOScale(new Vector3(0,0,0), 0.01f));

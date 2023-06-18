@@ -28,17 +28,15 @@ public class MyPanel : MonoBehaviour
         canvasGroup = GetComponent<CanvasGroup>();
         showing = false;
         rect = GetComponent<RectTransform>();
+        canvasGroup.alpha = 0;
+        if (style == Style.Fold)
+        {
+            rect.anchoredPosition = posWhenHide;
+        }
     }
     void Start()
     {
         if (appearOnStart) Appear();
-        else {
-            canvasGroup.alpha = 0;
-            if (style == Style.Fold)
-            {
-                rect.anchoredPosition = posWhenHide;
-            }
-        }
     }
     // Update is called once per frame
     void Update()
@@ -73,6 +71,9 @@ public class MyPanel : MonoBehaviour
             rect.anchoredPosition = posWhenHide;
             animationSequence.Append(rect.DOAnchorPos(posWhenShow, 0.3f).SetEase(Ease.OutCubic));
         }
+        else if (style == Style.Fade) {
+            animationSequence.Append(canvasGroup.DOFade(1, tweenTimeUnit * 0.7f));
+        }
     }
     public void Disappear(bool destroy = false)
     {
@@ -91,6 +92,10 @@ public class MyPanel : MonoBehaviour
         else if (style == Style.Fold)
         {
             animationSequence.Append(rect.DOAnchorPos(posWhenHide, 0.3f).SetEase(Ease.OutCubic));
+        }
+        else if (style == Style.Fade)
+        {
+            animationSequence.Append(canvasGroup.DOFade(0, tweenTimeUnit * 0.3f));
         }
         animationSequence.OnComplete(() => {
             content?.SetActive(false);
