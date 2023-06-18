@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Arrow : MonoBehaviour
 {
@@ -93,10 +94,15 @@ public class Arrow : MonoBehaviour
     {
         TurnTo((direction + delta) % 4);
     }
-    void TurnTo(int dir)
+    Sequence turnAnimationSequence;
+    void TurnTo(int dir, bool animated = true)
     {
         direction = dir;
-        transform.rotation = Quaternion.Euler(0, 0, -90 * direction);        
+        if (!animated) transform.rotation = Quaternion.Euler(0, 0, -90 * direction);        
+        else {
+            transform.DOKill();
+            transform.DORotate(new Vector3(0, 0, -90 * direction), 0.1f);
+        }
     }
     public void ChangeState() {
         if (type == Type.Flip) Turn(2);

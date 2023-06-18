@@ -574,7 +574,31 @@ public class MyTile : MonoBehaviour
             if (animated) UpdateValueAnimation();
         }
     }
+    public void UpdateValueByNeko(int newValue)
+    {
+        if (label != "")
+            foreach(var tile in myGrid.tileTable[label])
+            {
+                tile.value = newValue;
+                tile.UpdateValueByNekoAnimation();
+            }
+        else {
+            value = newValue;
+            UpdateValueByNekoAnimation();
+        }        
+    }
     Sequence animationSequence;
+    public void UpdateValueByNekoAnimation()
+    {
+        transform.DOKill();
+        animationSequence?.Kill();
+        animationSequence = DOTween.Sequence();
+        animationSequence.Append(transform.DOScale(new Vector3(1.3f, 0.7f, 1), 0.1f / Global.nekoPlaySpeed));
+        animationSequence.Append(transform.DOScale(new Vector3(0.8f, 1.2f, 1), 0.1f / Global.nekoPlaySpeed));
+        animationSequence.Append(transform.DOScale(new Vector3(0.9f, 1.1f, 1), 0.1f / Global.nekoPlaySpeed));
+        animationSequence.Append(transform.DOScale(new Vector3(1.05f, 0.95f, 1), 0.1f / Global.nekoPlaySpeed));
+        animationSequence.Append(transform.DOScale(new Vector3(1, 1, 1), 0.1f / Global.nekoPlaySpeed));
+    }
     public void RefreshAnimation()
     {
         transform.DOKill();

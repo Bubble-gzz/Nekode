@@ -162,6 +162,10 @@ public class Neko : MonoBehaviour
         MyTile tile = grid.grid[i,j].GetComponent<MyTile>();
         if (tile.IsLogicType()) tile.logicState = false;
     }
+    void UpdateTileValue(MyTile tile, int newValue)
+    {
+        tile.UpdateValueByNeko(newValue);
+    }
     void Interact(int i, int j)
     {
         MyTile tile = grid.grid[i, j].GetComponent<MyTile>();
@@ -171,7 +175,7 @@ public class Neko : MonoBehaviour
         switch (tileType)
         {
             case (MyTile.Type.InputTile):
-                tile.UpdateValue(value);
+                UpdateTileValue(tile,value);
                 break;
             case (MyTile.Type.OutputTile):
                 UpdateValue(tile.value);
