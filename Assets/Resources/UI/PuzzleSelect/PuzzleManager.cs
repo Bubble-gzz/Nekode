@@ -7,7 +7,7 @@ public class PuzzleManager : MonoBehaviour
     // Start is called before the first frame update
     static PuzzleManager Instance;
     static bool newSave = true;
-    static int calendarPage;
+    static public int calendarPage;
     List<int> puzzleStar = new List<int>(); //-1 locked  0 newPuzzle 1~3 stars
     static public int puzzleCount = 30;
     void Awake()
