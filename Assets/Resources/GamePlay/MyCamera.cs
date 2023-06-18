@@ -60,8 +60,10 @@ public class MyCamera : MonoBehaviour
             if (mouseMiddleButtonDown)
             {
                 if (Global.mainCam != null)
-                    transform.position += Global.mainCam.ScreenToWorldPoint(mousePos) - Global.mainCam.ScreenToWorldPoint(lastMousePos);
+                    transform.position += Global.mainCam.ScreenToWorldPoint(lastMousePos) - Global.mainCam.ScreenToWorldPoint(mousePos);
             }
+            if (Input.GetMouseButtonDown(2)) CursorManager.SetCursor("Paw");
+            if (Input.GetMouseButtonUp(2)) CursorManager.SetCursor("Arrow");
             if (Input.GetMouseButton(2)) {
                 velocity = Vector2.zero;
                 mouseMiddleButtonDown = true;
