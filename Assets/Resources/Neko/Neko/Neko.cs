@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 public class Neko : MonoBehaviour
 {
@@ -139,7 +140,7 @@ public class Neko : MonoBehaviour
         }
         i = _i; j = _j;
         Interact(i, j);
-        yield return new WaitForSeconds(0.3f / Global.nekoPlaySpeed);
+        yield return new WaitForSeconds(0.5f / Global.nekoPlaySpeed);
         running = false;
     }
     void CalcDirection()
@@ -300,11 +301,30 @@ public class Neko : MonoBehaviour
             default: break;
         }
     }
+
     void UpdateValue(int newValue, bool animated = true)
     {
         newValue = Mathf.Clamp(newValue, -32768, 32767);
         value = newValue;
         bubble.transform.GetComponentInChildren<TMP_Text>().text = value.ToString();
+        if (animated) UpdateValueAnimation();
+    }
+    Sequence bubbleAnimSeq;
+    void UpdateValueAnimation()
+    {
+        bubbleAnimSeq?.Kill();
+        bubbleAnimSeq = DOTween.Sequence();
+        bubbleAnimSeq.Append(bubble.transform.DOScale(new Vector3(0.7f,1.3f,1), 0.1f/Global.nekoPlaySpeed));
+        bubbleAnimSeq.Append(bubble.transform.DOScale(new Vector3(1.2f,0.8f,1), 0.1f/Global.nekoPlaySpeed));
+        bubbleAnimSeq.Append(bubble.transform.DOScale(new Vector3(0.9f,1.1f,1), 0.1f/Global.nekoPlaySpeed));
+        bubbleAnimSeq.Append(bubble.transform.DOScale(new Vector3(1.05f,0.95f,1), 0.1f/Global.nekoPlaySpeed));
+        bubbleAnimSeq.Append(bubble.transform.DOScale(new Vector3(1,1,1), 0.1f/Global.nekoPlaySpeed));
+        /*
+        bubbleAnimSeq.Append(bubble.transform.DOScale(new Vector3(0.8f,1.2f,1), 0.1f/Global.nekoPlaySpeed));
+        bubbleAnimSeq.Append(bubble.transform.DOScale(new Vector3(1.1f,0.9f,1), 0.1f/Global.nekoPlaySpeed));
+        bubbleAnimSeq.Append(bubble.transform.DOScale(new Vector3(0.95f,1.05f,1), 0.1f/Global.nekoPlaySpeed));
+        bubbleAnimSeq.Append(bubble.transform.DOScale(new Vector3(1,1,1), 0.1f/Global.nekoPlaySpeed));
+        */
     }
     void SwitchMode(Mode newMode)
     {
