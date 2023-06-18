@@ -31,8 +31,11 @@ public class MyGrid : MonoBehaviour
     GameObject lastGhost;
     Neko neko;
     public List<int> tileCount = new List<int>();
+    Rect border = new Rect();
+    class Rect{
+        public int l,u,r,d;
+    }
     [SerializeField]
-    
     int tileKindN;
     void Awake()
     {
