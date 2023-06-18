@@ -18,6 +18,7 @@ public class Global
     static public PuzzleTarget puzzleTarget;
     static public bool isTyping;
     static public int stepCount;
+    static public Vector2 canvasReferenceResolution = new Vector2(1920, 1080);
     public enum GameMode{
         Test,
         Debug
@@ -52,5 +53,11 @@ public class Global
         Vector3 res = mainCam.ScreenToWorldPoint(Input.mousePosition);
         res.z = pos.z;
         return res;
+    }
+    static public Vector2 ScreenSpaceToCanvasSpace(Vector2 screenSpace)
+    {
+        float x = screenSpace.x / Screen.width * canvasReferenceResolution.x;
+        float y = screenSpace.y / Screen.height * canvasReferenceResolution.y;
+        return new Vector2(x, y);
     }
 }

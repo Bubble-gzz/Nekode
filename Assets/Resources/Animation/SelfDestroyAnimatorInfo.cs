@@ -15,7 +15,7 @@ public class SelfDestroyAnimatorInfo : AnimationInfo
     public override void Invoke()
     {
         SelfDestroyAnimator animator = gameObject.GetComponent<SelfDestroyAnimator>();
-        //Global.debugCount++;
+        //.debugCount++;
         //Debug.Log("SelfDestroyAnimatorInfo : " + Global.debugCount);
         animator.info = this;
         if (animator == null) {

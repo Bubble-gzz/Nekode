@@ -57,7 +57,7 @@ public class MyDialogueBox : MonoBehaviour
         }
         */
         if (Input.anyKeyDown) fastforward = true;
-        tail.position = rect.position + (Vector3)tailOffset; //mainCam.ScreenToWorldPoint(tailOffset);
+        tail.position = rect.position + new Vector3(tailOffset.x/1920*Screen.width, tailOffset.y/1920*Screen.width); //mainCam.ScreenToWorldPoint(tailOffset);
         //UpdateMesh();
     }
     public void Open(Vector2 size)
@@ -70,7 +70,7 @@ public class MyDialogueBox : MonoBehaviour
         if (mainCam == null) mainCam = Global.mainCam;
         if (targetObject == null) targetObject = DrBubble.instance.transform;
         Debug.Log("dialogue.mainCam " + mainCam + "  /  global:" + Global.mainCam);
-        transform.position = mainCam.WorldToScreenPoint(targetObject.transform.position) + (Vector3)boxOffset;
+        transform.position = mainCam.WorldToScreenPoint(targetObject.transform.position) + new Vector3(boxOffset.x/1920*Screen.width, boxOffset.y/1920*Screen.width);
         panel.Appear();
     }
     public void Close(bool destroy = false)
