@@ -36,27 +36,29 @@ public class Puzzle4_1 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(31.9f, 31.8f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLR();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("你可能已经注意到，目前为止保存数据仍然很困难。");
-        else dialogue.Play("You may have noticed that storing data is still challenging at present.", new Vector2(600, 100));
+        else dialogue.Play("You may have noticed that storing data is still challenging at present.", new Vector2(680, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("比如我想让你将A设为22，B设为33。");
-        else dialogue.Play("Say, I would like you to set A to 22 and B to 33.", new Vector2(600, 150));
+        else dialogue.Play("Say, I would like you to set A to 22 and B to 33.", new Vector2(680, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("你将不得不考虑数据丢失的问题。");
-        else dialogue.Play("You will have to face the problem of data loss.", new Vector2(750, 150));
+        else dialogue.Play("You will have to face the problem of data loss.", new Vector2(660, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("所以我们向你介绍一个新的工具——");
-        else dialogue.Play("So let me introduce a new tool for you--", new Vector2(700, 150));
+        else dialogue.Play("So let me introduce a new tool for you--", new Vector2(780, 120));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("别管直线定律了吧。");
-        else dialogue.Play("just forget about the Law of Straight Line.", new Vector2(700, 150));
+        else dialogue.Play("just forget about the Law of Straight Line.", new Vector2(600, 160));
         while (dialogue.isPlaying) yield return null;
 
         dialogue.Close(true);

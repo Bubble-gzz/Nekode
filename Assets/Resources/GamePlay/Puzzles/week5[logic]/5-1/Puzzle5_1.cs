@@ -36,19 +36,21 @@ public class Puzzle5_1 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(30.7f, 31.6f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLM();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("目前为止不管输入是什么,小猫的路线总是固定的。");
-        else dialogue.Play("So far our kitten's route is always the same regardless of the input.", new Vector2(600, 100));
+        else dialogue.Play("So far our kitten's route is always the same regardless of the input.", new Vector2(760, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("为了支持更加灵活的逻辑，我们决定引入逻辑方块。");
-        else dialogue.Play("So we decide to introduce LOGIC TILES to add some flexibility.", new Vector2(600, 150));
+        else dialogue.Play("So we decide to introduce LOGIC TILES to add some flexibility.", new Vector2(760, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("利用GEQ方块实现一个正负数分类器吧。");
-        else dialogue.Play("Let's create a positive/negative number classifier with GEQ Tile.", new Vector2(750, 150));
+        else dialogue.Play("Let's create a positive/negative number classifier with GEQ Tile.", new Vector2(760, 160));
         while (dialogue.isPlaying) yield return null;
 
         dialogue.Close(true);

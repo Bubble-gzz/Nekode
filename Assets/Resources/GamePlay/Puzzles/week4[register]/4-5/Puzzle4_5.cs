@@ -36,15 +36,17 @@ public class Puzzle4_5 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(30.7f, 28.5f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLM();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("有了寄存器，交换数据变得很方便。");
-        else dialogue.Play("It becomes convenient to swap data with the help of register.", new Vector2(600, 100));
+        else dialogue.Play("It becomes convenient to swap data with the help of register.", new Vector2(800, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("试试交换A和B中的数据");
-        else dialogue.Play("Try swapping the data stored in A and B.", new Vector2(600, 150));
+        else dialogue.Play("Try swapping the data stored in A and B.", new Vector2(800, 120));
         while (dialogue.isPlaying) yield return null;
 
         dialogue.Close(true);

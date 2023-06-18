@@ -35,11 +35,13 @@ public class Puzzle5_5 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(28.5f, 32f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLL();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("求出两个数中较小的那一个");
-        else dialogue.Play("Could you always find the smaller number?", new Vector2(600, 100));
+        else dialogue.Play("Could you always find the smaller number?", new Vector2(800, 120));
         while (dialogue.isPlaying) yield return null;
 
         dialogue.Close(true);

@@ -35,19 +35,21 @@ public class Puzzle5_6 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(27.3f, 29.4f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLL();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("最近我们在办喵喵好声音");
-        else dialogue.Play("Recently we are planning to hold a singing contest.", new Vector2(600, 100));
+        else dialogue.Play("Recently we are planning to hold a singing contest.", new Vector2(680, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("你可以帮我们设计一个投票系统吗");
-        else dialogue.Play("Could you please design a voting system for us?", new Vector2(600, 100));
+        else dialogue.Play("Could you please design a voting system for us?", new Vector2(660, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("简单来说就是找出三个数中出现次数最多的那个数。");
-        else dialogue.Play("In simple terms, find the number that appears most frequently among the three numbers.", new Vector2(600, 100));
+        else dialogue.Play("In simple terms, find the number that appears most frequently among the three numbers.", new Vector2(700, 200));
         while (dialogue.isPlaying) yield return null;
 
         dialogue.Close(true);

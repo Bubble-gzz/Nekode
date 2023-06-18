@@ -37,19 +37,21 @@ public class Puzzle4_4 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(30.1f, 28.5f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLM();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("就像加法方块那样，寄存器也是可以设置初始值的。");
-        else dialogue.Play("Registers can be assigned with initial value just like ADD Tiles do.", new Vector2(600, 100));
+        else dialogue.Play("Registers can be assigned with initial value just like ADD Tiles do.", new Vector2(800, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("利用寄存器的特性，你可以设置一些有用的常量。");
-        else dialogue.Play("You can set some useful constants using this feature.", new Vector2(600, 150));
+        else dialogue.Play("You can set some useful constants using this feature.", new Vector2(780, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("这次的目标是做出一个奇怪的加法器。");
-        else dialogue.Play("This time, let's make a strange adder.", new Vector2(750, 150));
+        else dialogue.Play("This time, let's make a strange adder.", new Vector2(760, 120));
         while (dialogue.isPlaying) yield return null;
 
         dialogue.Close(true);

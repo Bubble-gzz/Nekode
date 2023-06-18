@@ -36,19 +36,21 @@ public class Puzzle4_6 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(30.7f, 28.5f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLM();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("我们暂时没有足够的寄存器。");
-        else dialogue.Play("We are short of registers currently.", new Vector2(600, 100));
+        else dialogue.Play("We are short of registers currently.", new Vector2(710, 120));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("你可以用其它方法实现上次的交换器吗？");
-        else dialogue.Play("Could you implement a swapper like before in another way?", new Vector2(600, 150));
+        else dialogue.Play("Could you implement a swapper like before in another way?", new Vector2(800, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("好消息是，我们这儿还有一些减法方块。");
-        else dialogue.Play("Good news is that we have some SUB Tiles for you.", new Vector2(750, 150));
+        else dialogue.Play("Good news is that we have some SUB Tiles for you.", new Vector2(800, 160));
         while (dialogue.isPlaying) yield return null;
 
         dialogue.Close(true);

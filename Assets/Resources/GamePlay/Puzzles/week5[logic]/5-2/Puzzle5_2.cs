@@ -47,11 +47,13 @@ public class Puzzle5_2 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(31.3f, 28.5f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLM();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("请实现一个比较器。");
-        else dialogue.Play("Please implement a comparator.", new Vector2(600, 100));
+        else dialogue.Play("Please implement a comparator.", new Vector2(650, 120));
         while (dialogue.isPlaying) yield return null;
 
         dialogue.Close(true);

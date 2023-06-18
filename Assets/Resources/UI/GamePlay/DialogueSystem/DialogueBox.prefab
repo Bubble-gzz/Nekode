@@ -228,7 +228,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Today let's make a 16x amplifier!
+  m_text: In simple terms, find the number that appears most frequently among the
+    three numbers.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d58eb52860d53fc46a7169f402c0af2c, type: 2}
   m_sharedMaterial: {fileID: 1258872212443488781, guid: d58eb52860d53fc46a7169f402c0af2c, type: 2}
@@ -338,7 +339,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 680, y: 120}
+  m_SizeDelta: {x: 700, y: 200}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &6102604104106911295
 MonoBehaviour:

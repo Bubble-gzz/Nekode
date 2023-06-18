@@ -36,7 +36,9 @@ public class Puzzle4_3 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(31.9f, 31.7f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLR();
         //helpCardPanel = GameUIManager.PopOutPanel(helpCardPanelPrefab).GetComponentInChildren<MyPanel>();
         //while (helpCardPanel.showing) yield return null;
         

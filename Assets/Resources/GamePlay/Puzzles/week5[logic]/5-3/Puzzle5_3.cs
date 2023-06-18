@@ -35,11 +35,13 @@ public class Puzzle5_3 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(28.4f, 31.5f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLL();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("请实现一个过滤器，筛掉那些不在[10,20]之间的数。");
-        else dialogue.Play("Please implement a comparator.", new Vector2(600, 100));
+        else dialogue.Play("Please create a filter to exclude numbers outside the range of [10, 20].", new Vector2(800, 160));
         while (dialogue.isPlaying) yield return null;
 
         dialogue.Close(true);

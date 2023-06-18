@@ -53,15 +53,17 @@ public class Puzzle5_4 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(27f, 29.2f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLL();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("这次的目标是做一个多路输出选择器。");
-        else dialogue.Play("This time we want you to make a demultiplexer.", new Vector2(600, 100));
+        else dialogue.Play("This time we want you to make a demultiplexer.", new Vector2(600, 160));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("通俗一点说，数字是多少，就点亮对应编号的灯！");
-        else dialogue.Play("To put it simple, just turn on the corresponding light that matches the number!", new Vector2(600, 100));
+        else dialogue.Play("To put it simple, just turn on the corresponding light that matches the number!", new Vector2(580, 200));
         while (dialogue.isPlaying) yield return null;
 
         dialogue.Close(true);

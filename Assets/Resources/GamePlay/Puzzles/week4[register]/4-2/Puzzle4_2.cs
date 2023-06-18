@@ -36,15 +36,17 @@ public class Puzzle4_2 : PuzzleLogic
     override protected IEnumerator GameProcess()
     {
         yield return base.GameProcess();
-
+        DrBubble.instance.transform.position = new Vector3(28.3f, 31.6f, 0);
+        yield return new WaitForSeconds(1f);
+        dialogue.SetTailLL();
         dialogue.Open();
         
         if (Settings.language == "CH") dialogue.Play("似曾相识的送快递任务。");
-        else dialogue.Play("We are studying number sequences.", new Vector2(600, 100));
+        else dialogue.Play("A familiar delivery mission huh?", new Vector2(620, 120));
         while (dialogue.isPlaying) yield return null;
 
         if (Settings.language == "CH") dialogue.Play("该怎么解决呢……");
-        else dialogue.Play("Now we have a sequence A, where each term is obtained by doubling the previous term and adding 2.", new Vector2(600, 150));
+        else dialogue.Play("How should we solve this?", new Vector2(550, 120));
         while (dialogue.isPlaying) yield return null;
 
         dialogue.Close(true);
