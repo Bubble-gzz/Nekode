@@ -44,6 +44,7 @@ public class SaveEntry : MonoBehaviour
     }
     void Init()
     {
+        originalPos = rect.anchoredPosition;
         choosed = false;
         PuzzleManager.PuzzleData data = PuzzleManager.GetData(saveName);
         if (data == null)
@@ -102,7 +103,6 @@ public class SaveEntry : MonoBehaviour
     }
     void ZoomOut()
     {
-        originalPos = rect.anchoredPosition;
         rect.DOAnchorPos(originalPos + new Vector2(0, 1000), 0.7f).SetEase(Ease.OutCubic);
     }
     IEnumerator ZoomBack()
