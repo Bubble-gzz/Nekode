@@ -41,13 +41,19 @@ public class PuzzleManager : MonoBehaviour
     }
     void InitSave(string nickName = "nickName")
     {
-        for(int i = 0; i < puzzleCount; i++)
-            puzzleStar.Add(-1);
-        puzzleStar[0] = 0;
+        puzzleStar.Clear();
+        if (nickName == "Dr.Bubble")
+        {
+            for(int i = 0; i < puzzleCount; i++)
+                puzzleStar.Add(UnityEngine.Random.Range(0, 4));
+        }
+        else
+        {
+            for(int i = 0; i < puzzleCount; i++)
+                puzzleStar.Add(-1);
+            puzzleStar[0] = 0;
+        }
         saveNickname = nickName;
-//        puzzleStar[1] = 2;
-  //      puzzleStar[2] = 1;
-    //    puzzleStar[3] = 0;
     }
     static public int PuzzleInfo(int id)
     {

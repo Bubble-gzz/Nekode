@@ -30,6 +30,7 @@ public class Calendar : MonoBehaviour
     }
     void Start()
     {
+        AudioManager.PlayMusicByName("Puzzle_Select");
         CreateIndex();
         curPage = PuzzleManager.calendarPage;
         for (int i = 0; i < pageCount; i++)

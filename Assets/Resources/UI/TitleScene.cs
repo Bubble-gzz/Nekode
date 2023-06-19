@@ -7,7 +7,7 @@ public class TitleScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        AudioManager.PlayMusicByName("Main_Menu");
     }
 
     // Update is called once per frame
