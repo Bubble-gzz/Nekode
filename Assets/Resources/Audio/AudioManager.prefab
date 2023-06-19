@@ -305,6 +305,8 @@ MonoBehaviour:
   - name: Gameplay_bgm_relaxing
     clip: {fileID: 8300000, guid: f6acb4a1fd4eca14fa59d615d0546f4d, type: 3}
   - name: Main_Menu
-    clip: {fileID: 8300000, guid: 171eb83b04946d7479f37d50795a79bf, type: 3}
+    clip: {fileID: 8300000, guid: 9abcc85605ee9fc45acc9b317eb3ed75, type: 3}
   - name: Puzzle_Select
     clip: {fileID: 8300000, guid: c248375a723a12c459b0a740ba310f82, type: 3}
+  - name: Opening
+    clip: {fileID: 8300000, guid: 9abcc85605ee9fc45acc9b317eb3ed75, type: 3}

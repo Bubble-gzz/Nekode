@@ -16,7 +16,7 @@ public class MyDialogueBox : MonoBehaviour
     public bool isPlaying;
     public bool fastforward;
     MyPanel panel;
-    Transform targetObject = null;
+    public Transform targetObject = null;
     public Vector2 boxOffset;
     Transform tail;
     Camera mainCam;
@@ -38,7 +38,7 @@ public class MyDialogueBox : MonoBehaviour
     void Start()
     {
         mainCam = Global.mainCam;
-        targetObject = DrBubble.instance.transform;
+//        targetObject = DrBubble.instance.transform;
         if (Settings.language == "CH") content.font = font_CH;
         else content.font = font_EN;
     }

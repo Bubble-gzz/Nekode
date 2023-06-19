@@ -153,6 +153,7 @@ public class PuzzleLogic : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         dialogue = GameUIManager.PopOutDialogueBox().GetComponentInChildren<MyDialogueBox>();
+        dialogue.targetObject = DrBubble;
         //dialogue = GameUIManager.PopOutPanel(dialogueBoxPrefab).GetComponentInChildren<MyDialogueBox>();
     }
     public void PuzzleComplete()
