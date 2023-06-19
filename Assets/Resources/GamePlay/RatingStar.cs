@@ -28,9 +28,11 @@ public class RatingStar : MonoBehaviour
         var sequence = DOTween.Sequence();
         star.transform.localScale = Vector3.zero;
         star.GetComponent<Image>().DOFade(1, 0.1f);
-        sequence.Append( star.transform.DOScale(Vector3.one * 1.3f, 0.1f) );
-        sequence.Append( star.transform.DOScale(Vector3.one * 0.9f, 0.1f) );
-        sequence.Append( star.transform.DOScale(Vector3.one * 1f, 0.1f) );    
+        sequence.Append( star.transform.DOScale(new Vector3(1.3f, 0.7f, 1), 0.1f) );
+        sequence.Append( star.transform.DOScale(new Vector3(0.8f, 1.2f, 1), 0.1f) );
+        sequence.Append( star.transform.DOScale(new Vector3(0.9f, 1.1f, 1), 0.1f) );    
+        sequence.Append( star.transform.DOScale(new Vector3(1.05f, 0.95f, 1), 0.1f) );    
+        sequence.Append( star.transform.DOScale(new Vector3(1, 1, 1), 0.1f) );    
     }
     public void Fail()
     {

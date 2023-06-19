@@ -189,7 +189,7 @@ public class Neko : MonoBehaviour
             case (MyTile.Type.RegisterTile):
                 if (mode == Mode.Write)
                 {
-                    tile.UpdateValue(value);
+                    UpdateTileValue(tile, value); // tile.UpdateValue(value);
                 }
                 else
                 {
@@ -199,28 +199,28 @@ public class Neko : MonoBehaviour
             case (MyTile.Type.ADD):
                 if (mode == Mode.Write)
                 {
-                    tile.UpdateValue(value);
+                    UpdateTileValue(tile, value); // tile.UpdateValue(value);
                 }
                 else UpdateValue(value + tile.value);
                 break;
             case (MyTile.Type.SUB):
                 if (mode == Mode.Write)
                 {
-                    tile.UpdateValue(value);
+                    UpdateTileValue(tile, value); //tile.UpdateValue(value);
                 }
                 else UpdateValue(value - tile.value);
                 break;
             case (MyTile.Type.MUL):
                 if (mode == Mode.Write)
                 {
-                    tile.UpdateValue(value);
+                    UpdateTileValue(tile, value); //tile.UpdateValue(value);
                 }
                 else UpdateValue(value * tile.value);
                 break;
             case (MyTile.Type.DIV):
                 if (mode == Mode.Write)
                 {
-                    tile.UpdateValue(value);
+                    UpdateTileValue(tile, value); //tile.UpdateValue(value);
                 }
                 else
                 if (tile.value != 0) UpdateValue(value / tile.value);
@@ -228,14 +228,14 @@ public class Neko : MonoBehaviour
             case (MyTile.Type.MOD):
                 if (mode == Mode.Write)
                 {
-                    tile.UpdateValue(value);
+                    UpdateTileValue(tile, value);// tile.UpdateValue(value);
                 }
                 else if (tile.value != 0) UpdateValue(value % tile.value);
                 break;
             case (MyTile.Type.EQU):
                 if (mode == Mode.Write)
                 {
-                    tile.UpdateValue(value);
+                    UpdateTileValue(tile, value); //tile.UpdateValue(value);
                     tile.SetLogitState(true);
                 }
                 else
@@ -246,7 +246,7 @@ public class Neko : MonoBehaviour
             case (MyTile.Type.GEQ):
                 if (mode == Mode.Write)
                 {
-                    tile.UpdateValue(value);
+                    UpdateTileValue(tile, value);// tile.UpdateValue(value);
                     tile.SetLogitState(true);
                 }
                 else
@@ -257,7 +257,7 @@ public class Neko : MonoBehaviour
             case (MyTile.Type.GTR):
                 if (mode == Mode.Write)
                 {
-                    tile.UpdateValue(value);
+                    UpdateTileValue(tile, value);// tile.UpdateValue(value);
                     tile.SetLogitState(true);
                 }
                 else
@@ -268,7 +268,7 @@ public class Neko : MonoBehaviour
             case (MyTile.Type.LEQ):
                 if (mode == Mode.Write)
                 {
-                    tile.UpdateValue(value);
+                    UpdateTileValue(tile, value); //tile.UpdateValue(value);
                     tile.SetLogitState(true);
                 }
                 else
@@ -279,7 +279,7 @@ public class Neko : MonoBehaviour
             case (MyTile.Type.LSS):
                 if (mode == Mode.Write)
                 {
-                    tile.UpdateValue(value);
+                    UpdateTileValue(tile, value); // tile.UpdateValue(value);
                     tile.SetLogitState(true);
                 }
                 else
@@ -290,7 +290,7 @@ public class Neko : MonoBehaviour
             case (MyTile.Type.NEQ):
                 if (mode == Mode.Write)
                 {
-                    tile.UpdateValue(value);
+                    UpdateTileValue(tile, value); // tile.UpdateValue(value);
                     tile.SetLogitState(true);
                 }
                 else

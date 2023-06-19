@@ -18,9 +18,11 @@ public class MyCondition : MonoBehaviour
         condition = GetComponentInChildren<TMP_Text>();//.text;
         mark = transform.Find("checkbox/mark");
         canvasGroup = GetComponentInChildren<CanvasGroup>();
+        canvasGroup.alpha = 0;
         rect = GetComponent<RectTransform>();
         pos0 = rect.anchoredPosition;
         rect.anchoredPosition = pos0 + new Vector2(100, 0);
+        
     }
     void Start()
     {

@@ -8,6 +8,7 @@ public class ResultPanel : MonoBehaviour
     // Start is called before the first frame update
     MyPanel myPanel;
     Sequence starAnimSeq;
+    public MyPanel buttonPanel;
     static List<string>[] remarks = new List<string>[3]{
         new List<string>(){"Good", "Okay"},
         new List<string>(){"Great", "Nice"},

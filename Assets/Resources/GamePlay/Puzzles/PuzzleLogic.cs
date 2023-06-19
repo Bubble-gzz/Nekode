@@ -168,6 +168,7 @@ public class PuzzleLogic : MonoBehaviour
         GameUIManager.FoldUI();
         resultPanel = GameUIManager.PopOutResultPanel().GetComponentInChildren<ResultPanel>();
         resultPanel.Appear();
+        resultPanel.buttonPanel.Appear();
 
         /*update puzzle complete information*/
         yield return StartCoroutine(CheckCondition0());
