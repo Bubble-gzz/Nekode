@@ -24,6 +24,9 @@ public class MyButtonImageEditor : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("tweenInterval"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("size_on"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("size_off"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("show"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("oneshot"));
+
         EditorGUILayout.Space(20);
 
         EditorGUILayout.PropertyField(serializedObject.FindProperty("shakeNotice"));

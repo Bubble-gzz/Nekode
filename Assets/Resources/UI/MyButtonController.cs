@@ -51,11 +51,14 @@ public class MyButtonController : MonoBehaviour, IPointerEnterHandler, IPointerE
     {
         
     }
-    public void SetActive(bool flag)
+    public void SetActive(bool flag, bool involveImage = true)
     {
         active = flag;
-        if (flag) image?.Appear();
-        else image?.Disappear();
+        if (involveImage)
+        {
+            if (flag) image?.Appear();
+            else image?.Disappear();
+        }
     }
     public void Clicked()
     {

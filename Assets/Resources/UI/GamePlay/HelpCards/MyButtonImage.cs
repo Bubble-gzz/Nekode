@@ -16,7 +16,8 @@ public class MyButtonImage : MonoBehaviour
     public bool shakeNotice = false;
     public float timeBeforeShake = 3f, shakeTimeUnit = 1, shakeInterval = 1;
     public float shakeAngle = 30;
-    bool show, hover, active;
+    public bool show, hover, active;
+    public bool oneshot = false; // clicked once
     Sequence animationSequence;
     void Awake()
     {
@@ -85,14 +86,14 @@ public class MyButtonImage : MonoBehaviour
     }
     public void OnMouseExit()
     {
-        if (!show || !active) return;
+        //if (!show || !active) return;
         hover = false;
         StopTween();
         transform.DORotate(new Vector3(0, 0, 0), 0.2f);
         animationSequence = DOTween.Sequence();
-        animationSequence.Append(transform.DOScale(new Vector3(0.9f, 0.9f, 0.9f), tweenInterval));
-        animationSequence.Append(transform.DOScale(new Vector3(1.05f, 1.05f, 1.05f), tweenInterval));
-        animationSequence.Append(transform.DOScale(new Vector3(1f, 1f, 1f), tweenInterval));
+        animationSequence.Append(transform.DOScale(size_off * 0.9f, tweenInterval));
+        animationSequence.Append(transform.DOScale(size_off * 1.05f, tweenInterval));
+        animationSequence.Append(transform.DOScale(size_off, tweenInterval));
         if (image != null) animationSequence.Insert(0, image.DOColor(NormalColor, tweenInterval * 3));
     }
     public void OnClicked()
@@ -107,8 +108,10 @@ public class MyButtonImage : MonoBehaviour
         animationSequence.Append(transform.DOScale(size_on, tweenInterval));
        // animationSequence.Insert(0, image.DOColor(ClickedColor, tweenInterval * 0.5f));
         
-        if (image != null) animationSequence.Insert(0, image.DOColor(HoverColor, tweenInterval*2));
-        
+        if (image != null) {
+            if (!oneshot) animationSequence.Insert(0, image.DOColor(HoverColor, tweenInterval*2));
+            else animationSequence.Insert(0, image.DOColor(NormalColor, tweenInterval*2));
+        }
     }
     public void Disappear()
     {

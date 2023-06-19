@@ -1,35 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.IO;
 
 public class PuzzleManager : MonoBehaviour
 {
     // Start is called before the first frame update
     static PuzzleManager Instance;
-    static bool newSave = true;
     static public int calendarPage;
-    List<int> puzzleStar = new List<int>(); //-1 locked  0 newPuzzle 1~3 stars
+    static List<int> puzzleStar = new List<int>(); //-1 locked  0 newPuzzle 1~3 stars
     static public int puzzleCount = 30;
     static public int currentPuzzleID = 0;
-    static string saveName = "showcase";
+    static public string saveName = "save1";
+    static string saveNickname = "Fully Unlocked Save";
+    
+    [Serializable]
+    public class PuzzleData{
+        public List<int> puzzleStar;
+        public string nickName;
+        public PuzzleData(List<int> _puzzleStar, string _nickName)
+        {
+            puzzleStar = _puzzleStar;
+            nickName = _nickName;
+        }
+    }
+    PuzzleData puzzleData;
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            if (newSave) InitSave();
+            //LoadData();
             calendarPage = 0;
         }
         else {
             Destroy(gameObject);
         }
     }
-    void InitSave()
+    void InitSave(string nickName = "nickName")
     {
         for(int i = 0; i < puzzleCount; i++)
             puzzleStar.Add(-1);
         puzzleStar[0] = 0;
+        saveNickname = nickName;
 //        puzzleStar[1] = 2;
   //      puzzleStar[2] = 1;
     //    puzzleStar[3] = 0;
@@ -37,24 +52,61 @@ public class PuzzleManager : MonoBehaviour
     static public int PuzzleInfo(int id)
     {
         if (Instance == null) return -1;
-        return Instance.puzzleStar[id];
+        return puzzleStar[id];
     }
     static public void UpdatePuzzleInfo(int id, int starCount)
     {
         if (id < 0 || id >= puzzleCount) return;
-        if (starCount > Instance.puzzleStar[id]) Instance.puzzleStar[id] = starCount;
+        if (starCount > puzzleStar[id]) puzzleStar[id] = starCount;
         if (id < puzzleCount - 1) // Unlock new puzzle
         {
-            if (Instance.puzzleStar[id + 1] == -1) Instance.puzzleStar[id + 1] = 0;
+            if (puzzleStar[id + 1] == -1) puzzleStar[id + 1] = 0;
         }
         SaveData();
     }
     static public void SaveData()
     {
-
+        string savePath = Application.dataPath + "/" + saveName + ".json";
+        Debug.Log("puzzleStar: " + puzzleStar);
+        PuzzleData data = new PuzzleData(puzzleStar, saveNickname);
+        string data_text = JsonUtility.ToJson(data);
+        File.WriteAllText(savePath, data_text);
     }
     static public void LoadData()
     {
-
+        LoadData(saveName);
+    }
+    static public void LoadData(string _saveName)
+    {
+        saveName = _saveName;
+        string savePath = Application.dataPath + "/" + saveName + ".json";
+        if (!File.Exists(savePath))
+        {
+            NewSave("");
+        }
+        else {
+            string data_text = File.ReadAllText(savePath);
+            PuzzleData data = JsonUtility.FromJson<PuzzleData>(data_text);
+            puzzleStar = data.puzzleStar;
+            saveNickname = data.nickName;
+        }
+    }
+    static public PuzzleData GetData(string saveName)
+    {
+        string savePath = Application.dataPath + "/" + saveName + ".json";
+        if (!File.Exists(savePath))
+        {
+            return null;
+        }
+        else {
+            string data_text = File.ReadAllText(savePath);
+            PuzzleData data = JsonUtility.FromJson<PuzzleData>(data_text);
+            return data;
+        }
+    }
+    static public void NewSave(string nickName)
+    {
+        Instance.InitSave(nickName);
+        SaveData();
     }
 }
