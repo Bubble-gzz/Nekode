@@ -15,9 +15,10 @@ public class OpeningStory : MonoBehaviour
     Vector3 triangleOrigin;
     public RectTransform upperEyelid, lowerEyelid;
     public Image sceneOfWakeUp;
+    public MyPanel skipButtonPanel;
+    bool canSkip;
     void Awake()
     {
-    
     }
     void Start()
     {
@@ -29,8 +30,20 @@ public class OpeningStory : MonoBehaviour
     {
         
     }
+    public void FinishPlaying()
+    {
+        PlayerPrefs.SetInt("FirstPlay", 1);
+        SceneSwitcher.SwitchTo("Menu");
+    }
     IEnumerator Story()
     {
+        canSkip = PlayerPrefs.GetInt("FirstPlay", 0) != 0;
+        if (canSkip) {
+            skipButtonPanel.GetComponentInChildren<TMP_Text>().color = new Color(1,1,1,1);
+            skipButtonPanel.Appear();
+        }
+        else skipButtonPanel.Disappear();
+
         text_middle.color = new Color(1,1,1,1);
         text_middle.GetComponent<CanvasGroup>().alpha = 0;
         triangle.GetComponent<CanvasGroup>().alpha = 0;
@@ -67,6 +80,7 @@ public class OpeningStory : MonoBehaviour
 
         text_middle.color = new Color(0,0,0,1);
         triangle.GetComponent<Image>().color = new Color(0,0,0,1);
+        if (canSkip) skipButtonPanel.GetComponentInChildren<TMP_Text>().color = new Color(0,0,0,1);
         yield return PopDialogue("Meow Meow Meow~", 0.2f);
         yield return PopDialogue("Meow? Meow.", 0.2f);
         yield return PopDialogue("Meow! Meow! Meow~", 0.2f);
@@ -102,8 +116,8 @@ public class OpeningStory : MonoBehaviour
         yield return FadeDialogue("I don't know what tense should I use when you are reading these words,", 0.2f);
         yield return FadeDialogue("But I hope this interactive diary could bring you some fun.", 0.2f);
         yield return FadeDialogue("Have a good time, whenever you are from past, present, or future.", 0.2f);
-        
-        SceneSwitcher.SwitchTo("Menu");
+
+        FinishPlaying();
     }
     IEnumerator OpenEyes(float width, float duration)
     {

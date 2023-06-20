@@ -33,6 +33,8 @@ public class AudioManager : MonoBehaviour
             if (!audioClips.ContainsKey(audio.name))
                 audioClips.Add(audio.name, audio.clip);
         }
+        bgmVolume = PlayerPrefs.GetFloat("bgmVolume", 1);
+        sfxVolume = PlayerPrefs.GetFloat("sfxVolume", 1);
     }
     void Start()
     {
@@ -59,5 +61,15 @@ public class AudioManager : MonoBehaviour
         Instance.musicSource.loop = loop;
         Instance.musicSource.clip = clip;
         Instance.musicSource.Play();
+    }
+    static public void Update_bgmVolume(float newVolume)
+    {
+        bgmVolume = newVolume;
+        PlayerPrefs.SetFloat("bgmVolume", bgmVolume);
+    }
+    static public void Update_sfxVolume(float newVolume)
+    {
+        sfxVolume = newVolume;
+        PlayerPrefs.SetFloat("sfxVolume", sfxVolume);
     }
 }
