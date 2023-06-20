@@ -115,6 +115,7 @@ public class Neko : MonoBehaviour
         }
         //Debug.Log("Pass1");
         if (grid.grid[_i, _j] == null) {
+            Debug.Log("stop at (" + i + ", " + j + ")");
             running = false;
             ResetButton.Hint();
             PlayButton.StopPlaying();

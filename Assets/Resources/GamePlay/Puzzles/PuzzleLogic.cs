@@ -199,20 +199,20 @@ public class PuzzleLogic : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         resultPanel.CheckCondition(0, conditionStatus[0]);
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.3f);
 
         resultPanel.CheckCondition(1, conditionStatus[1]);
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.3f);
 
         resultPanel.CheckCondition(2, conditionStatus[2]);
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.3f);
 
-        resultPanel.PopStar(0, conditionStatus[0]);
-        yield return new WaitForSeconds(0.3f);
-        resultPanel.PopStar(1, conditionStatus[1]);
-        yield return new WaitForSeconds(0.3f);
-        resultPanel.PopStar(2, conditionStatus[2]);
-        yield return new WaitForSeconds(0.3f);
+        resultPanel.PopStar(0, starCount >= 1);
+        yield return new WaitForSeconds(0.9f);
+        resultPanel.PopStar(1, starCount >= 2);
+        yield return new WaitForSeconds(0.9f);
+        resultPanel.PopStar(2, starCount >= 3);
+        yield return new WaitForSeconds(0.9f);
 
         if (conditionStatus[0] && conditionStatus[1] && conditionStatus[2])
             resultPanel.PlayChord();

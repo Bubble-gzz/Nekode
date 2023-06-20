@@ -8,10 +8,12 @@ public class RatingStar : MonoBehaviour
 {
     // Start is called before the first frame update
     Transform star, notch;
+    AudioSource sfx_star;
     void Awake()
     {
         star = transform.Find("Star");
         notch = transform.Find("Notch");
+        sfx_star = GetComponent<AudioSource>();
     }
     void Start()
     {
@@ -25,6 +27,11 @@ public class RatingStar : MonoBehaviour
     }
     public void Pass()
     {
+        if (sfx_star)
+        {
+            sfx_star.volume = AudioManager.sfxVolume;
+            sfx_star.Play();
+        }
         var sequence = DOTween.Sequence();
         star.transform.localScale = Vector3.zero;
         star.GetComponent<Image>().DOFade(1, 0.1f);

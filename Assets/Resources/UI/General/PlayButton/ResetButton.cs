@@ -51,7 +51,7 @@ public class ResetButton : MyButton
             bubble.GetComponent<CanvasGroup>().DOFade(0, 0.1f);
             seq.onComplete = (()=>{bubble.gameObject.SetActive(false);});
         }
-        
+
         coroutinesToBeKilledOnReset.RemoveAll(item => item == null);
         foreach(var coroutine in coroutinesToBeKilledOnReset.ToArray()) {
             coroutinesToBeKilledOnReset.Remove(coroutine);
@@ -82,6 +82,7 @@ public class ResetButton : MyButton
     }
     static public void Hint()
     {
+        if (Instance == null) return;
         if (Instance.isActiveAndEnabled)
             Instance.PopBubble();
     }

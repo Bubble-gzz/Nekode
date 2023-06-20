@@ -40,8 +40,8 @@ public class TitleScene : MonoBehaviour
         grid.InviteNeko(52,69,1); //N2
 
         grid.InviteNeko(52,74,2); //E
-        Vector2 startPos = grid.GetWorldPos(50, 34);
-        Vector2 endPos = grid.GetWorldPos(50, 65);
+        Vector2 startPos = grid.GetWorldPos(50, 36);
+        Vector2 endPos = grid.GetWorldPos(50, 67);
         mainCam.transform.position = new Vector3(startPos.x, startPos.y, -10);
         mainCam.DOMove(new Vector3(endPos.x, endPos.y, -10) ,50).SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
 

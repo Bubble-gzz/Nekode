@@ -57,11 +57,14 @@ public class MyGrid : MonoBehaviour
     void Start()
     {
         myCamera = Global.mainCam;
-        if (myCamera.GetComponent<MyCamera>().mode == MyCamera.Mode.WSAD)
+        if (!isTitleBackground)
         {
-            Vector3 newPos = GetWorldPos(n / 2, m / 2);
-            newPos.z = -10;
-            myCamera.transform.position = newPos;
+            if (myCamera.GetComponent<MyCamera>().mode == MyCamera.Mode.WSAD)
+            {
+                Vector3 newPos = GetWorldPos(n / 2, m / 2);
+                newPos.z = -10;
+                myCamera.transform.position = newPos;
+            }
         }
     }
     public void SetTileCount(List<TilePresetPair> tileCountPreset)

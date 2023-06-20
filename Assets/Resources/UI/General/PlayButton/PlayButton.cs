@@ -100,7 +100,7 @@ public class PlayButton : MyButton
     }
     static public void Hint()
     {
-        if (Instance.isActiveAndEnabled)
+        if (Instance.isActiveAndEnabled && Global.gameState == Global.GameState.Editing)
             Instance.PopBubble();
     }
     static public void StopPlaying()

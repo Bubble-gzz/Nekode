@@ -49,13 +49,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2308128094342778043, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: description_CH
-      value: "The <color=#19A100>green tile</color> is where data comes out. \nOur
+      value: "The <color=#19A100>green tile</color> is where data is submited. \nOur
         kitten <sprite=0> will put his number into the output port  upon stepping
         onto it. "
       objectReference: {fileID: 0}
     - target: {fileID: 2308128094342778043, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: description_EN
-      value: "The <color=#19A100>green tile</color> is where data comes out. \nOur
+      value: "The <color=#19A100>green tile</color> is where data is submited. \nOur
         kitten <sprite=0> will put his number into the output port  upon stepping
         onto it. "
       objectReference: {fileID: 0}
