@@ -267,7 +267,8 @@ public class MyTile : MonoBehaviour
         canBeFree = permission != Permission.Free && isWorkshop;
         canBeProtected = permission != Permission.Protected && isWorkshop;
         canBeReadOnly = permission != Permission.ReadOnly && isWorkshop && hasValue;
-        hasLabel = Global.inWorkshop;
+        if (Global.inWorkshop) hasLabel = true;
+        else hasLabel = MyGrid.canAddLabelAsPlayer & hasValue & (permission == Permission.Free);
 
         if (isWorkshop)
         {
@@ -328,6 +329,7 @@ public class MyTile : MonoBehaviour
         if (deleted) return;
         deleted = true;
         //Debug.Log("delete");
+        if (label != null && label != "") myGrid.tileTable[label].Remove(this);
         if (sfx_delete && type != Type.Blank)
         {
             sfx_delete.volume = AudioManager.sfxVolume;

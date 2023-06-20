@@ -44,8 +44,10 @@ public class MyGrid : MonoBehaviour
     }
     [SerializeField]
     int tileKindN;
+    static public bool canAddLabelAsPlayer = false;
     void Awake()
     {
+        canAddLabelAsPlayer = false;
         grid = new GameObject[n, m];
         currentTileType = MyTile.Type.NULL;
         lasti = lastj = -100;

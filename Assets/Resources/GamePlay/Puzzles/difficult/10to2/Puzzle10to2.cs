@@ -35,8 +35,9 @@ public class Puzzle10to2 : PuzzleLogic
 
     override protected IEnumerator GameProcess()
     {
+        MyGrid.canAddLabelAsPlayer = true;
         yield return base.GameProcess();
-        DrBubble.instance.transform.position = new Vector3(30.7f, 28.5f, 0);
+        DrBubble.instance.transform.position = new Vector3(65.6f, 63f, 0);
         yield return new WaitForSeconds(1f);
         dialogue.SetTailLM();
         dialogue.Open();
@@ -60,7 +61,7 @@ public class Puzzle10to2 : PuzzleLogic
         if (Settings.language == "CH") dialogue.Play("现在试试将输入的数转化为二进制数位吧！");
         else dialogue.Play("Now try to make a machine converting the input number to binary bits!", new Vector2(800, 160));
         while (dialogue.isPlaying) yield return null;
-        
+
         dialogue.Close(true);
 
         yield return new WaitForSeconds(0.2f);
