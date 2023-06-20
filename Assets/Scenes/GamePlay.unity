@@ -3061,6 +3061,10 @@ MonoBehaviour:
     tilePreset: {fileID: 11400000, guid: d076f0113ebda1440bd4cfcd34031e0b, type: 2}
     puzzleLogic: {fileID: 1017659862919568342, guid: 1fd8c9b9de585214d8b0f4858abda23b, type: 3}
     cameraSize: 4
+  - puzzleName: 10to2
+    tilePreset: {fileID: 11400000, guid: 9970a52300f2b2e499cf615b2dda5cfa, type: 2}
+    puzzleLogic: {fileID: 2346825772962017916, guid: dd20638fa2df2cf459537c30960abd32, type: 3}
+    cameraSize: 4
   puzzleLogics: []
   mainInventory: {fileID: 468300230}
   arithInventory: {fileID: 558332627}

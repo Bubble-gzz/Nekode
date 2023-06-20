@@ -550,7 +550,7 @@ MonoBehaviour:
   damping: 0
   accelRate: 1
   speedLimit: 0
-  freelyMove: 1
+  freelyMove: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0

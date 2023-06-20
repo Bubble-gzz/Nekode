@@ -10,7 +10,7 @@ public class PuzzleManager : MonoBehaviour
     static PuzzleManager Instance;
     static public int calendarPage;
     static List<int> puzzleStar = new List<int>(); //-1 locked  0 newPuzzle 1~3 stars
-    static public int puzzleCount = 30;
+    static public int puzzleCount = 31;
     static public int currentPuzzleID = 0;
     static public string saveName = "save1";
     static string saveNickname = "Fully Unlocked Save";

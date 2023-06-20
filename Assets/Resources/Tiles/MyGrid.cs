@@ -36,6 +36,11 @@ public class MyGrid : MonoBehaviour
     public bool isTitleBackground = false;
     class Rect{
         public int l,u,r,d;
+        public Rect(int _l, int _u, int _r, int _d)
+        {
+            l = _l; u = _u; r = _r; d = _d;
+        }
+        public Rect() {}
     }
     [SerializeField]
     int tileKindN;
@@ -53,19 +58,26 @@ public class MyGrid : MonoBehaviour
         for (int i = 0; i < tileKindN; i++)
             tileCount.Add(-1);
         sfx_place = GameObject.Find("sfx/place")?.GetComponent<AudioSource>();
+        borderCalculated = false;
+        cameraCalibrated = false;
     }
+    bool borderCalculated, cameraCalibrated;
     void Start()
     {
         myCamera = Global.mainCam;
-        if (!isTitleBackground)
+    }
+    void CameraInitialize()
+    {
+        if (isTitleBackground) return;
+        if (myCamera.GetComponent<MyCamera>().mode == MyCamera.Mode.WSAD)
         {
-            if (myCamera.GetComponent<MyCamera>().mode == MyCamera.Mode.WSAD)
-            {
-                Vector3 newPos = GetWorldPos(n / 2, m / 2);
-                newPos.z = -10;
-                myCamera.transform.position = newPos;
-            }
+            Debug.Log("l:" + border.l + " r:" + border.r + " u:" + border.u + " d:" + border.d);
+            Vector3 newPos = (GetWorldPos(border.d, border.l) + GetWorldPos(border.d, border.r) + 
+                                GetWorldPos(border.u, border.l) + GetWorldPos(border.u, border.r)) / 4;
+            newPos.z = -10;
+            myCamera.transform.position = newPos;
         }
+        cameraCalibrated = true;
     }
     public void SetTileCount(List<TilePresetPair> tileCountPreset)
     {
@@ -80,6 +92,8 @@ public class MyGrid : MonoBehaviour
         grid[n/2, m/2] = NewTile(MyTile.Type.Blank, n/2, m/2);
         grid[n/2, m/2].transform.position = GetWorldPos(n/2, m/2);
         if (!isTitleBackground) InviteNeko(n/2, m/2);
+        cameraCalibrated = false;
+        UpdateRect();
     }
 
     public void InviteNeko(int i, int j, int dir = 0)
@@ -105,6 +119,8 @@ public class MyGrid : MonoBehaviour
         CheckBlankTile();
         CheckPlaceTile();
         lasti = i; lastj = j;
+        if (borderCalculated && !cameraCalibrated)
+            CameraInitialize();
     }
     void CheckCancelCurrentTile()
     {
@@ -258,6 +274,9 @@ public class MyGrid : MonoBehaviour
     void LoadFromJson(string jsonData)
     {
         ClearGrid();
+        
+        cameraCalibrated = false;
+        borderCalculated = false;
         GridData gridData = JsonUtility.FromJson<GridData>(jsonData);
         n = gridData.n; m = gridData.m;
         grid = new GameObject[n, m];
@@ -271,6 +290,23 @@ public class MyGrid : MonoBehaviour
             neko.value = nekoData.value;
             neko.direction = nekoData.direction;
         }
+        UpdateRect();
+
+    }
+    void UpdateRect()
+    {
+        if (grid == null) return;
+        border = new Rect(m, -1, -1, n);
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < m; j++)
+                if (grid[i, j] != null)
+                {
+                    if (j < border.l) border.l = j;
+                    if (j > border.r) border.r =j;
+                    if (i < border.d) border.d = i;
+                    if (i > border.u) border.u = i;
+                }
+        borderCalculated = true;
     }
     void BuildTileFromData(TileData tileData)
     {
