@@ -19,6 +19,7 @@ public class PuzzleLogic : MonoBehaviour
     static public TestProgress testProgress;
     bool isTesting = false;
     Transform DrBubble;
+    AudioSource sfx_accepted, sfx_error;
     virtual protected void Awake()
     {
         answerTable = new Dictionary<string, int>();
@@ -26,6 +27,9 @@ public class PuzzleLogic : MonoBehaviour
         curTestCase = 0;
         isTestResultClean = true;
         DrBubble = GameObject.Find("Dr.Bubble").transform;
+        GameUIManager.HelpCardPrefab = helpCardPanelPrefab;
+        sfx_accepted = GameObject.Find("sfx/accepted").GetComponent<AudioSource>();
+        sfx_error = GameObject.Find("sfx/error").GetComponent<AudioSource>();
     }
     virtual protected void Start()
     {
@@ -106,6 +110,8 @@ public class PuzzleLogic : MonoBehaviour
         isTestResultClean = false;
         if (accepted)
         {
+            sfx_accepted.volume = AudioManager.sfxVolume;
+            sfx_accepted.Play();
             testProgress?.SetCurrentResult(true);
             yield return new WaitForSeconds(1f);
             if (curTestCase == totalTestCase)
@@ -116,6 +122,8 @@ public class PuzzleLogic : MonoBehaviour
             yield return NextTestCase();
         }
         else{
+            sfx_error.volume = AudioManager.sfxVolume;
+            sfx_error.Play();
             testProgress?.SetCurrentResult(false);
             TestCaseFail();
         }

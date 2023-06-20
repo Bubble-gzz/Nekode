@@ -24,6 +24,7 @@ public class Arrow : MonoBehaviour
     Transform myCollider;
     SpriteRenderer sprite;
     bool logicState, lastLogicState;
+    AudioSource sfx_delete;
     static public bool IsArrow(MyTile.Type type)
     {
         return type == MyTile.Type.Arrow || type == MyTile.Type.FlipArrow;
@@ -53,6 +54,7 @@ public class Arrow : MonoBehaviour
         mouseEnter = false;
         myCollider = transform.Find("Collider");
         texture = transform.Find("Texture");
+        sfx_delete = GameObject.Find("sfx/delete")?.GetComponent<AudioSource>();
         //Debug.Log("texture:" + texture);
     }
     void Start()
@@ -137,6 +139,11 @@ public class Arrow : MonoBehaviour
     public void Delete()
     {
         if (Global.gameState != Global.GameState.Editing) return;
+        if (sfx_delete)
+        {
+            sfx_delete.volume = AudioManager.sfxVolume;
+            sfx_delete.Play();
+        }
         //Debug.Log("arrow to tile: " + (int)ArrowToTileType(type));
         if (tile.myGrid.tileCount[(int)ArrowToTileType(type)] >= 0) tile.myGrid.tileCount[(int)ArrowToTileType(type)]++;
         tile.DeleteArrow(id);

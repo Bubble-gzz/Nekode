@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource effectSource;
     static Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
     public List<AudioWithName> audioPresets = new List<AudioWithName>();
+    static public float bgmVolume = 1, sfxVolume = 1;
     [Serializable]
     public class AudioWithName{
         public string name;

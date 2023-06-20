@@ -165,6 +165,10 @@ MonoBehaviour:
   shakeTimeUnit: 1
   shakeInterval: 1
   shakeAngle: 30
+  show: 0
+  hover: 0
+  active: 0
+  oneshot: 0
 --- !u!114 &124764936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,6 +394,10 @@ MonoBehaviour:
   shakeTimeUnit: 1
   shakeInterval: 1
   shakeAngle: 30
+  show: 0
+  hover: 0
+  active: 0
+  oneshot: 0
 --- !u!222 &366487571
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1569,6 +1577,10 @@ MonoBehaviour:
   shakeTimeUnit: 1
   shakeInterval: 1
   shakeAngle: 30
+  show: 0
+  hover: 0
+  active: 0
+  oneshot: 0
 --- !u!114 &1510129659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1678,6 +1690,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8549543740240347157, guid: 43bf3fb76d8639a4194e0a46fd85c5c8, type: 3}
+      propertyPath: audioPresets.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549543740240347157, guid: 43bf3fb76d8639a4194e0a46fd85c5c8, type: 3}
+      propertyPath: audioPresets.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 24fa72f8d0047db4e802f1c5ee446e69, type: 3}
+    - target: {fileID: 8549543740240347157, guid: 43bf3fb76d8639a4194e0a46fd85c5c8, type: 3}
+      propertyPath: audioPresets.Array.data[4].name
+      value: delete
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549543740240347157, guid: 43bf3fb76d8639a4194e0a46fd85c5c8, type: 3}
+      propertyPath: audioPresets.Array.data[5].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: a5af5b88d96615841b3069ae24323248, type: 3}
+    - target: {fileID: 8549543740240347157, guid: 43bf3fb76d8639a4194e0a46fd85c5c8, type: 3}
+      propertyPath: audioPresets.Array.data[5].name
+      value: fliparrow
+      objectReference: {fileID: 0}
     - target: {fileID: 8549543740240347162, guid: 43bf3fb76d8639a4194e0a46fd85c5c8, type: 3}
       propertyPath: m_Name
       value: AudioManager
@@ -1726,6 +1758,10 @@ MonoBehaviour:
   shakeTimeUnit: 1
   shakeInterval: 1
   shakeAngle: 30
+  show: 0
+  hover: 0
+  active: 0
+  oneshot: 0
 --- !u!114 &1629999281
 MonoBehaviour:
   m_ObjectHideFlags: 0

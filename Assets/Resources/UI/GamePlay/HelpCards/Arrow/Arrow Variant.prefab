@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2308128093940707987, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 400
+      value: 390
       objectReference: {fileID: 0}
     - target: {fileID: 2308128093940707987, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -18,11 +18,31 @@ PrefabInstance:
     - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: m_VideoClip
       value: 
-      objectReference: {fileID: 32900000, guid: 7af79193c030b2c41baf366e2d3ea08a, type: 3}
+      objectReference: {fileID: 32900000, guid: 15d539ffafdf20d4c950ba2092713a82, type: 3}
     - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: m_TargetTexture
       value: 
       objectReference: {fileID: 8400000, guid: f5681fef7fdfedb49b11d219b3bb8790, type: 2}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_ControlledAudioTrackCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_DirectAudioMutes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_DirectAudioVolumes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_EnabledAudioTracks.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_TargetAudioSources.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2308128093958194119, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: m_Texture
       value: 
@@ -46,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2308128094342778046, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: m_Name
-      value: Arrow
+      value: Arrow Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: m_Pivot.x

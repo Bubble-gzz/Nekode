@@ -33,6 +33,7 @@ public class Neko : MonoBehaviour
     bool running;
     AnimationBuffer animationBuffer;
     List<MoveAttempt> moveAttempts = new List<MoveAttempt>();
+    AudioSource sfx_updateValue;
     class MoveAttempt{
         public bool valid = true;
     }
@@ -49,6 +50,7 @@ public class Neko : MonoBehaviour
         mouseEnter = false;
         atDestination = false;
         GameMessage.OnResetGridState.AddListener(ClearStepCount);
+        sfx_updateValue = transform.Find("sfx/updateValue")?.GetComponent<AudioSource>();
     }
     void Start()
     {
@@ -164,6 +166,11 @@ public class Neko : MonoBehaviour
     }
     void UpdateTileValue(MyTile tile, int newValue)
     {
+        if (sfx_updateValue)
+        {
+            sfx_updateValue.volume = AudioManager.sfxVolume;
+            sfx_updateValue.Play();
+        }
         tile.UpdateValueByNeko(newValue);
     }
     void Interact(int i, int j)
@@ -308,6 +315,11 @@ public class Neko : MonoBehaviour
 
     void UpdateValue(int newValue, bool animated = true)
     {
+        if (sfx_updateValue)
+        {
+            sfx_updateValue.volume = AudioManager.sfxVolume;
+            sfx_updateValue.Play();
+        }
         newValue = Mathf.Clamp(newValue, -32768, 32767);
         value = newValue;
         bubble.transform.GetComponentInChildren<TMP_Text>().text = value.ToString();

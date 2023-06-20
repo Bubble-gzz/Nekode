@@ -32,6 +32,7 @@ public class MyGrid : MonoBehaviour
     Neko neko;
     public List<int> tileCount = new List<int>();
     Rect border = new Rect();
+    AudioSource sfx_place;
     class Rect{
         public int l,u,r,d;
     }
@@ -50,6 +51,7 @@ public class MyGrid : MonoBehaviour
         tileTable = new Dictionary<string, List<MyTile>>();
         for (int i = 0; i < tileKindN; i++)
             tileCount.Add(-1);
+        sfx_place = GameObject.Find("sfx/place")?.GetComponent<AudioSource>();
     }
     void Start()
     {
@@ -190,6 +192,11 @@ public class MyGrid : MonoBehaviour
         if (tileCount[(int)currentTileType] == 0) return;
         if (tileCount[(int)currentTileType] > 0) tileCount[(int)currentTileType]--;
 
+        if (sfx_place)
+        {
+            sfx_place.volume = AudioManager.sfxVolume;
+            sfx_place.Play();
+        }
         grid[i, j] = NewTile(currentTileType, i, j);
         if (lastTile != null)
         {

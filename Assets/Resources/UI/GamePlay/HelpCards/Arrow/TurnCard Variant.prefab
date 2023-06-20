@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2308128093940707987, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 400
+      value: 390
       objectReference: {fileID: 0}
     - target: {fileID: 2308128093940707987, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -23,6 +23,26 @@ PrefabInstance:
       propertyPath: m_TargetTexture
       value: 
       objectReference: {fileID: 8400000, guid: 849b5f45e84b96c49b3d49499b3e2713, type: 2}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_ControlledAudioTrackCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_DirectAudioMutes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_DirectAudioVolumes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_EnabledAudioTracks.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_TargetAudioSources.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2308128093958194119, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: m_Texture
       value: 
@@ -45,7 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2308128094342778046, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: m_Name
-      value: TurnCard
+      value: TurnCard Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: m_Pivot.x

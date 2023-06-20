@@ -54,6 +54,7 @@ public class GamePlay : MonoBehaviour
         logicInventory.tileTypes = tilePreset.logicInventory;
         mainInventory.gameObject.SetActive(true);
         Global.mainCam.orthographicSize = preset.cameraSize;
+        //Debug.Log("puzzleName:" + Global.currentPuzzleName + " puzzleID:" + PuzzleManager.currentPuzzleID + " preset:" + preset);
         Instantiate(preset.puzzleLogic, transform); 
     }
     void Update()

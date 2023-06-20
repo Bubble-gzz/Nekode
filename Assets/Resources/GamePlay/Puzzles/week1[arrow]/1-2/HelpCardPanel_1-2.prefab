@@ -201,6 +201,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3099178146482383716}
     m_Modifications:
+    - target: {fileID: 2287546538310113464, guid: 0338a4acb800f704db3e309a6d93d90a, type: 3}
+      propertyPath: CardSize.y
+      value: 850
+      objectReference: {fileID: 0}
     - target: {fileID: 2287546538310113468, guid: 0338a4acb800f704db3e309a6d93d90a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -388,7 +392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5832879713230824209, guid: 3ebb94d7288b83d4b883da6ab0edcb98, type: 3}
       propertyPath: m_Name
-      value: HelpCardPanel
+      value: HelpCardPanel_1-2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ebb94d7288b83d4b883da6ab0edcb98, type: 3}

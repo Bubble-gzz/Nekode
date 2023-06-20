@@ -118,4 +118,8 @@ public class HelpCardGroup : MonoBehaviour
     {
         canvasGroup.enabled = false;
     }
+    public void Close()
+    {
+        GameUIManager.CloseHelpPanel();
+    }
 }

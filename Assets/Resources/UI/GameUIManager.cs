@@ -12,6 +12,9 @@ public class GameUIManager : MonoBehaviour
     public List<MyPanel> panelsInControl;
     public List<MyPanel> editPanelsInControl;
     static Slider speedSlider;
+    static public GameObject HelpCardPrefab;
+    static public GameObject curHelpCardPrefab;
+    
     void Awake()
     {
         instance = this;
@@ -39,6 +42,16 @@ public class GameUIManager : MonoBehaviour
     {
         instance.resultPanelInTheScene.Appear();
         return instance.resultPanelInTheScene;
+    }
+    public void PopOutHelpPanel()
+    {
+        if (curHelpCardPrefab != null) return;
+        if (HelpCardPrefab == null) return;
+        curHelpCardPrefab = PopOutPanel(HelpCardPrefab);
+    }
+    static public void CloseHelpPanel()
+    {
+        curHelpCardPrefab = null;
     }
     static public void FoldUI()
     {

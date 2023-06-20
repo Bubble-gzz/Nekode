@@ -105,6 +105,8 @@ public class MyTile : MonoBehaviour
     [SerializeField]
     GameObject arrowPrefab;
 
+    AudioSource sfx_delete, sfx_place;
+
     void Awake()
     {
         sprite = transform.Find("Texture").GetComponent<SpriteRenderer>();
@@ -135,6 +137,8 @@ public class MyTile : MonoBehaviour
             new Vector3(-0.45f, 0, 0),
             new Vector3(0, 0.45f, 0)
         };
+        sfx_delete = GameObject.Find("sfx/delete")?.GetComponent<AudioSource>();
+        sfx_place = GameObject.Find("sfx/place")?.GetComponent<AudioSource>();
     }
     void Start()
     {
@@ -321,6 +325,11 @@ public class MyTile : MonoBehaviour
         if (deleted) return;
         deleted = true;
         //Debug.Log("delete");
+        if (sfx_delete && type != Type.Blank)
+        {
+            sfx_delete.volume = AudioManager.sfxVolume;
+            sfx_delete.Play();
+        }
         foreach(var button in buttons)
             if (button != null) Destroy(button.gameObject);
         if (type != Type.Blank)
@@ -546,6 +555,11 @@ public class MyTile : MonoBehaviour
     }
     public void PlaceArrow(int id, Arrow.Type type, int direction = 0)
     {
+        if (sfx_place)
+        {
+            sfx_place.volume = AudioManager.sfxVolume;
+            sfx_place.Play();
+        }
         GameObject newArrow = Instantiate(arrowPrefab, transform);
         //Debug.Log("arrowPos: " + arrowPos[id]);
         newArrow.transform.localPosition = arrowPos[id];

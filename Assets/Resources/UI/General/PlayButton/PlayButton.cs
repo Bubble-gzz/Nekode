@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayButton : MyButton
 {
     // Start is called before the first frame update
+    AudioSource sfx;
     [SerializeField]
     Sprite[] textures = new Sprite[2];
     enum Icon{
@@ -18,6 +19,7 @@ public class PlayButton : MyButton
         base.Awake();
         Global.gameState = Global.GameState.Editing;
         icon = GetComponent<Image>();
+        sfx = GetComponent<AudioSource>();
     }
     override protected void Start()
     {
@@ -50,6 +52,8 @@ public class PlayButton : MyButton
             Global.grid.MapBackUp();
             GameUIManager.FoldEditUI();
             GameMessage.OnPlay.Invoke();
+            sfx.volume = AudioManager.sfxVolume;
+            sfx.Play();
         }
         if (Global.gameState == Global.GameState.Playing)
         {

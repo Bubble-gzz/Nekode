@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2308128093940707987, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 275
+      objectReference: {fileID: 0}
     - target: {fileID: 2308128094342778043, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: title_CH
       value: "\u8F93\u5165\u7AEF\u53E3"
@@ -27,7 +31,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2308128094342778046, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: m_Name
-      value: InputPort
+      value: InputPort Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: m_Pivot.x
