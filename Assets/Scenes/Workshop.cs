@@ -17,6 +17,7 @@ public class Workshop : MonoBehaviour
         Global.gameMode = Global.GameMode.Debug;
         Global.mouseOverUI = false;
         Global.mouseOverArrow = false;
+        puzzleName = "map_sample";
     }
     void Start()
     {
@@ -33,5 +34,9 @@ public class Workshop : MonoBehaviour
     void Update()
     {
         title.text = puzzleName;
+    }
+    public void UpdateName(string newName)
+    {
+        puzzleName = newName;
     }
 }

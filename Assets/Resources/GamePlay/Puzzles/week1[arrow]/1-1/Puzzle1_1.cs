@@ -59,6 +59,10 @@ public class Puzzle1_1 : PuzzleLogic
         if (Settings.language == "CH") SetTarget("读取A端口中的数，输出到B端口");
         else SetTarget("Read the data from port A and output it to port B");
         GameUIManager.UnFoldUI();
+
+        yield return new WaitForSeconds(1f);
+        PlayButton.Hint();
+
         yield return null;
     }
 

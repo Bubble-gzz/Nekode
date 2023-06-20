@@ -13,7 +13,7 @@ public class SaveSceneLogic : MonoBehaviour
     }
     void Start()
     {
-        
+        AudioManager.PlayMusicByName("Puzzle_Select");
     }
 
     // Update is called once per frame

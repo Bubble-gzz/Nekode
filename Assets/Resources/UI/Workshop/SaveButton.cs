@@ -23,6 +23,7 @@ public class SaveButton : MyButton
     }
     public void Save()
     {
+        if (workshop.puzzleName == "") return;
         string data = JsonUtility.ToJson(grid.ConvertToData());
         DirectoryInfo root = new DirectoryInfo(Application.dataPath + "/TempMapData/");
         if (!root.Exists) root.Create();

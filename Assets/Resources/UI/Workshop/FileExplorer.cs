@@ -28,6 +28,9 @@ public class FileExplorer : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     }
     void Start()
     {
+        loadFromResource = false;
+        initialPath = "TempMapData";
+        
         if (loadFromResource) curPath = initialPath;
         else curPath = Application.dataPath + "/" + initialPath;
         ReloadItems(curPath);
@@ -63,7 +66,7 @@ public class FileExplorer : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         }
         else {
             DirectoryInfo curDir = new DirectoryInfo(curPath);
-            if (curDir.Exists) curDir.Create();
+            if (!curDir.Exists) curDir.Create();
             ClearItems();
             DirectoryInfo[] directories = curDir.GetDirectories();
             foreach (var directory in directories)

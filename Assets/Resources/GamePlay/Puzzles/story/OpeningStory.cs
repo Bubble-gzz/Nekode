@@ -115,7 +115,7 @@ public class OpeningStory : MonoBehaviour
         yield return FadeDialogue("This is where this game comes from, my dear friend.", 0.2f);
         yield return FadeDialogue("I don't know what tense should I use when you are reading these words,", 0.2f);
         yield return FadeDialogue("But I hope this interactive diary could bring you some fun.", 0.2f);
-        yield return FadeDialogue("Have a good time, whenever you are from past, present, or future.", 0.2f);
+        yield return FadeDialogue("Have a good time, whether you are from past, present, or future.", 0.2f);
 
         FinishPlaying();
     }

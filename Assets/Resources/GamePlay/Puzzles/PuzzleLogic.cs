@@ -141,7 +141,8 @@ public class PuzzleLogic : MonoBehaviour
     }
     void TestCaseFail()
     {
-
+        ResetButton.Hint();
+        PlayButton.StopPlaying();
     }
     IEnumerator NextTestCase()
     {

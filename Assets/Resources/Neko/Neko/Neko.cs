@@ -116,6 +116,8 @@ public class Neko : MonoBehaviour
         //Debug.Log("Pass1");
         if (grid.grid[_i, _j] == null) {
             running = false;
+            ResetButton.Hint();
+            PlayButton.StopPlaying();
             yield break;
         }
         Leave(i, j);
@@ -166,7 +168,7 @@ public class Neko : MonoBehaviour
     }
     void UpdateTileValue(MyTile tile, int newValue)
     {
-        if (sfx_updateValue)
+        if (sfx_updateValue && !grid.isTitleBackground)
         {
             sfx_updateValue.volume = AudioManager.sfxVolume;
             sfx_updateValue.Play();
@@ -315,7 +317,7 @@ public class Neko : MonoBehaviour
 
     void UpdateValue(int newValue, bool animated = true)
     {
-        if (sfx_updateValue)
+        if (sfx_updateValue && !grid.isTitleBackground)
         {
             sfx_updateValue.volume = AudioManager.sfxVolume;
             sfx_updateValue.Play();

@@ -33,6 +33,7 @@ public class MyGrid : MonoBehaviour
     public List<int> tileCount = new List<int>();
     Rect border = new Rect();
     AudioSource sfx_place;
+    public bool isTitleBackground = false;
     class Rect{
         public int l,u,r,d;
     }
@@ -75,10 +76,10 @@ public class MyGrid : MonoBehaviour
     {
         grid[n/2, m/2] = NewTile(MyTile.Type.Blank, n/2, m/2);
         grid[n/2, m/2].transform.position = GetWorldPos(n/2, m/2);
-        InviteNeko(n/2, m/2);
+        if (!isTitleBackground) InviteNeko(n/2, m/2);
     }
 
-    void InviteNeko(int i, int j)
+    public void InviteNeko(int i, int j, int dir = 0)
     {
         neko = Instantiate(nekoPrefab).GetComponent<Neko>();
         Vector3 nekoPos = GetWorldPos(i, j);
@@ -86,6 +87,7 @@ public class MyGrid : MonoBehaviour
         neko.transform.position = nekoPos;
         neko.i = i; neko.j = j;
         neko.grid = this;
+        neko.direction = dir;
     }
 
     // Update is called once per frame
@@ -258,11 +260,14 @@ public class MyGrid : MonoBehaviour
         grid = new GameObject[n, m];
         foreach (var tileData in gridData.tiles)
             BuildTileFromData(tileData);
-        NekoData nekoData = gridData.neko;
-        InviteNeko(nekoData.i, nekoData.j);
-        neko.mode = (Neko.Mode)nekoData.mode;
-        neko.value = nekoData.value;
-        neko.direction = nekoData.direction;
+        if (!isTitleBackground)
+        {
+            NekoData nekoData = gridData.neko;
+            InviteNeko(nekoData.i, nekoData.j);
+            neko.mode = (Neko.Mode)nekoData.mode;
+            neko.value = nekoData.value;
+            neko.direction = nekoData.direction;
+        }
     }
     void BuildTileFromData(TileData tileData)
     {
