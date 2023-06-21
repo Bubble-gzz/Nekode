@@ -11,6 +11,30 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 275
       objectReference: {fileID: 0}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: 770541f35b8cb5342bff40184dabf445, type: 3}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_ControlledAudioTrackCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_DirectAudioMutes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_DirectAudioVolumes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_EnabledAudioTracks.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_TargetAudioSources.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2308128094342778043, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: title_CH
       value: "\u8F93\u5165\u7AEF\u53E3"

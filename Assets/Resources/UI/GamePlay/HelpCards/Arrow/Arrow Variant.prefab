@@ -62,7 +62,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2308128094342778043, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: description_EN
-      value: 'Change the kitten''s direction with arrows <sprite=3> '
+      value: "Change the kitten's direction with arrows <sprite=3> \nThe kitten's
+        direction in which he leaves the tile will be decided by the arrow in front
+        of him."
       objectReference: {fileID: 0}
     - target: {fileID: 2308128094342778046, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: m_Name
@@ -170,7 +172,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2308128094458634746, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: m_text
-      value: 'Change the kitten''s direction with arrows <sprite=3> '
+      value: "Change the kitten's direction with arrows <sprite=3> \nThe kitten's
+        direction in which he leaves the tile will be decided by the arrow in front
+        of him."
       objectReference: {fileID: 0}
     - target: {fileID: 2308128094458634746, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: m_spriteAsset

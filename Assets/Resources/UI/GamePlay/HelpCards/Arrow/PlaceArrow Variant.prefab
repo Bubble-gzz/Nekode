@@ -57,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2308128094342778043, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: CardSize.y
-      value: 1000
+      value: 850
       objectReference: {fileID: 0}
     - target: {fileID: 2308128094342778043, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
       propertyPath: description_CH

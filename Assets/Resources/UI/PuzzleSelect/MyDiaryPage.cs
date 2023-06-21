@@ -27,6 +27,7 @@ public class MyDiaryPage : MonoBehaviour
         int status;
         if (puzzleID == -1) status = 0;
         else status = PuzzleManager.PuzzleInfo(puzzleID);
+        //Debug.Log("diary show status:" + status + " contents[status]:" + contents[status]);
         foreach(var content in contents)
             content.SetActive(false);
         contents[status].SetActive(true);

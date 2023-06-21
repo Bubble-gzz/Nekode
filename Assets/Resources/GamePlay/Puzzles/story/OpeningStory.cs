@@ -17,12 +17,18 @@ public class OpeningStory : MonoBehaviour
     public Image sceneOfWakeUp;
     public MyPanel skipButtonPanel;
     bool canSkip;
+    public CanvasGroup logo, whiteBG1, blackBG, headphone;
+    public AudioSource pop_sfx;
     void Awake()
     {
     }
     void Start()
     {
-        StartCoroutine(Story());
+        text_middle.color = new Color(1,1,1,1);
+        text_middle.GetComponent<CanvasGroup>().alpha = 0;
+        triangle.GetComponent<CanvasGroup>().alpha = 0;
+        sceneOfWakeUp.color = new Color(1,1,1,1);
+        StartCoroutine(Opening());
     }
 
     // Update is called once per frame
@@ -35,19 +41,34 @@ public class OpeningStory : MonoBehaviour
         PlayerPrefs.SetInt("FirstPlay", 1);
         SceneSwitcher.SwitchTo("Menu");
     }
+    IEnumerator Opening()
+    {
+        yield return BeforeStory();
+        yield return Story();
+    }
+    IEnumerator BeforeStory()
+    {
+        yield return new WaitForSeconds(0.5f);
+        yield return whiteBG1.DOFade(0, 0.5f).WaitForCompletion();
+        yield return new WaitForSeconds(1.5f);
+        yield return blackBG.DOFade(1, 1f).WaitForCompletion();
+        yield return new WaitForSeconds(0.5f);
+        blackBG.alpha = 0;
+        logo.alpha = 0;
+        yield return headphone.DOFade(1, 0.7f).WaitForCompletion();
+        yield return new WaitForSeconds(2f);
+        yield return headphone.DOFade(0, 0.7f).WaitForCompletion();
+        yield return new WaitForSeconds(1f); 
+    }
     IEnumerator Story()
     {
         canSkip = PlayerPrefs.GetInt("FirstPlay", 0) != 0;
         if (canSkip) {
-            skipButtonPanel.GetComponentInChildren<TMP_Text>().color = new Color(1,1,1,1);
             skipButtonPanel.Appear();
+            skipButtonPanel.GetComponentInChildren<TMP_Text>().color = new Color(1,1,1,1);
         }
         else skipButtonPanel.Disappear();
 
-        text_middle.color = new Color(1,1,1,1);
-        text_middle.GetComponent<CanvasGroup>().alpha = 0;
-        triangle.GetComponent<CanvasGroup>().alpha = 0;
-        sceneOfWakeUp.color = new Color(1,1,1,1);
         yield return new WaitForSeconds(0.5f);
         //SceneSwitcher.SwitchTo("Menu");
 
@@ -138,12 +159,19 @@ public class OpeningStory : MonoBehaviour
     } 
     IEnumerator BeforeWakeUp()
     {
+        pop_sfx?.Play();
         yield return PopDialogue("No, it's not AD 3023 now!!", 0.2f);
+        pop_sfx?.Play();
         yield return PopDialogue("It's actually ......", 0.2f);
+        pop_sfx?.Play();
         yield return PopDialogue("I don't know.", 0.2f);
+        pop_sfx?.Play();
         yield return PopDialogue("It was supposed to be AD 3033 when I arrive.", 0.2f);
+        pop_sfx?.Play();
         yield return PopDialogue("But the time machine seems to have encountered some problems.", 0.2f);
+        pop_sfx?.Play();
         yield return PopDialogue("So I don't know where I am now.", 0.2f);
+        pop_sfx?.Play();
         yield return PopDialogue("Or to be more precise, when I am now......", 0.2f);
     }
     IEnumerator PopDialogue(string content, float waitsec, bool waitForInput = true)

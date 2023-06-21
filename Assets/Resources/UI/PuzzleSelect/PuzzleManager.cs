@@ -66,9 +66,53 @@ public class PuzzleManager : MonoBehaviour
         if (starCount > puzzleStar[id]) puzzleStar[id] = starCount;
         if (id < puzzleCount - 1) // Unlock new puzzle
         {
-            if (puzzleStar[id + 1] == -1) puzzleStar[id + 1] = 0;
+            UnlockPuzzle(id + 1); // if (puzzleStar[id + 1] == -1) puzzleStar[id + 1] = 0;
         }
+        
+        BeKindtoPlayers(id);
+        
         SaveData();
+    }
+    static void BeKindtoPlayers(int id)
+    {
+        /*
+                    ------6-7..
+                   /
+            0-1-2-3-4-5
+        */
+        if (id == 3) UnlockPuzzle(6);
+
+        /* 
+              8--------
+             / \       \
+          6-7   10-11   12
+            \  /       /
+             9-------- 
+        */
+        if (id == 7) UnlockPuzzle(9);
+        if (id == 8 || id == 9) {
+            UnlockPuzzle(10);
+            UnlockPuzzle(12);
+        }
+        /*       15-16-17
+                /    \
+           12-13-14  18----..
+        */
+        if (id == 13) UnlockPuzzle(15);
+        if (id == 16) UnlockPuzzle(18);
+        
+        /*                -----24
+                         /
+            18-19-20-21-22-23
+                    \__/
+        */
+        if (id == 20) UnlockPuzzle(22);
+        if (id == 22) UnlockPuzzle(24);
+    }
+    static void UnlockPuzzle(int id)
+    {
+        if (puzzleStar[id] != -1) return;
+        puzzleStar[id] = 0;
     }
     static public void SaveData()
     {

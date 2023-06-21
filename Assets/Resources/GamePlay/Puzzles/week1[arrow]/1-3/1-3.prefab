@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6cfac51f28c05f469d2f8c6ffaf81ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  helpCardPanelPrefab: {fileID: 0}
+  helpCardPanelPrefab: {fileID: 6731937493200193430, guid: d9d70bbd01c24b14a8faab02b8483a00, type: 3}
   hintOfPan: {fileID: 105978835692681177}
 --- !u!1 &2526890557940428278
 GameObject:

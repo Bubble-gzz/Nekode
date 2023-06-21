@@ -31545,7 +31545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e100ff068ba8c9f41be260fdd1da55c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleID: 7
+  puzzleID: 6
   contents:
   - {fileID: 1635353889}
   - {fileID: 36267748}
