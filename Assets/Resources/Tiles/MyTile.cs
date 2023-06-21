@@ -145,6 +145,9 @@ public class MyTile : MonoBehaviour
         if (Global.gameMode == Global.GameMode.Debug)
             transform.Find("coordinate").GetComponentInChildren<TMP_Text>().text = "(" + i.ToString() + ", " + j + ")";
         else transform.Find("coordinate").gameObject.SetActive(false);
+
+        transform.Find("coordinate").gameObject.SetActive(false);
+
         if (type == Type.Blank)
         {
             transform.Find("Texture").rotation = Quaternion.Euler(0, 0, 90 * Random.Range(0, 3));

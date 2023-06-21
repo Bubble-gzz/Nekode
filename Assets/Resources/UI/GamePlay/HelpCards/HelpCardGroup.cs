@@ -56,7 +56,7 @@ public class HelpCardGroup : MonoBehaviour
             indexCircles[i].GetComponent<RectTransform>().localPosition = new Vector3(posX, 0, 0);
             posX += indexCircleInterval;
         }
-        if (pageCount > 1) turnRightButton.SetActive(true);
+        turnRightButton.SetActive(pageCount > 1);
         turnLeftButton.SetActive(false);
 
         closeButton.SetActive(true);

@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using DG.Tweening;
-
+using UnityEngine.SceneManagement;
 public class CursorManager : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -38,6 +38,11 @@ public class CursorManager : MonoBehaviour
         else {
             Destroy(gameObject);
         }
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Show();
     }
     void Start()
     {

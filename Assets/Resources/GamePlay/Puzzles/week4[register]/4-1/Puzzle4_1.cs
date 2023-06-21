@@ -64,8 +64,9 @@ public class Puzzle4_1 : PuzzleLogic
         dialogue.Close(true);
 
         yield return new WaitForSeconds(0.2f);
-        //helpCardPanel = GameUIManager.PopOutPanel(helpCardPanelPrefab).GetComponentInChildren<MyPanel>();
-        //while (helpCardPanel.showing) yield return null;
+        helpCardPanel = GameUIManager.PopOutPanel(helpCardPanelPrefab).GetComponentInChildren<MyPanel>();
+        yield return new WaitForSeconds(0.5f);
+        while (helpCardPanel.showing) yield return null;
         
         
         if (Settings.language == "CH") SetTarget("将A设置为22, B设置为33");

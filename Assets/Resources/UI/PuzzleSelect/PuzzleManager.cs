@@ -45,7 +45,7 @@ public class PuzzleManager : MonoBehaviour
         if (nickName == "Dr.Bubble")
         {
             for(int i = 0; i < puzzleCount; i++)
-                puzzleStar.Add(UnityEngine.Random.Range(0, 4));
+                puzzleStar.Add(UnityEngine.Random.Range(1, 4));
         }
         else
         {

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
-
+using UnityEngine.UI;
 public class Puzzle1_3 : PuzzleLogic
 {
+    public MyPanel hintOfPan;
     TMP_Text debugInfo;
     protected override void Awake()
     {
@@ -64,6 +65,19 @@ public class Puzzle1_3 : PuzzleLogic
         while (dialogue.isPlaying) yield return null;
         
         dialogue.Close(true);
+
+        yield return new WaitForSeconds(0.5f);
+        hintOfPan.Appear();
+        GameMessage.playingStory = false;
+        while (true)
+        {
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.W))
+                break;
+            if (Input.GetMouseButtonDown(2)) break;
+            yield return null;
+        }
+        yield return new WaitForSeconds(0.5f);
+        hintOfPan.Disappear();
 
         yield return new WaitForSeconds(0.2f);
         //helpCardPanel = GameUIManager.PopOutPanel(helpCardPanelPrefab).GetComponentInChildren<MyPanel>();

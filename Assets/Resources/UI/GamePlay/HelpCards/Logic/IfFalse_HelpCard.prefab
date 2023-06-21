@@ -1,0 +1,215 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3040166487515907348
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2308128093940707987, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 345
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128093940707987, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: c87d5b15456cc2c4a927de518bc8df7c, type: 3}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 7ddfa32259e1dbe42b074a29d871dab8, type: 2}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_ControlledAudioTrackCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_DirectAudioMutes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_DirectAudioVolumes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_EnabledAudioTracks.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128093958194118, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_TargetAudioSources.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128093958194119, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 8400000, guid: 7ddfa32259e1dbe42b074a29d871dab8, type: 2}
+    - target: {fileID: 2308128094342778043, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: title_CH
+      value: If False
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778043, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: title_EN
+      value: If False
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778043, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: description_CH
+      value: 'The tile will disable all the arrows attached to it if the following
+        conditions are met at the same time:
+
+        A.The kitten is at input state
+
+        B.The
+        kitten''s number does not match the tile''s condition
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778043, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: description_EN
+      value: 'The tile will disable all the arrows attached to it if the following
+        conditions are met at the same time:
+
+        A.The kitten is at input state
+
+        B.The
+        kitten''s number does not match the tile''s condition
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778046, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_Name
+      value: IfFalse_HelpCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 750
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094342778047, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094456410933, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094456410934, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_text
+      value: If False
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094456410934, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.43529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094456410934, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.6745098
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094456410934, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.99215686
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094456410934, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4285508861
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094458634745, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094458634745, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308128094458634746, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
+      propertyPath: m_text
+      value: 'The tile will disable all the arrows attached to it if the following
+        conditions are met at the same time:
+
+        A.The kitten is at input state
+
+        B.The
+        kitten''s number does not match the tile''s condition
+
+'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b5a36b97645f60840858595a76a24a3c, type: 3}
