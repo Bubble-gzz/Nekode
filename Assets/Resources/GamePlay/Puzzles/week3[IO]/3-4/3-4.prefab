@@ -43,4 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea9eb69982b7e414885f369c32d1895d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  helpCardPanelPrefab: {fileID: 0}
+  helpCardPanelPrefab: {fileID: 8681892142570620722, guid: b9fc2920941768c4e9b415431dc5116d, type: 3}

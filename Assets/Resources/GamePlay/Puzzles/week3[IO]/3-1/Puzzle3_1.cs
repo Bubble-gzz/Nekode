@@ -74,8 +74,9 @@ public class Puzzle3_1 : PuzzleLogic
         dialogue.Close(true);
 
         yield return new WaitForSeconds(0.2f);
-        //helpCardPanel = GameUIManager.PopOutPanel(helpCardPanelPrefab).GetComponentInChildren<MyPanel>();
-        //while (helpCardPanel.showing) yield return null;
+        helpCardPanel = GameUIManager.PopOutPanel(helpCardPanelPrefab).GetComponentInChildren<MyPanel>();
+        yield return new WaitForSeconds(0.5f);
+        while (helpCardPanel.showing) yield return null;
         
         
         if (Settings.language == "CH") SetTarget("将小猫的数字输出到端口A");

@@ -78,7 +78,7 @@ public class Puzzle10to2 : PuzzleLogic
     {
         base.GenerateTestCase();
         
-        grid.tileTable["X"][0].UpdateValue(curTestCase);
+        grid.tileTable["X"][0].UpdateValue(curTestCase-1);
 
 
         answerTable["B2"] = grid.tileTable["X"][0].value >> 2;
