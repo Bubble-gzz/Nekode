@@ -132,7 +132,7 @@ public class MyDialogueBox : MonoBehaviour
             //StartCoroutine(PopOutChar(i));
             //await Task.Delay(50);
         }
-        yield return new WaitForEndOfFrame();
+        yield return null; //Wait for a frame so that the input is refreshed
         triangleOrigin = triangle.position;
         triangle.position = triangleOrigin + new Vector3(0, 2, 0);
         triangle.DOMove(triangleOrigin - new Vector3(0, 4, 0), 0.3f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
