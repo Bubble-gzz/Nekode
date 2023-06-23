@@ -21,7 +21,7 @@ public class FileExplorer : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public bool loadFromResource;
     void Awake()
     {
-        rootPath = Application.dataPath;
+        rootPath = Application.persistentDataPath;
 
         //Debug.Log(curPath);
         targetExtensions.Add(".json");
@@ -32,7 +32,7 @@ public class FileExplorer : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         initialPath = "TempMapData";
         
         if (loadFromResource) curPath = initialPath;
-        else curPath = Application.dataPath + "/" + initialPath;
+        else curPath = Application.persistentDataPath + "/" + initialPath;
         ReloadItems(curPath);
     }
     void ResetPath(string newPath, bool reload = true)

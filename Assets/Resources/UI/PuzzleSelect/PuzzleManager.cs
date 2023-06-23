@@ -116,7 +116,9 @@ public class PuzzleManager : MonoBehaviour
     }
     static public void SaveData()
     {
-        string savePath = Application.dataPath + "/" + saveName + ".json";
+        //string savePath = Application.dataPath + "/" + saveName + ".json";
+        string savePath = Application.persistentDataPath + "/" + saveName + ".json";
+        
         Debug.Log("puzzleStar: " + puzzleStar);
         PuzzleData data = new PuzzleData(puzzleStar, saveNickname);
         string data_text = JsonUtility.ToJson(data);
@@ -129,7 +131,9 @@ public class PuzzleManager : MonoBehaviour
     static public void LoadData(string _saveName)
     {
         saveName = _saveName;
-        string savePath = Application.dataPath + "/" + saveName + ".json";
+        //string savePath = Application.dataPath + "/" + saveName + ".json";
+        string savePath = Application.persistentDataPath + "/" + saveName + ".json";
+        
         if (!File.Exists(savePath))
         {
             NewSave("");
@@ -143,7 +147,9 @@ public class PuzzleManager : MonoBehaviour
     }
     static public PuzzleData GetData(string saveName)
     {
-        string savePath = Application.dataPath + "/" + saveName + ".json";
+        //string savePath = Application.dataPath + "/" + saveName + ".json";
+        string savePath = Application.persistentDataPath + "/" + saveName + ".json";
+        
         if (!File.Exists(savePath))
         {
             return null;

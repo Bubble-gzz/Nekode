@@ -47,7 +47,6 @@ public class GamePlay : MonoBehaviour
         grid = GameObject.FindObjectOfType<MyGrid>();
         grid.SetTileCount(preset.tilePreset.tileCounts);
         grid.LoadFromFile("MapData/" + Global.currentPuzzleName);
-        //grid.LoadFromFile("MapData/" + Global.currentPuzzleName);//grid.LoadFromFile(Application.dataPath + "/Resources/MapData/" + Global.currentPuzzleName + ".json");
         TilePreset tilePreset = preset.tilePreset;
         mainInventory.tileTypes = tilePreset.mainInventory;
         arithInventory.tileTypes = tilePreset.arithInventory;

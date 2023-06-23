@@ -54,7 +54,7 @@ public class Puzzle4_3 : PuzzleLogic
         //Debug.Log("Generating Test Case ... ... ");
         //grid.tileTable["A0"][0].UpdateValue(1);
        //grid.tileTable["A1"][0].UpdateValue(2);
-        grid.tileTable["A"][0].UpdateValue(1);
+        //grid.tileTable["A"][0].UpdateValue(1);
 
         answerTable["B0"] = grid.tileTable["A"][0].value * 3;
         answerTable["B1"] = grid.tileTable["A"][0].value * 5;

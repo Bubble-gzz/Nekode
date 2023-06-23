@@ -47,7 +47,7 @@ public class SaveEntry : MonoBehaviour
         originalPos = rect.anchoredPosition;
         choosed = false;
         PuzzleManager.PuzzleData data = PuzzleManager.GetData(saveName);
-        if (data == null)
+        if (data == null && saveName != "save3")
         {
             cover.sprite = covers[0];
             title.text = nickName = "Someone New";
@@ -56,7 +56,13 @@ public class SaveEntry : MonoBehaviour
         else
         {
             cover.sprite = covers[1];
-            title.text = nickName = data.nickName;
+            if (data == null && saveName == "save3")
+            {
+                PuzzleManager.saveName = saveName;
+                PuzzleManager.NewSave("Dr.Bubble");
+                title.text = nickName = "Dr.Bubble";
+            }
+            else title.text = nickName = data.nickName;
             newSave = false;
         }
     }

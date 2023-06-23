@@ -17,14 +17,14 @@ public class Workshop : MonoBehaviour
         Global.gameMode = Global.GameMode.Debug;
         Global.mouseOverUI = false;
         Global.mouseOverArrow = false;
-        puzzleName = "map_sample";
+        puzzleName = "";
     }
     void Start()
     {
         MyGrid grid = GameObject.FindObjectOfType<MyGrid>();
         bool presetExist = false;
         if (puzzleName != "") {
-            presetExist |= grid.LoadFromFileWithReturnValue(Application.dataPath+"/TempMapData/"+puzzleName+".json", false);
+            presetExist |= grid.LoadFromFileWithReturnValue(Application.persistentDataPath+"/TempMapData/"+puzzleName+".json", false);
         }
         if (!presetExist) grid.Init();
         GameUIManager.UnFoldUI();

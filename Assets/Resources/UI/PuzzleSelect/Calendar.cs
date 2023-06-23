@@ -41,7 +41,7 @@ public class Calendar : MonoBehaviour
                 indexCircles[i].SetState(false);
             }
         }
-        indexCircles[0].SetState(true);
+        indexCircles[curPage].SetState(true);
         float posX = - (pageCount - 1) * indexCircleInterval * 1.0f / 2;
         for (int i = 0; i < pageCount; i++)
         {

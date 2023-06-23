@@ -310,7 +310,7 @@ public class Neko : MonoBehaviour
                 break;
             case (MyTile.Type.Destination):
                 atDestination = true;
-                GamePlay.onNekoSubmit.Invoke();
+                GamePlay.onNekoSubmit?.Invoke();
                 break;
             default: break;
         }

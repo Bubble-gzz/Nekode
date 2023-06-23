@@ -14,7 +14,7 @@ public class Puzzle2_4 : PuzzleLogic
     override protected void Start()
     {
         base.Start();
-        totalTestCase = 1;
+        totalTestCase = 3;
 
         conditionStatus[0] = true;
         conditionStatus[1] = true;
@@ -74,6 +74,9 @@ public class Puzzle2_4 : PuzzleLogic
         //grid.tileTable["A0"][0].UpdateValue(1);
        //grid.tileTable["A1"][0].UpdateValue(2);
         //grid.tileTable["A2"][0].UpdateValue(3);
+        grid.tileTable["A0"][0].UpdateValue(Random.Range(-99, 100));
+        grid.tileTable["A1"][0].UpdateValue(Random.Range(-99, 100));
+        grid.tileTable["A2"][0].UpdateValue(Random.Range(-99, 100));
 
         answerTable["B0"] = grid.tileTable["A0"][0].value + 7;
         answerTable["B1"] = grid.tileTable["A1"][0].value + 8;

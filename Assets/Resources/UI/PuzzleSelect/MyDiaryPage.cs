@@ -22,16 +22,19 @@ public class MyDiaryPage : MonoBehaviour
     {
         
     }
-    public void Show()
+    public bool Show()
     {
         int status;
         if (puzzleID == -1) status = 0;
         else status = PuzzleManager.PuzzleInfo(puzzleID);
+        Debug.Log("puzzleID: " + puzzleID + "  status: " + status);
         //Debug.Log("diary show status:" + status + " contents[status]:" + contents[status]);
+        if (status == -1) return false;
         foreach(var content in contents)
             content.SetActive(false);
         contents[status].SetActive(true);
         panel.Appear();
+        return true;
     }
     public void Hide()
     {

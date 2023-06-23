@@ -25,7 +25,7 @@ public class SaveButton : MyButton
     {
         if (workshop.puzzleName == "") return;
         string data = JsonUtility.ToJson(grid.ConvertToData());
-        DirectoryInfo root = new DirectoryInfo(Application.dataPath + "/TempMapData/");
+        DirectoryInfo root = new DirectoryInfo(Application.persistentDataPath + "/TempMapData/");
         if (!root.Exists) root.Create();
         string path = root + workshop.puzzleName + ".json";
         File.WriteAllText(path, data);

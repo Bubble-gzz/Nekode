@@ -6,7 +6,7 @@ public class MyDiary : MonoBehaviour
 {
     // Start is called before the first frame update
     public List<MyDiaryPage> pages = new List<MyDiaryPage>();
-    int currentPageID;
+    int currentPageID = -1;
     float blankTimelapse;
     public float blankTimeLimit = 0.2f;
     void Awake()
@@ -31,9 +31,13 @@ public class MyDiary : MonoBehaviour
     public void ShowPage(int pageID)
     {
         if (pageID < 0 || pageID >= pages.Count) return;
+        if (pageID == currentPageID) return;
+        if (!pages[pageID].Show()) return;
         HidePage(currentPageID);
+        
         currentPageID = pageID;
-        pages[pageID].Show();
+        Debug.Log("pageID: " + pageID);
+        
     }
     public void HidePage(int pageID)
     {
